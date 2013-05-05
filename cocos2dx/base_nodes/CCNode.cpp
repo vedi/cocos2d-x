@@ -43,7 +43,7 @@ THE SOFTWARE.
 #if CC_NODE_RENDER_SUBPIXEL
 #define RENDER_IN_SUBPIXEL
 #else
-#define RENDER_IN_SUBPIXEL(__ARGS__) (ceil(__ARGS__))
+#define RENDER_IN_SUBPIXEL (__ARGS__) (ceil(__ARGS__))
 #endif
 
 NS_CC_BEGIN
@@ -512,6 +512,12 @@ CCRect CCNode::boundingBox()
 {
     CCRect rect = CCRectMake(0, 0, m_obContentSize.width, m_obContentSize.height);
     return CCRectApplyAffineTransform(rect, nodeToParentTransform());
+}
+
+CCRect CCNode::globalBoundingBox()
+{
+    CCRect rect = CCRectMake(0, 0, m_obContentSize.width, m_obContentSize.height);
+    return CCRectApplyAffineTransform(rect, nodeToWorldTransform());
 }
 
 CCNode * CCNode::create(void)
@@ -983,6 +989,11 @@ CCAction * CCNode::runAction(CCAction* action)
 void CCNode::stopAllActions()
 {
     m_pActionManager->removeAllActionsFromTarget(this);
+}
+
+void CCNode::stopAllActionsRecursive() {
+    stopAllActions();
+    arrayMakeObjectsPerformSelector(m_pChildren, stopAllActionsRecursive, CCNode *);
 }
 
 void CCNode::stopAction(CCAction* action)
