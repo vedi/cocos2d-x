@@ -46,6 +46,8 @@ GUI/CCScrollView/CCScrollView.cpp \
 GUI/CCScrollView/CCTableView.cpp \
 GUI/CCScrollView/CCTableViewCell.cpp \
 GUI/CCScrollView/CCSorting.cpp \
+GUI/CCListView/CCListView.cpp \
+GUI/CCListView/CCListViewCell.cpp \
 GUI/CCEditBox/CCEditBox.cpp \
 GUI/CCEditBox/CCEditBoxImplAndroid.cpp \
 network/HttpClient.cpp \

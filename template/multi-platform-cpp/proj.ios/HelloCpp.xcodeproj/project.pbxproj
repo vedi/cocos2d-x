@@ -176,6 +176,8 @@
 		9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360211737A8EF0036983A /* NodeProvider.cpp */; };
 		9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360231737A8EF0036983A /* SceneDispatcher.cpp */; };
 		9DD8C15F1737D30100CB4A3C /* GestureDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8C15D1737D30100CB4A3C /* GestureDetector.cpp */; };
+		9DEE5EDF173800D900F0E0CB /* CCListView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEE5EDB173800D900F0E0CB /* CCListView.cpp */; };
+		9DEE5EE0173800D900F0E0CB /* CCListViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEE5EDD173800D900F0E0CB /* CCListViewCell.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -551,6 +553,11 @@
 		9D7360241737A8EF0036983A /* SceneDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneDispatcher.h; path = ../Classes/SceneDispatcher.h; sourceTree = "<group>"; };
 		9DD8C15D1737D30100CB4A3C /* GestureDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GestureDetector.cpp; sourceTree = "<group>"; };
 		9DD8C15E1737D30100CB4A3C /* GestureDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureDetector.h; sourceTree = "<group>"; };
+		9DEE5EDA173800D900F0E0CB /* CCControlDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCControlDefine.h; sourceTree = "<group>"; };
+		9DEE5EDB173800D900F0E0CB /* CCListView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCListView.cpp; sourceTree = "<group>"; };
+		9DEE5EDC173800D900F0E0CB /* CCListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCListView.h; sourceTree = "<group>"; };
+		9DEE5EDD173800D900F0E0CB /* CCListViewCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCListViewCell.cpp; sourceTree = "<group>"; };
+		9DEE5EDE173800D900F0E0CB /* CCListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCListViewCell.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -949,6 +956,7 @@
 		15A3D9EC1682F826002FB0C5 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				9DEE5ED9173800D900F0E0CB /* CCListView */,
 				15A3D9ED1682F826002FB0C5 /* CCControlExtension */,
 				15A3DA071682F826002FB0C5 /* CCEditBox */,
 				15A3DA111682F826002FB0C5 /* CCScrollView */,
@@ -1225,6 +1233,18 @@
 			path = ../../../external/vedidev;
 			sourceTree = "<group>";
 		};
+		9DEE5ED9173800D900F0E0CB /* CCListView */ = {
+			isa = PBXGroup;
+			children = (
+				9DEE5EDA173800D900F0E0CB /* CCControlDefine.h */,
+				9DEE5EDB173800D900F0E0CB /* CCListView.cpp */,
+				9DEE5EDC173800D900F0E0CB /* CCListView.h */,
+				9DEE5EDD173800D900F0E0CB /* CCListViewCell.cpp */,
+				9DEE5EDE173800D900F0E0CB /* CCListViewCell.h */,
+			);
+			path = CCListView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1474,6 +1494,8 @@
 				9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */,
 				9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */,
 				9DD8C15F1737D30100CB4A3C /* GestureDetector.cpp in Sources */,
+				9DEE5EDF173800D900F0E0CB /* CCListView.cpp in Sources */,
+				9DEE5EE0173800D900F0E0CB /* CCListViewCell.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

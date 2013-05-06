@@ -33,6 +33,7 @@
 #include "CCBReader/CCNode+CCBRelativePositioning.h"
 
 #include "GUI/CCControlExtension/CCControlExtensions.h"
+#include "GUI/CCListView/CCListView.h"
 #include "GUI/CCScrollView/CCScrollView.h"
 #include "GUI/CCScrollView/CCTableView.h"
 #include "GUI/CCEditBox/CCEditBox.h"
