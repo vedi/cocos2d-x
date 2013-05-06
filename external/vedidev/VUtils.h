@@ -11,82 +11,78 @@
 #include <string>
 #include "cocos2d.h"
 
+USING_NS_CC;
+
+#define V_ALIGN_LEFT_TOP ccp(0, 1)
+#define V_ALIGN_LEFT_MIDDLE ccp(0, 0.5)
+#define V_ALIGN_LEFT_BOTTOM ccp(0, 0)
+
+#define V_ALIGN_RIGHT_TOP ccp(1, 1)
+#define V_ALIGN_RIGHT_MIDDLE ccp(1, 0.5)
+#define V_ALIGN_RIGHT_BOTTOM ccp(1, 0)
+
+#define V_ALIGN_CENTER_TOP ccp(0.5, 1)
+#define V_ALIGN_CENTER_MIDDLE ccp(0.5, 0.5)
+#define V_ALIGN_CENTER_BOTTOM ccp(0.5, 0)
+
+#define V_ALIGN_LEFT ccp(0, -1)
+#define V_ALIGN_CENTER ccp(0.5, -1)
+#define V_ALIGN_RIGHT ccp(1, -1)
+#define V_ALIGN_TOP ccp(-1, 1)
+#define V_ALIGN_MIDDLE ccp(-1, 0.5)
+#define V_ALIGN_BOTTOM ccp(-1, 0)
+
+#define V_FILL_HORIZONTALLY ccp(1, -1)
+#define V_FILL_VERTICALLY ccp(-1, 1)
+#define V_FILL_BOTH ccp(1, 1)
+
+enum {
+    V_FILL_STRATEGY_CROP,
+    V_FILL_STRATEGY_FIT,
+    V_FILL_STRATEGY_STRETCH
+};
+
 class VUtils {
 public:
 
-    static float applyScaleForNode(cocos2d::CCNode *node);
+    static void align(CCNode *targetNode, CCPoint anchor);
 
-    static const char *toPChar(int value);
+    static void alignRelative(CCNode *targetNode, CCNode *anchorNode, CCPoint anchor);
 
-    static void format(std::string &ret, int size, const char *pszFormat, ...);
+    static void fill(CCNode *targetNode, CCPoint fill, int fillStrategy);
 
-    static std::string toStr(int value);
+    static void applyScaleForNode(CCNode *targetNode);
 
-    static bool isNodeAtPoint(cocos2d::CCNode *node, cocos2d::CCPoint& touchLocation);
 
-    static cocos2d::CCPoint convertToGlobalCoos(cocos2d::CCTouch *touch);
+    static void fitToRect(CCRect rect, float &x, float &y);
 
-    static cocos2d::CCPoint convertToGlobalCoos(cocos2d::CCPoint& point);
+    static void fitToRect(float &x, float &y);
 
-    static cocos2d::CCLabelTTF *createLabelTTFWithCopy(cocos2d::CCLabelTTF *pSource);
 
-    static cocos2d::CCSprite *createSpriteWithCopy(cocos2d::CCSprite *pSource);
+    static bool isNodeAtPoint(CCNode *node, CCPoint& touchLocation);
 
-    static cocos2d::CCMenu *createMenuWithCopy(cocos2d::CCMenu *pSource);
 
-    static cocos2d::CCMenuItemImage *createMenuItemImageWithCopy(cocos2d::CCMenuItemImage *pSource);
+    static CCSprite *createSpriteWithCopy(CCSprite *pSource);
 
-    static void copySprite(cocos2d::CCSprite *pSource, cocos2d::CCSprite *pDest);
+    static CCLabelTTF *createLabelTTFWithCopy(CCLabelTTF *pSource);
 
-    static void copyNode(cocos2d::CCNode *pSource, cocos2d::CCNode *pDest);
+    static CCMenu *createMenuWithCopy(CCMenu *pSource);
 
-    static void alignCenterTop(cocos2d::CCNode *node);
+    static CCMenuItemImage *createMenuItemImageWithCopy(CCMenuItemImage *pSource);
 
-    static void alignCenterBottom(cocos2d::CCNode *node);
+    static void copyNode(CCNode *pSource, CCNode *pDest);
 
-    static void alignCenterMiddle(cocos2d::CCNode *pNode);
+    static void copySprite(CCSprite *pSource, CCSprite *pDest);
 
-    static void shiftToLeftTop(cocos2d::CCNode *targetNode);
-
-    static void shiftToRightTop(cocos2d::CCNode *targetNode);
-
-    static void shiftToRightBottom(cocos2d::CCNode *targetNode);
-
-    static void shiftToTop(cocos2d::CCNode *targetNode);
-
-    static void shiftToBottom(cocos2d::CCNode *targetNode);
-
-    static void shiftToLeftBottom(cocos2d::CCNode *targetNode);
-
-    static void shiftToLeftCenter(cocos2d::CCNode *targetNode);
-
-    static void shiftToRightCenter(cocos2d::CCNode *targetNode);
-
-    static void fillWidth(cocos2d::CCNode *targetNode);
-
-    static void fillHeight(cocos2d::CCNode *targetNode);
-
-    static void fill(cocos2d::CCNode *targetNode);
-
-    static void putToCenterMiddleOf(cocos2d::CCNode *targetNode, cocos2d::CCNode *anchorNode);
-
-    static void putToVCenterOf(cocos2d::CCNode *targetNode, cocos2d::CCNode *anchorNode);
-
-    static void putUpperOf(cocos2d::CCNode *targetNode, cocos2d::CCNode *anchorNode);
-
-    static void fitToRect(float* x, float* y);
-
-    static void fitToRect(cocos2d::CCRect rect, float* x, float* y);
 
     static void shuffleArray(int* array, int count);
 
-    static void shuffleArray(cocos2d::CCArray *pArr);
-
-    static void stretchRanged(cocos2d::CCNode *pNode);
+    static void shuffleArray(CCArray *pArr);
 
     static void split(std::string src, const char* token, std::vector<std::string>& vect);
 
-    static void setStateForMenuItem(cocos2d::CCMenuItemImage *pMenuItemImage, bool bState);
+
+    static void setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState);
 };
 
 #endif /* VUTILS_H_ */

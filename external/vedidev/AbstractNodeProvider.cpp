@@ -6,7 +6,7 @@
  */
 
 #include "AbstractNodeProvider.h"
-#import "AnimationManagerAssigner.h"
+#include "AnimationManagerAssigner.h"
 
 USING_NS_CC_EXT;
 

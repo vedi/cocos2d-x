@@ -8,7 +8,7 @@
 #ifndef ABSTRACT_SCENEDISPATCHER_H_
 #define ABSTRACT_SCENEDISPATCHER_H_
 
-#include "MainScreen.h"
+#include "vedidev.h"
 
 #define SCENE_DISPATCHER_GETTER_GLUE(__CLASS__) cocos2d::CCScene *get##__CLASS__() { \
         return __CLASS__::scene();\
