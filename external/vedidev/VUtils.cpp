@@ -8,10 +8,9 @@
 #include "VUtils.h"
 
 void VUtils::align(CCNode *targetNode, CCPoint anchor) {
+    CC_ASSERT(targetNode->getParent());
     CCPoint newSize = ccpCompMult(ccpFromSize(CCDirector::sharedDirector()->getWinSize()), anchor);
-    CCRect rect = CCRectApplyAffineTransform(CCRectMake(0, 0, newSize.x, newSize.y),
-            targetNode->worldToNodeTransform());
-    CCPoint position = ccp(rect.size.width, rect.size.height);
+    CCPoint position = targetNode->getParent()->convertToNodeSpace(newSize);
     if (anchor.x < 0) {
         position.x = targetNode->getPositionX();
     }
