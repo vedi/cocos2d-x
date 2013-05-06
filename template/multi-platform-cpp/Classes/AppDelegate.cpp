@@ -1,34 +1,40 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+
+#include "vedidev/vedidev.h"
+#include "consts.h"
+#include "SceneDispatcher.h"
+#include "AudioManager.h"
 
 USING_NS_CC;
 
-AppDelegate::AppDelegate() {
+AppDelegate::AppDelegate()
+{
 
 }
 
-AppDelegate::~AppDelegate() 
+AppDelegate::~AppDelegate()
 {
 }
 
-bool AppDelegate::applicationDidFinishLaunching() {
+bool AppDelegate::applicationDidFinishLaunching()
+{
     // initialize director
-    CCDirector* pDirector = CCDirector::sharedDirector();
+    CCDirector *pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
 
     pDirector->setOpenGLView(pEGLView);
-	
+
     // turn on display FPS
     pDirector->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    pDirector->setAnimationInterval(1.0 / 60);
-
-    // create a scene. it's an autorelease object
-    CCScene *pScene = HelloWorld::scene();
+    pDirector->setAnimationInterval(1.0/kFPS);
 
     // run
-    pDirector->runWithScene(pScene);
+    SceneDispatcher *sceneDispatcher = SceneDispatcher::sharedSceneDispatcher();
+    pDirector->getScheduler()->scheduleSelector(
+            schedule_selector(SceneDispatcher::goToStartScene),
+            sceneDispatcher, 0, 0, 0, false);
 
     return true;
 }
@@ -36,15 +42,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
-
-    // if you use SimpleAudioEngine, it must be pause
-    // SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+    AudioManager::sharedAudioManager()->pauseAll();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
-
-    // if you use SimpleAudioEngine, it must resume here
-    // SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+    AudioManager::sharedAudioManager()->resumeAll();
 }

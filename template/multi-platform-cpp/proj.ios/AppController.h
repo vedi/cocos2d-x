@@ -1,9 +1,6 @@
 //
-//  iphoneAppDelegate.h
-//  iphone
-//
-//  Created by Walzer on 10-11-16.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Created by Fedor Shubin on 10/11/12.
+//  Copyright VedideV 2013. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,6 +11,9 @@
     UIWindow *window;
     RootViewController    *viewController;
 }
+
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) RootViewController *viewController;
 
 @end
 

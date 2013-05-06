@@ -157,15 +157,24 @@
 		1AC3624B16D4A1E8000847F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3624516D4A1E8000847F2 /* main.m */; };
 		1ACB3244164770DE00914215 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACB3243164770DE00914215 /* libcurl.a */; };
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
-		1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */; };
-		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
-		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCDA8116D4A25900906EA6 /* RootViewController.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
+		9D7360031737A8850036983A /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360001737A8850036983A /* ccb */; };
+		9D7360041737A8850036983A /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360011737A8850036983A /* fonts */; };
+		9D7360051737A8850036983A /* images in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360021737A8850036983A /* images */; };
+		9D7360151737A8B80036983A /* AbstractNodeProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360071737A8B80036983A /* AbstractNodeProvider.cpp */; };
+		9D7360161737A8B80036983A /* AbstractSceneDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360091737A8B80036983A /* AbstractSceneDispatcher.cpp */; };
+		9D7360181737A8B80036983A /* AnimationManagerAssigner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D73600C1737A8B80036983A /* AnimationManagerAssigner.cpp */; };
+		9D7360191737A8B80036983A /* VLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D73600F1737A8B80036983A /* VLayer.cpp */; };
+		9D73601A1737A8B80036983A /* VNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360111737A8B80036983A /* VNode.cpp */; };
+		9D73601B1737A8B80036983A /* VUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360131737A8B80036983A /* VUtils.cpp */; };
+		9D7360251737A8EF0036983A /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D73601C1737A8EF0036983A /* AudioManager.cpp */; };
+		9D7360261737A8EF0036983A /* MainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D73601F1737A8EF0036983A /* MainScreen.cpp */; };
+		9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360211737A8EF0036983A /* NodeProvider.cpp */; };
+		9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360231737A8EF0036983A /* SceneDispatcher.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -507,11 +516,6 @@
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
-		1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = ../Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = ../Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
-		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		1AFCDA8016D4A25900906EA6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = SOURCE_ROOT; };
 		1AFCDA8116D4A25900906EA6 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = SOURCE_ROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -519,6 +523,31 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
+		9D7360001737A8850036983A /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
+		9D7360011737A8850036983A /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		9D7360021737A8850036983A /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		9D7360071737A8B80036983A /* AbstractNodeProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractNodeProvider.cpp; sourceTree = "<group>"; };
+		9D7360081737A8B80036983A /* AbstractNodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractNodeProvider.h; sourceTree = "<group>"; };
+		9D7360091737A8B80036983A /* AbstractSceneDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractSceneDispatcher.cpp; sourceTree = "<group>"; };
+		9D73600A1737A8B80036983A /* AbstractSceneDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractSceneDispatcher.h; sourceTree = "<group>"; };
+		9D73600C1737A8B80036983A /* AnimationManagerAssigner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationManagerAssigner.cpp; sourceTree = "<group>"; };
+		9D73600D1737A8B80036983A /* AnimationManagerAssigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationManagerAssigner.h; sourceTree = "<group>"; };
+		9D73600E1737A8B80036983A /* vedidev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vedidev.h; sourceTree = "<group>"; };
+		9D73600F1737A8B80036983A /* VLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VLayer.cpp; sourceTree = "<group>"; };
+		9D7360101737A8B80036983A /* VLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLayer.h; sourceTree = "<group>"; };
+		9D7360111737A8B80036983A /* VNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VNode.cpp; sourceTree = "<group>"; };
+		9D7360121737A8B80036983A /* VNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VNode.h; sourceTree = "<group>"; };
+		9D7360131737A8B80036983A /* VUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VUtils.cpp; sourceTree = "<group>"; };
+		9D7360141737A8B80036983A /* VUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VUtils.h; sourceTree = "<group>"; };
+		9D73601C1737A8EF0036983A /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioManager.cpp; path = ../Classes/AudioManager.cpp; sourceTree = "<group>"; };
+		9D73601D1737A8EF0036983A /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioManager.h; path = ../Classes/AudioManager.h; sourceTree = "<group>"; };
+		9D73601E1737A8EF0036983A /* consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = consts.h; path = ../Classes/consts.h; sourceTree = "<group>"; };
+		9D73601F1737A8EF0036983A /* MainScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainScreen.cpp; path = ../Classes/MainScreen.cpp; sourceTree = "<group>"; };
+		9D7360201737A8EF0036983A /* MainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScreen.h; path = ../Classes/MainScreen.h; sourceTree = "<group>"; };
+		9D7360211737A8EF0036983A /* NodeProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NodeProvider.cpp; path = ../Classes/NodeProvider.cpp; sourceTree = "<group>"; };
+		9D7360221737A8EF0036983A /* NodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeProvider.h; path = ../Classes/NodeProvider.h; sourceTree = "<group>"; };
+		9D7360231737A8EF0036983A /* SceneDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneDispatcher.cpp; path = ../Classes/SceneDispatcher.cpp; sourceTree = "<group>"; };
+		9D7360241737A8EF0036983A /* SceneDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneDispatcher.h; path = ../Classes/SceneDispatcher.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1048,8 +1077,15 @@
 			children = (
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
-				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
+				9D73601C1737A8EF0036983A /* AudioManager.cpp */,
+				9D73601D1737A8EF0036983A /* AudioManager.h */,
+				9D73601E1737A8EF0036983A /* consts.h */,
+				9D73601F1737A8EF0036983A /* MainScreen.cpp */,
+				9D7360201737A8EF0036983A /* MainScreen.h */,
+				9D7360211737A8EF0036983A /* NodeProvider.cpp */,
+				9D7360221737A8EF0036983A /* NodeProvider.h */,
+				9D7360231737A8EF0036983A /* SceneDispatcher.cpp */,
+				9D7360241737A8EF0036983A /* SceneDispatcher.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1118,6 +1154,7 @@
 				15AA9C4015B7EC450033D6C2 /* Classes */,
 				15A3DA6B1682F8A6002FB0C5 /* CocosDenshion */,
 				15A3D9B31682F826002FB0C5 /* extensions */,
+				9D7360061737A8B80036983A /* vedidev */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				080E96DDFE201D6D7F000001 /* ios */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -1147,9 +1184,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
-				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
-				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
+				9D7360001737A8850036983A /* ccb */,
+				9D7360011737A8850036983A /* fonts */,
+				9D7360021737A8850036983A /* images */,
 				D41A0AD0160F154A004552AE /* Default-568h@2x.png */,
 				7855E0DF153FEF240059DD9A /* Default.png */,
 				D446FD6D16102124000ADA7B /* Default@2x.png */,
@@ -1160,6 +1197,27 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		9D7360061737A8B80036983A /* vedidev */ = {
+			isa = PBXGroup;
+			children = (
+				9D7360071737A8B80036983A /* AbstractNodeProvider.cpp */,
+				9D7360081737A8B80036983A /* AbstractNodeProvider.h */,
+				9D7360091737A8B80036983A /* AbstractSceneDispatcher.cpp */,
+				9D73600A1737A8B80036983A /* AbstractSceneDispatcher.h */,
+				9D73600C1737A8B80036983A /* AnimationManagerAssigner.cpp */,
+				9D73600D1737A8B80036983A /* AnimationManagerAssigner.h */,
+				9D73600E1737A8B80036983A /* vedidev.h */,
+				9D73600F1737A8B80036983A /* VLayer.cpp */,
+				9D7360101737A8B80036983A /* VLayer.h */,
+				9D7360111737A8B80036983A /* VNode.cpp */,
+				9D7360121737A8B80036983A /* VNode.h */,
+				9D7360131737A8B80036983A /* VUtils.cpp */,
+				9D7360141737A8B80036983A /* VUtils.h */,
+			);
+			name = vedidev;
+			path = ../../../external/vedidev;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1239,9 +1297,9 @@
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
-				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
-				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
-				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				9D7360031737A8850036983A /* ccb in Resources */,
+				9D7360041737A8850036983A /* fonts in Resources */,
+				9D7360051737A8850036983A /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1378,7 +1436,6 @@
 				15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */,
 				1A27573F1697CF2B00504026 /* CCEditBoxImplAndroid.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
-				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,
 				1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */,
@@ -1401,6 +1458,16 @@
 				1A40E72F1727BF49006D4861 /* Slot.cpp in Sources */,
 				1A40E7301727BF49006D4861 /* SlotData.cpp in Sources */,
 				1A40E7311727BF49006D4861 /* spine-cocos2dx.cpp in Sources */,
+				9D7360151737A8B80036983A /* AbstractNodeProvider.cpp in Sources */,
+				9D7360161737A8B80036983A /* AbstractSceneDispatcher.cpp in Sources */,
+				9D7360181737A8B80036983A /* AnimationManagerAssigner.cpp in Sources */,
+				9D7360191737A8B80036983A /* VLayer.cpp in Sources */,
+				9D73601A1737A8B80036983A /* VNode.cpp in Sources */,
+				9D73601B1737A8B80036983A /* VUtils.cpp in Sources */,
+				9D7360251737A8EF0036983A /* AudioManager.cpp in Sources */,
+				9D7360261737A8EF0036983A /* MainScreen.cpp in Sources */,
+				9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */,
+				9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

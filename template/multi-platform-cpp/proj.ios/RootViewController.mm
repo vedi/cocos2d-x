@@ -1,9 +1,6 @@
-    //
-//  RootViewController.mm
-//  test
 //
-//  Created by Walzer on 11-4-28.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Fedor Shubin on 10/11/12.
+//  Copyright VedideV 2013. All rights reserved.
 //
 
 #import "RootViewController.h"
@@ -54,7 +51,7 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 

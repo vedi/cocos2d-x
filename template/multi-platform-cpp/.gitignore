@@ -1,0 +1,14 @@
+*.iml
+.idea
+*.ccbresourcelog
+art/income/
+art/sources/
+proj.android/assets
+proj.android/bin
+proj.android/gen
+proj.android/libs/armeabi
+proj.android/obj
+proj.android/out
+proj.android/local.properties
+proj.ios/*.xcodeproj/project.xcworkspace/xcuserdata
+proj.ios/*.xcodeproj/xcuserdata

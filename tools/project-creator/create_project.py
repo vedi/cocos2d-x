@@ -190,6 +190,10 @@ else:
 
 # call process_proj from each platform's script folder          
 for platform in platforms_list:
+    src = "/art/ccb/" + context["src_project_name"] + ".ccbproj"
+    dst = "/art/ccb/" + context["dst_project_name"] + ".ccbproj"
+    if (os.path.exists(context["dst_project_path"] + src) == True):
+         os.rename(context["dst_project_path"] + src, context["dst_project_path"] + dst)
     processPlatformProjects(platform)
 #    exec "import %s.handle_project_files" % (platform)
 #    exec "%s.handle_project_files.handle_project_files(context)" % (platform)
