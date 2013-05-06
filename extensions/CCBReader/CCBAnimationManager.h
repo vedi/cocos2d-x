@@ -109,11 +109,11 @@ public:
     void runAnimationsForSequenceNamed(const char *pName, bool bRestore = true);
     void runAnimationsForSequenceIdTweenDuration(int nSeqId, float fTweenDuration, float fDuration, bool bRestore = true);
 
-    void stopAllSequences();
-
     void gotoAnimationFrameForSequenceNamed(unsigned int uFrameIdx, const char *pName);
     void gotoAnimationFrameForSequenceId(unsigned int uFrameIdx, int nSeqId);
     int getAnimationFramesNumberForSequenceNamed(const char *pName);
+
+    void stopAllSequences();
 
     void setAnimationCompletedCallback(CCObject *target, SEL_CallFunc callbackFunc);
 

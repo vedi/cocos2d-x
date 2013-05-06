@@ -803,7 +803,7 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
     }
 
     // Make callback at end of sequence
-    CCAction *completeAction = CCSequence::createWithTwoActions(CCDelayTime::create(seq->getDuration() + fTweenDuration),
+    CCAction *completeAction = CCSequence::createWithTwoActions(CCDelayTime::create(fTimeRatio * seq->getDuration() + fTweenDuration),
             CCCallFuncO::create(this, callfuncO_selector(CCBAnimationManager::sequenceCompleted), CCFloat::create(fDuration)));
     mRootNode->runAction(completeAction);
 
@@ -829,17 +829,15 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
 void CCBAnimationManager::runAnimationsForSequenceNamedTweenDuration(const char *pName, float fTweenDuration, bool bRestore)
 {
     int seqId = getSequenceId(pName);
+
+    CCAssert(seqId != -1, "Unknown sequence");
+
     runAnimationsForSequenceIdTweenDuration(seqId, fTweenDuration, 0, bRestore);
 }
 
 void CCBAnimationManager::runAnimationsForSequenceNamed(const char *pName, bool bRestore)
 {
     runAnimationsForSequenceNamedTweenDuration(pName, 0, bRestore);
-}
-
-void CCBAnimationManager::stopAllSequences() {
-    mRootNode->stopAllActionsRecursive();
-    mRunningSequence = NULL;
 }
 
 void CCBAnimationManager::gotoAnimationFrameForSequenceNamed(unsigned int uFrameIdx, const char *pName) {
@@ -910,6 +908,12 @@ int CCBAnimationManager::getAnimationFramesNumberForSequenceNamed(const char *pN
     } else {
         return -1;
     }
+}
+
+
+void CCBAnimationManager::stopAllSequences() {
+    mRootNode->stopAllActionsRecursive();
+    mRunningSequence = NULL;
 }
 
 void CCBAnimationManager::debug()

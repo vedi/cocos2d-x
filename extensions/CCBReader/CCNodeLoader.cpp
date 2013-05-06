@@ -904,7 +904,7 @@ CCNode * CCNodeLoader::parsePropTypeCCBFile(CCNode * pNode, CCNode * pParent, CC
     ccbReader->mCurrentByte = 0;
     ccbReader->mCurrentBit = 0;
     if (pCCBReader->mOwner != NULL) {
-        ccbReader->mOwner = pCCBReader->mOwner;
+    ccbReader->mOwner = pCCBReader->mOwner;
     } else {
         ccbReader->mOwner = pCCBReader->getAnimationManager()->getRootNode();
     }
