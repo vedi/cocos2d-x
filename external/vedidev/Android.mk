@@ -8,6 +8,7 @@ LOCAL_MODULE_FILENAME := libvedidev
 LOCAL_SRC_FILES := AbstractNodeProvider.cpp \
 AbstractSceneDispatcher.cpp \
 AnimationManagerAssigner.cpp \
+GestureDetector.cpp \
 VLayer.cpp \
 VNode.cpp \
 VUtils.cpp

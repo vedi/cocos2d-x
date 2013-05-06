@@ -175,6 +175,7 @@
 		9D7360261737A8EF0036983A /* MainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D73601F1737A8EF0036983A /* MainScreen.cpp */; };
 		9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360211737A8EF0036983A /* NodeProvider.cpp */; };
 		9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360231737A8EF0036983A /* SceneDispatcher.cpp */; };
+		9DD8C15F1737D30100CB4A3C /* GestureDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DD8C15D1737D30100CB4A3C /* GestureDetector.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -548,6 +549,8 @@
 		9D7360221737A8EF0036983A /* NodeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeProvider.h; path = ../Classes/NodeProvider.h; sourceTree = "<group>"; };
 		9D7360231737A8EF0036983A /* SceneDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneDispatcher.cpp; path = ../Classes/SceneDispatcher.cpp; sourceTree = "<group>"; };
 		9D7360241737A8EF0036983A /* SceneDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneDispatcher.h; path = ../Classes/SceneDispatcher.h; sourceTree = "<group>"; };
+		9DD8C15D1737D30100CB4A3C /* GestureDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GestureDetector.cpp; sourceTree = "<group>"; };
+		9DD8C15E1737D30100CB4A3C /* GestureDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureDetector.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1202,6 +1205,8 @@
 		9D7360061737A8B80036983A /* vedidev */ = {
 			isa = PBXGroup;
 			children = (
+				9DD8C15D1737D30100CB4A3C /* GestureDetector.cpp */,
+				9DD8C15E1737D30100CB4A3C /* GestureDetector.h */,
 				9D7360071737A8B80036983A /* AbstractNodeProvider.cpp */,
 				9D7360081737A8B80036983A /* AbstractNodeProvider.h */,
 				9D7360091737A8B80036983A /* AbstractSceneDispatcher.cpp */,
@@ -1468,6 +1473,7 @@
 				9D7360261737A8EF0036983A /* MainScreen.cpp in Sources */,
 				9D7360271737A8EF0036983A /* NodeProvider.cpp in Sources */,
 				9D7360281737A8EF0036983A /* SceneDispatcher.cpp in Sources */,
+				9DD8C15F1737D30100CB4A3C /* GestureDetector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
