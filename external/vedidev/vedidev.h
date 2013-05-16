@@ -46,6 +46,7 @@ USING_NS_CC;
 
 #define V_SCENE_GLUE(CLASS) static cocos2d::CCScene* scene() { \
     CCScene *scene = CCScene::create(); \
+    CC_ASSERT(scene); \
     CLASS * pNode = dynamic_cast<CLASS *>( \
     		NodeProvider::sharedNodeProvider()->get##CLASS##Node()); \
     CC_ASSERT(pNode); \
@@ -67,6 +68,14 @@ protected: \
     CCObject *pObj;\
     __class__ __var__;\
     CCARRAY_FOREACH(__array__, pObj) {\
+        __var__ = dynamic_cast<__class__>(pObj);\
+        CC_ASSERT(__var__);\
+
+#define V_CCARRAY_FOREACH_REVERSE_BEG(__array__, __class__, __var__) \
+{ \
+    CCObject *pObj;\
+    __class__ __var__;\
+    CCARRAY_FOREACH_REVERSE(__array__, pObj) {\
         __var__ = dynamic_cast<__class__>(pObj);\
         CC_ASSERT(__var__);\
 
