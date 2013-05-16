@@ -161,6 +161,20 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		372B72C6964F3CCEFEA880B6 /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7E6F195C43DC1EAB51CF /* value.c */; };
+		372B738846B7232DB8C6403F /* strbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7739F02261BBB0AFD4C8 /* strbuffer.c */; };
+		372B73F57897A53C8BCAF352 /* IOSNDKHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 372B7F1CD675C89E4D1D0AFF /* IOSNDKHelper.mm */; };
+		372B74A335067428FD3E3717 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B708ACBE07EA6DCC9606A /* hashtable.c */; };
+		372B74AB3B07FB36928F0144 /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B74DCBDA166A3D5B59EDE /* dump.c */; };
+		372B74CA1826C9A2D1FE5C48 /* utf.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B78621A956BBACA88A731 /* utf.c */; };
+		372B75391293C104495B0D85 /* pack_unpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B749AD8C357FBD336EE6A /* pack_unpack.c */; };
+		372B780161D85244DD1672F6 /* NDKHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7E995189C984E5C33B23 /* NDKHelper.cpp */; };
+		372B78A62B56765414077D9D /* strconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B704F0D3D8ACCB10DDD26 /* strconv.c */; };
+		372B795E2E2E9386199F69F5 /* Android.mk in Resources */ = {isa = PBXBuildFile; fileRef = 372B7436B808F6F6DC6C5F8E /* Android.mk */; };
+		372B79F2ECFF6A91784E84E6 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7FA66872799AE1A96053 /* error.c */; };
+		372B7A9ACBBEDD5A1449A170 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7CAD722CBA73ABBA53DA /* load.c */; };
+		372B7C3E93A69E65232A3A9F /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7428BD8FC95A027E6FCE /* memory.c */; };
+		372B7D130D4A9B552BE09633 /* NDKCallbackData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		9D7360031737A8850036983A /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360001737A8850036983A /* ccb */; };
 		9D7360041737A8850036983A /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9D7360011737A8850036983A /* fonts */; };
@@ -525,6 +539,30 @@
 		1D6058910D05DD3D006BFB54 /* HelloCpp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCpp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		372B704F0D3D8ACCB10DDD26 /* strconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strconv.c; sourceTree = "<group>"; };
+		372B708ACBE07EA6DCC9606A /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
+		372B71EBA09C85D34744115C /* NDKCallbackData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDKCallbackData.h; sourceTree = "<group>"; };
+		372B72FCCAE192431D4E9FDA /* IOSNDKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSNDKHelper.h; sourceTree = "<group>"; };
+		372B7428BD8FC95A027E6FCE /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		372B7436B808F6F6DC6C5F8E /* Android.mk */ = {isa = PBXFileReference; lastKnownFileType = file.mk; path = Android.mk; sourceTree = "<group>"; };
+		372B74614E38D4DEE17F1AC3 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jansson_config.h; sourceTree = "<group>"; };
+		372B749AD8C357FBD336EE6A /* pack_unpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pack_unpack.c; sourceTree = "<group>"; };
+		372B74DCBDA166A3D5B59EDE /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dump.c; sourceTree = "<group>"; };
+		372B7739F02261BBB0AFD4C8 /* strbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strbuffer.c; sourceTree = "<group>"; };
+		372B78621A956BBACA88A731 /* utf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf.c; sourceTree = "<group>"; };
+		372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NDKCallbackData.cpp; sourceTree = "<group>"; };
+		372B7A158D77ED52D38A50A9 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf.h; sourceTree = "<group>"; };
+		372B7B33155360641C283082 /* jansson_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jansson_private.h; sourceTree = "<group>"; };
+		372B7BA87765D7EE8905214A /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashtable.h; sourceTree = "<group>"; };
+		372B7CAD722CBA73ABBA53DA /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = load.c; sourceTree = "<group>"; };
+		372B7D7541ABB997B4D8F1A7 /* NDKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDKHelper.h; sourceTree = "<group>"; };
+		372B7DC7936392FA66987EC0 /* strbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strbuffer.h; sourceTree = "<group>"; };
+		372B7E35BF88C90F3E4BDE20 /* IOSNDKHelper-C-Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IOSNDKHelper-C-Interface.h"; sourceTree = "<group>"; };
+		372B7E6F195C43DC1EAB51CF /* value.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = value.c; sourceTree = "<group>"; };
+		372B7E84AB5170DC348B921E /* jansson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jansson.h; sourceTree = "<group>"; };
+		372B7E995189C984E5C33B23 /* NDKHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NDKHelper.cpp; sourceTree = "<group>"; };
+		372B7F1CD675C89E4D1D0AFF /* IOSNDKHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOSNDKHelper.mm; sourceTree = "<group>"; };
+		372B7FA66872799AE1A96053 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		9D7360001737A8850036983A /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
 		9D7360011737A8850036983A /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -889,6 +927,7 @@
 				15A3DA1A1682F826002FB0C5 /* network */,
 				15A3DA1F1682F826002FB0C5 /* physics_nodes */,
 				1A40E6F71727BF48006D4861 /* spine */,
+				372B7A79DA660CAE82BD973C /* EasyNDK */,
 			);
 			name = extensions;
 			path = ../../../extensions;
@@ -1170,6 +1209,7 @@
 				080E96DDFE201D6D7F000001 /* ios */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				78C7DDAA14EBA5050085D0C2 /* Resources */,
+				372B79852DC26F1B959DE7D0 /* jansson */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1190,6 +1230,53 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		372B740C8C914FAD40A7F640 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				372B72FCCAE192431D4E9FDA /* IOSNDKHelper.h */,
+				372B7F1CD675C89E4D1D0AFF /* IOSNDKHelper.mm */,
+				372B7E35BF88C90F3E4BDE20 /* IOSNDKHelper-C-Interface.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		372B79852DC26F1B959DE7D0 /* jansson */ = {
+			isa = PBXGroup;
+			children = (
+				372B78621A956BBACA88A731 /* utf.c */,
+				372B7A158D77ED52D38A50A9 /* utf.h */,
+				372B74DCBDA166A3D5B59EDE /* dump.c */,
+				372B7CAD722CBA73ABBA53DA /* load.c */,
+				372B7FA66872799AE1A96053 /* error.c */,
+				372B7E6F195C43DC1EAB51CF /* value.c */,
+				372B7428BD8FC95A027E6FCE /* memory.c */,
+				372B7E84AB5170DC348B921E /* jansson.h */,
+				372B704F0D3D8ACCB10DDD26 /* strconv.c */,
+				372B7436B808F6F6DC6C5F8E /* Android.mk */,
+				372B708ACBE07EA6DCC9606A /* hashtable.c */,
+				372B7BA87765D7EE8905214A /* hashtable.h */,
+				372B7739F02261BBB0AFD4C8 /* strbuffer.c */,
+				372B7DC7936392FA66987EC0 /* strbuffer.h */,
+				372B749AD8C357FBD336EE6A /* pack_unpack.c */,
+				372B74614E38D4DEE17F1AC3 /* jansson_config.h */,
+				372B7B33155360641C283082 /* jansson_private.h */,
+			);
+			name = jansson;
+			path = ../../../external/jansson;
+			sourceTree = "<group>";
+		};
+		372B7A79DA660CAE82BD973C /* EasyNDK */ = {
+			isa = PBXGroup;
+			children = (
+				372B740C8C914FAD40A7F640 /* ios */,
+				372B7D7541ABB997B4D8F1A7 /* NDKHelper.h */,
+				372B7E995189C984E5C33B23 /* NDKHelper.cpp */,
+				372B71EBA09C85D34744115C /* NDKCallbackData.h */,
+				372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */,
+			);
+			path = EasyNDK;
 			sourceTree = "<group>";
 		};
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
@@ -1325,6 +1412,7 @@
 				9D7360031737A8850036983A /* ccb in Resources */,
 				9D7360041737A8850036983A /* fonts in Resources */,
 				9D7360051737A8850036983A /* images in Resources */,
+				372B795E2E2E9386199F69F5 /* Android.mk in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1584,19 @@
 				9DD8C15F1737D30100CB4A3C /* GestureDetector.cpp in Sources */,
 				9DEE5EDF173800D900F0E0CB /* CCListView.cpp in Sources */,
 				9DEE5EE0173800D900F0E0CB /* CCListViewCell.cpp in Sources */,
+				372B74CA1826C9A2D1FE5C48 /* utf.c in Sources */,
+				372B74AB3B07FB36928F0144 /* dump.c in Sources */,
+				372B7A9ACBBEDD5A1449A170 /* load.c in Sources */,
+				372B79F2ECFF6A91784E84E6 /* error.c in Sources */,
+				372B72C6964F3CCEFEA880B6 /* value.c in Sources */,
+				372B7C3E93A69E65232A3A9F /* memory.c in Sources */,
+				372B78A62B56765414077D9D /* strconv.c in Sources */,
+				372B74A335067428FD3E3717 /* hashtable.c in Sources */,
+				372B738846B7232DB8C6403F /* strbuffer.c in Sources */,
+				372B75391293C104495B0D85 /* pack_unpack.c in Sources */,
+				372B73F57897A53C8BCAF352 /* IOSNDKHelper.mm in Sources */,
+				372B780161D85244DD1672F6 /* NDKHelper.cpp in Sources */,
+				372B7D130D4A9B552BE09633 /* NDKCallbackData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
