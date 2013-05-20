@@ -333,16 +333,14 @@ bool AssetsManager::createDirectory(const char *path)
 #endif
 }
 
-void AssetsManager::setSearchPath()
-{
+void AssetsManager::setSearchPath() {
     vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
     vector<string>::iterator iter = searchPaths.begin();
     searchPaths.insert(iter, _storagePath);
     CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 }
 
-static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userdata)
-{
+static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userdata) {
     FILE *fp = (FILE*)userdata;
     size_t written = fwrite(ptr, size, nmemb, fp);
     return written;
@@ -366,7 +364,7 @@ bool AssetsManager::downLoad()
         return false;
     }
     
-    // Download pacakge
+    // Download package
     CURLcode res;
     curl_easy_setopt(_curl, CURLOPT_URL, _packageUrl.c_str());
     curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, downLoadPackage);
