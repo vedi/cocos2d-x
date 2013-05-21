@@ -158,6 +158,8 @@ void VUtils::copyNode(cocos2d::CCNode* pSource,
     pDest->setRotationY(pSource->getRotationY());
     pDest->setScaleX(pSource->getScaleX());
     pDest->setScaleY(pSource->getScaleY());
+    pDest->setSkewX(pSource->getSkewX());
+    pDest->setSkewY(pSource->getSkewY());
     pDest->setTag(pSource->getTag());
     pDest->setZOrder(pSource->getZOrder());
 }
