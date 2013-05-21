@@ -12,6 +12,7 @@ USING_NS_CC_EXT;
 
 CCNode* AbstractNodeProvider::getNodeFromCcbFile(const char* pCcbFileName) {
     CCBReader* pReader = new CCBReader(CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary());
+    pReader->setCCBResourcePostfix(getResourcePostfix());
 	CCNode* pNode = pReader->readNodeGraphFromFile(pCcbFileName);
 
     AnimationManagerAssigner *pAnimationManagerAssigner = dynamic_cast<AnimationManagerAssigner *>(pNode);

@@ -17,6 +17,7 @@
 class AbstractNodeProvider: public CCObject {
 protected:
     CCNode * getNodeFromCcbFile(const char *pCcbFileName);
+    virtual const char *getResourcePostfix() {return "";};
 };
 
 #endif /* ABSTRACT_NODEPROVIDER_H_ */
