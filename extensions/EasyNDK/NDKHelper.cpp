@@ -13,7 +13,7 @@
 
 vector<NDKCallbackData> NDKHelper::selectorList;
 
-void NDKHelper::addSelector(char const *groupName, char const *name, CCNode *target, SEL_CallFuncO selector) {
+void NDKHelper::addSelector(char const *groupName, char const *name, CCObject *target, SEL_CallFuncO selector) {
     NDKHelper::selectorList.push_back(NDKCallbackData(groupName, name, target, selector));
 }
 
@@ -75,15 +75,9 @@ CCObject *NDKHelper::getCCObjectFromJson(json_t *obj) {
         return array;
     }
     else if (json_is_boolean(obj)) {
-        stringstream str;
-        if (json_is_true(obj))
-            str << true;
-        else if (json_is_false(obj))
-            str << false;
-
-        CCString *ccString = new CCString(str.str());
+        CCBool *ccBool = new CCBool(json_boolean(obj));
         //CCString::create(str.str());
-        return ccString;
+        return ccBool;
     }
     else if (json_is_integer(obj)) {
         json_int_t intVal = json_integer_value(obj);
@@ -146,6 +140,12 @@ json_t* NDKHelper::getJsonFromCCObject(CCObject* obj) {
 
         return jsonString;
     }
+    else if (dynamic_cast<CCInteger *>(obj)) {
+        CCInteger *mainInteger = (CCInteger *) obj;
+        json_t *jsonInt = json_integer(mainInteger->getValue());
+
+        return jsonInt;
+    }
     else if (dynamic_cast<CCDouble *>(obj)) {
         CCDouble *mainDouble = (CCDouble *) obj;
         json_t *jsonReal = json_real(mainDouble->getValue());
@@ -157,6 +157,12 @@ json_t* NDKHelper::getJsonFromCCObject(CCObject* obj) {
         json_t *jsonString = json_real(mainFloat->getValue());
 
         return jsonString;
+    }
+    else if (dynamic_cast<CCBool *>(obj)) {
+        CCBool *mainBool = (CCBool *) obj;
+        json_t *jsonBoolean = json_boolean(mainBool->getValue());
+
+        return jsonBoolean;
     }
     else {
         CC_ASSERT(false);
@@ -186,12 +192,10 @@ void NDKHelper::handleMessage(json_t *methodName, json_t* methodParams)
         {
             CCObject *dataToPass = NDKHelper::getCCObjectFromJson(methodParams);
             SEL_CallFuncO sel = NDKHelper::selectorList[i].getSelector();
-            CCNode *target = NDKHelper::selectorList[i].getTarget();
-            
-            CCFiniteTimeAction* action = CCSequence::create(CCCallFuncO::create(target, sel, dataToPass), NULL);
-            
-            target->runAction(action);
-            
+            CCObject *target = NDKHelper::selectorList[i].getTarget();
+
+            (target->*sel)(dataToPass);
+
             if (dataToPass != NULL) {
                 dataToPass->autorelease();
                 dataToPass->retain();
@@ -246,11 +250,13 @@ extern "C"
     #endif
     
     // Method for sending message from CPP to the targetted platform
-    void sendMessageWithParams(string methodName, CCObject* methodParams)
-    {
-        if (0 == strcmp(methodName.c_str(), ""))
-            return;
-        
+    CCObject* sendMessageWithParams(string methodName, CCObject* methodParams, bool async) {
+        CCDictionary *retParams = CCDictionary::create();
+
+        if (0 == strcmp(methodName.c_str(), "")) {
+            return retParams;
+        }
+
         json_t *toBeSentJson = json_object();
         json_object_set_new(toBeSentJson, __CALLED_METHOD__, json_string(methodName.c_str()));
         
@@ -259,43 +265,61 @@ extern "C"
             json_t* paramsJson = NDKHelper::getJsonFromCCObject(methodParams);
             json_object_set_new(toBeSentJson, __CALLED_METHOD_PARAMS__, paramsJson);
         }
-        
+
+        json_t *retJsonParams = NULL;
         #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         JniMethodInfo t;
         
 		if (JniHelper::getStaticMethodInfo(t,
                                            CLASS_NAME,
                                            "receiveCppMessage",
-                                           "(Ljava/lang/String;)V"))
+                                           "(Ljava/lang/String;Z)Ljava/lang/String;"))
 		{
             char* jsonStrLocal = json_dumps(toBeSentJson, JSON_COMPACT | JSON_ENSURE_ASCII);
             string jsonStr(jsonStrLocal);
             free(jsonStrLocal);
             
             jstring stringArg1 = t.env->NewStringUTF(jsonStr.c_str());
-            t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
+            jstring retString = (jstring) t.env->CallStaticObjectMethod(t.classID, t.methodID, stringArg1, (jboolean)async);
+
             t.env->DeleteLocalRef(stringArg1);
 			t.env->DeleteLocalRef(t.classID);
+
+		    const char *nativeString = t.env->GetStringUTFChars(retString, 0);
+		    string retParamsStr(nativeString);
+		    t.env->ReleaseStringUTFChars(retString, nativeString);
+
+
+            const char *jsonCharArray = retParamsStr.c_str();
+
+            json_error_t error;
+            retJsonParams = json_loads(jsonCharArray, 0, &error);
+
+            if (!retJsonParams) {
+                fprintf(stderr, "error: on line %d: %s\n", error.line, error.text);
+                return retParams;
+            }
 		}
-        #endif
-        
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         json_t *jsonMessageName = json_string(methodName.c_str());
-        
+
         if (methodParams != NULL)
         {
             json_t *jsonParams = NDKHelper::getJsonFromCCObject(methodParams);
-            IOSNDKHelperImpl::receiveCPPMessage(jsonMessageName, jsonParams);
+            retJsonParams = IOSNDKHelperImpl::receiveCPPMessage(jsonMessageName, jsonParams);
             json_decref(jsonParams);
+        } else {
+            retJsonParams = IOSNDKHelperImpl::receiveCPPMessage(jsonMessageName, NULL);
         }
-        else
-        {
-            IOSNDKHelperImpl::receiveCPPMessage(jsonMessageName, NULL);
+
+        if (!retJsonParams) {
+            return retParams;
         }
-        
+
         json_decref(jsonMessageName);
         #endif
         
         json_decref(toBeSentJson);
+        return NDKHelper::getCCObjectFromJson(retJsonParams);
     }
 }

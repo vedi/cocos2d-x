@@ -20,7 +20,7 @@ using namespace std;
 
 class NDKHelper {
     public :
-        static void addSelector(char const *groupName, char const *name, CCNode *target, SEL_CallFuncO selector);
+        static void addSelector(char const *groupName, char const *name, CCObject *target, SEL_CallFuncO selector);
         static void removeSelectorsInGroup(char const *groupName);
         static void printSelectorList();
         static CCObject *getCCObjectFromJson(json_t *obj);
@@ -33,7 +33,7 @@ class NDKHelper {
 
 extern "C"
 {
-    void sendMessageWithParams(string methodName, CCObject* methodParams);
+    CCObject* sendMessageWithParams(string methodName, CCObject* methodParams, bool async = true);
 }
 
 #endif /* defined(__EasyNDK_for_cocos2dx__NDKHelper__) */
