@@ -7,3 +7,9 @@
 [submodule "samples/Javascript/Shared"]
 	path = samples/Javascript/Shared
 	url = https://github.com/minggo/cocos2d-js-tests.git
+[submodule "external/jansson"]
+	path = external/jansson
+	url = https://github.com/vedi/jansson.git
+[submodule "extensions/EasyNDK"]
+	path = extensions/EasyNDK
+	url = https://github.com/vedi/EasyNDK.git
