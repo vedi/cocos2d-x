@@ -30,8 +30,6 @@ CCBReader/CCBSequenceProperty.cpp \
 CCBReader/CCBValue.cpp \
 CCBReader/CCData.cpp \
 CCBReader/CCNode+CCBRelativePositioning.cpp \
-EasyNDK/NDKCallbackData.cpp \
-EasyNDK/NDKHelper.cpp \
 GUI/CCControlExtension/CCControl.cpp \
 GUI/CCControlExtension/CCControlButton.cpp \
 GUI/CCControlExtension/CCControlColourPicker.cpp \

@@ -3,7 +3,6 @@
 //
 
 
-
 #ifndef __VNode_H_
 #define __VNode_H_
 
@@ -12,7 +11,7 @@
 
 USING_NS_CC_EXT;
 
-class VNode : public CCNode
+class VNode : public CCNodeRGBA
 , public CCBMemberVariableAssigner
 , public CCBSelectorResolver
 , public CCNodeLoaderListener

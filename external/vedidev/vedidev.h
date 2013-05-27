@@ -10,6 +10,8 @@
 
 USING_NS_CC;
 
+using namespace std;
+
 #define V_CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(T) virtual T * createCCNode(cocos2d::CCNode * pParent, cocos2d::extension::CCBReader * pCCBReader) { \
     T *pRet = T::create(); \
     return pRet; \

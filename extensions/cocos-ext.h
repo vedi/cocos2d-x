@@ -32,9 +32,6 @@
 #include "CCBReader/CCData.h"
 #include "CCBReader/CCNode+CCBRelativePositioning.h"
 
-#include "EasyNDK/NDKCallbackData.h"
-#include "EasyNDK/NDKHelper.h"
-
 #include "GUI/CCControlExtension/CCControlExtensions.h"
 #include "GUI/CCListView/CCListView.h"
 #include "GUI/CCScrollView/CCScrollView.h"
