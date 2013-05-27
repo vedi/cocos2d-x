@@ -13,3 +13,6 @@
 [submodule "extensions/EasyNDK"]
 	path = extensions/EasyNDK
 	url = https://github.com/vedi/EasyNDK.git
+[submodule "extensions/cocos2dx-store"]
+	path = extensions/cocos2dx-store
+	url = https://github.com/vedi/cocos2dx-store.git
