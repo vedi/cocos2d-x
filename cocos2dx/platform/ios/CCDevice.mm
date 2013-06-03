@@ -1,5 +1,7 @@
 #include "CCDevice.h"
 #import <UIKit/UIKit.h>
+#import <UIKit/UIDevice.h>
+#import "UIDevice-IdentifierAddition.h"
 
 NS_CC_BEGIN
 
@@ -24,6 +26,10 @@ int CCDevice::getDPI()
         }
     }
     return dpi;
+}
+
+std::string CCDevice::getDeviceId() {
+    return [[[UIDevice currentDevice] uniqueDeviceIdentifier] UTF8String];
 }
 
 NS_CC_END

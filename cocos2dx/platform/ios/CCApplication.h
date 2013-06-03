@@ -66,6 +66,8 @@ public:
      */
     virtual TargetPlatform getTargetPlatform();
 
+    virtual std::string getAppID();
+
 protected:
     static CCApplication * sm_pSharedApplication;
 };

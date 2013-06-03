@@ -49,5 +49,6 @@ extern void setIntegerForKeyJNI(const char* pKey, int value);
 extern void setFloatForKeyJNI(const char* pKey, float value);
 extern void setDoubleForKeyJNI(const char* pKey, double value);
 extern void setStringForKeyJNI(const char* pKey, const char* value);
+extern std::string getDeviceIdJNI();
 
 #endif /* __Java_org_cocos2dx_lib_Cocos2dxHelper_H__ */

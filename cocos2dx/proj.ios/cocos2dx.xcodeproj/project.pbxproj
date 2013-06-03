@@ -289,6 +289,10 @@
 		1AC6CE8816B910CD00330EFD /* CCFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC6CE8616B910CD00330EFD /* CCFileUtils.cpp */; };
 		1AC6CE8916B910CD00330EFD /* CCFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AC6CE8716B910CD00330EFD /* CCFileUtils.h */; };
 		2628297A15EC7064002C4240 /* ccTypeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 2628297915EC7064002C4240 /* ccTypeInfo.h */; };
+		372B77FD441EEBC4B5BB0EA7 /* UIDevice-IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */; };
+		372B7E8B78804F2772A78C4F /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */; };
+		372B7F1D81B67C8F09BC1FF0 /* UIDevice-IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */; };
+		372B7F8E7660C69D9FF002B1 /* NSString-MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */; };
 		469A7DF316C24787006FFCB2 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 469A7DF116C24787006FFCB2 /* tinyxml2.cpp */; };
 		469A7DF416C24787006FFCB2 /* tinyxml2.h in Headers */ = {isa = PBXBuildFile; fileRef = 469A7DF216C24787006FFCB2 /* tinyxml2.h */; };
 		46A393F616E5D01B00210B16 /* CCUserDefault.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A393F216E5D01B00210B16 /* CCUserDefault.cpp */; };
@@ -597,6 +601,11 @@
 		1AC6CE8616B910CD00330EFD /* CCFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCFileUtils.cpp; sourceTree = "<group>"; };
 		1AC6CE8716B910CD00330EFD /* CCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileUtils.h; sourceTree = "<group>"; };
 		2628297915EC7064002C4240 /* ccTypeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypeInfo.h; sourceTree = "<group>"; };
+		372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-MD5Addition.m"; sourceTree = "<group>"; };
+		372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-MD5Addition.h"; sourceTree = "<group>"; };
+		372B789A0C95221217BBC930 /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
+		372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-IdentifierAddition.h"; sourceTree = "<group>"; };
+		372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-IdentifierAddition.m"; sourceTree = "<group>"; };
 		469A7DF116C24787006FFCB2 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml2.cpp; sourceTree = "<group>"; };
 		469A7DF216C24787006FFCB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		46A393F216E5D01B00210B16 /* CCUserDefault.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCUserDefault.cpp; sourceTree = "<group>"; };
@@ -1017,6 +1026,7 @@
 				1551A493158F2ADE00E66CFE /* EAGLView.mm */,
 				1551A4A0158F2ADE00E66CFE /* OpenGL_Internal.h */,
 				1551A4A1158F2ADE00E66CFE /* Simulation */,
+				372B772AE475565948D5EC6D /* UIDevice-UUID */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -1245,6 +1255,18 @@
 			path = webp;
 			sourceTree = "<group>";
 		};
+		372B772AE475565948D5EC6D /* UIDevice-UUID */ = {
+			isa = PBXGroup;
+			children = (
+				372B789A0C95221217BBC930 /* license */,
+				372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */,
+				372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */,
+				372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */,
+				372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */,
+			);
+			path = "UIDevice-UUID";
+			sourceTree = "<group>";
+		};
 		469A7DF016C24787006FFCB2 /* tinyxml2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1441,6 +1463,8 @@
 				1A5B48EA16F084CC008568FC /* CCBool.h in Headers */,
 				1A5B48EB16F084CC008568FC /* CCDouble.h in Headers */,
 				1A5B48EC16F084CC008568FC /* CCFloat.h in Headers */,
+				372B7F8E7660C69D9FF002B1 /* NSString-MD5Addition.h in Headers */,
+				372B77FD441EEBC4B5BB0EA7 /* UIDevice-IdentifierAddition.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,6 +1649,8 @@
 				46A393F616E5D01B00210B16 /* CCUserDefault.cpp in Sources */,
 				46A393F816E5D01B00210B16 /* CCUserDefault.mm in Sources */,
 				46A393F916E5D01B00210B16 /* CCUserDefaultAndroid.cpp in Sources */,
+				372B7E8B78804F2772A78C4F /* NSString-MD5Addition.m in Sources */,
+				372B7F1D81B67C8F09BC1FF0 /* UIDevice-IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1681,6 +1707,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/cocos2dx.dst;
+				FRAMEWORK_SEARCH_PATHS = "\"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2dx-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1698,11 +1725,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../platform/third_party/ios/libraries\"",
+					"\"${PROJECT_DIR}/../../CocosDenshion/third_party/blackberry/libraries/x86\"/**",
+					"\"${PROJECT_DIR}/../../CocosDenshion/third_party/blackberry/libraries/armle-v7\"/**",
+					"\"${PROJECT_DIR}/../../extensions/flurry/proj.ios/Flurry\"/**",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../../plugin/plugins/flurry/proj.ios\"/** \"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
 			};
 			name = Debug;
 		};
@@ -1710,6 +1741,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/cocos2dx.dst;
+				FRAMEWORK_SEARCH_PATHS = "\"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2dx-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1726,10 +1758,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../platform/third_party/ios/libraries\"",
+					"\"${PROJECT_DIR}/../../CocosDenshion/third_party/blackberry/libraries/x86\"/**",
+					"\"${PROJECT_DIR}/../../CocosDenshion/third_party/blackberry/libraries/armle-v7\"/**",
+					"\"${PROJECT_DIR}/../../extensions/flurry/proj.ios/Flurry\"/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../../plugin/plugins/flurry/proj.ios\"/** \"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
 			};
 			name = Release;
 		};

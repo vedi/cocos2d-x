@@ -124,4 +124,9 @@ TargetPlatform CCApplication::getTargetPlatform()
     return kTargetAndroid;
 }
 
+std::string CCApplication::getAppID() {
+    return getPackageNameJNI();
+}
+
+
 NS_CC_END

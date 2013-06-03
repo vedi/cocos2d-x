@@ -135,4 +135,11 @@ TargetPlatform CCApplication::getTargetPlatform()
     }
 }
 
+std::string cocos2d::CCApplication::getAppID() {
+    return [[[NSBundle mainBundle] bundleIdentifier] UTF8String];
+}
+
 NS_CC_END
+
+
+

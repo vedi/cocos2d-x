@@ -32,6 +32,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -109,7 +110,11 @@ public class Cocos2dxHelper {
 		return Build.MODEL;
     }
 
-	public static AssetManager getAssetManager() {
+    public static String getDeviceId() {
+        return Settings.Secure.getString(sContext.getContentResolver(),Settings.Secure.ANDROID_ID);
+    }
+
+    public static AssetManager getAssetManager() {
 		return Cocos2dxHelper.sAssetManager;
 	}
 

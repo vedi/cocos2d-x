@@ -1,6 +1,8 @@
 #ifndef __CC_APPLICATION_PROTOCOL_H__
 #define __CC_APPLICATION_PROTOCOL_H__
 
+#include <string>
+
 NS_CC_BEGIN
 
 enum TargetPlatform
@@ -61,6 +63,8 @@ public:
      @brief Get target platform
      */
     virtual TargetPlatform getTargetPlatform() = 0;
+
+    virtual std::string getAppID() = 0;
 };
 
 // end of platform group
