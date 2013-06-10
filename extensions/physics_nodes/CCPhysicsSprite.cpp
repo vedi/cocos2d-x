@@ -276,27 +276,30 @@ void CCPhysicsSprite::setPTMRatio(float fRatio)
 // Override the setters and getters to always reflect the body's properties.
 void CCPhysicsSprite::updatePosFromPhysics()
 {
-    b2Vec2 pos = m_pB2Body->GetPosition();
-    float x = pos.x * m_fPTMRatio;
-    float y = pos.y * m_fPTMRatio;
-    m_obPosition = ccp(x,y);
+    if (m_pB2Body != NULL) {
+        b2Vec2 pos = m_pB2Body->GetPosition();
+        float x = pos.x * m_fPTMRatio;
+        float y = pos.y * m_fPTMRatio;
+        m_obPosition = ccp(x,y);
+    }
 }
 
-void CCPhysicsSprite::setPosition(const CCPoint &pos)
-{
-    float angle = m_pB2Body->GetAngle();
-    m_pB2Body->SetTransform(b2Vec2(pos.x / m_fPTMRatio, pos.y / m_fPTMRatio), angle);
+void CCPhysicsSprite::setPosition(const CCPoint &pos) {
+    if (m_pB2Body != NULL) {
+        float angle = m_pB2Body->GetAngle();
+        m_pB2Body->SetTransform(b2Vec2(pos.x / m_fPTMRatio, pos.y / m_fPTMRatio), angle);
+    } else {
+        CCSprite::setPosition(pos);
+    }
 }
 
-float CCPhysicsSprite::getRotation()
-{
-    return (m_bIgnoreBodyRotation ? CCSprite::getRotation() :
+float CCPhysicsSprite::getRotation() {
+    return ((m_bIgnoreBodyRotation || m_pB2Body == NULL) ? CCSprite::getRotation() :
             CC_RADIANS_TO_DEGREES(m_pB2Body->GetAngle()));
 }
 
-void CCPhysicsSprite::setRotation(float fRotation)
-{
-    if (m_bIgnoreBodyRotation)
+void CCPhysicsSprite::setRotation(float fRotation) {
+    if (m_bIgnoreBodyRotation || m_pB2Body == NULL)
     {
         CCSprite::setRotation(fRotation);
     }
@@ -309,39 +312,43 @@ void CCPhysicsSprite::setRotation(float fRotation)
 }
 
 // returns the transform matrix according the Box2D Body values
-CCAffineTransform CCPhysicsSprite::nodeToParentTransform()
-{
-    b2Vec2 pos  = m_pB2Body->GetPosition();
-	
-	float x = pos.x * m_fPTMRatio;
-	float y = pos.y * m_fPTMRatio;
-	
-	if (m_bIgnoreAnchorPointForPosition)
-    {
-		x += m_obAnchorPointInPoints.x;
-		y += m_obAnchorPointInPoints.y;
-	}
-	
-	// Make matrix
-	float radians = m_pB2Body->GetAngle();
-	float c = cosf(radians);
-	float s = sinf(radians);
-	
-	// Although scale is not used by physics engines, it is calculated just in case
-	// the sprite is animated (scaled up/down) using actions.
-	// For more info see: http://www.cocos2d-iphone.org/forum/topic/68990
-	if (!m_obAnchorPointInPoints.equals(CCPointZero))
-    {
-		x += ((c * -m_obAnchorPointInPoints.x * m_fScaleX) + (-s * -m_obAnchorPointInPoints.y * m_fScaleY));
-		y += ((s * -m_obAnchorPointInPoints.x * m_fScaleX) + (c * -m_obAnchorPointInPoints.y * m_fScaleY));
-	}
-    
-	// Rot, Translate Matrix
-	m_sTransform = CCAffineTransformMake( c * m_fScaleX,	s * m_fScaleX,
-									     -s * m_fScaleY,	c * m_fScaleY,
-									     x,	y );
-	
-	return m_sTransform;
+CCAffineTransform CCPhysicsSprite::nodeToParentTransform() {
+    if (m_pB2Body != NULL) {
+
+        b2Vec2 pos  = m_pB2Body->GetPosition();
+
+        float x = pos.x * m_fPTMRatio;
+        float y = pos.y * m_fPTMRatio;
+
+        if (m_bIgnoreAnchorPointForPosition)
+        {
+            x += m_obAnchorPointInPoints.x;
+            y += m_obAnchorPointInPoints.y;
+        }
+
+        // Make matrix
+        float radians = m_pB2Body->GetAngle();
+        float c = cosf(radians);
+        float s = sinf(radians);
+
+        // Although scale is not used by physics engines, it is calculated just in case
+        // the sprite is animated (scaled up/down) using actions.
+        // For more info see: http://www.cocos2d-iphone.org/forum/topic/68990
+        if (!m_obAnchorPointInPoints.equals(CCPointZero))
+        {
+            x += ((c * -m_obAnchorPointInPoints.x * m_fScaleX) + (-s * -m_obAnchorPointInPoints.y * m_fScaleY));
+            y += ((s * -m_obAnchorPointInPoints.x * m_fScaleX) + (c * -m_obAnchorPointInPoints.y * m_fScaleY));
+        }
+
+        // Rot, Translate Matrix
+        m_sTransform = CCAffineTransformMake( c * m_fScaleX,	s * m_fScaleX,
+                                             -s * m_fScaleY,	c * m_fScaleY,
+                                             x,	y );
+
+        return m_sTransform;
+    } else {
+        return CCSprite::nodeToParentTransform();
+    }
 }
 
 #endif
