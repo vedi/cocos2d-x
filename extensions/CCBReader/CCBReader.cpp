@@ -72,6 +72,7 @@ CCBReader::CCBReader(CCNodeLoaderLibrary * pCCNodeLoaderLibrary, CCBMemberVariab
 , mOwnerCallbackNodes(NULL)
 , m_sCCBResourcePrefix("")
 , m_sCCBResourcePostfix("")
+, mCCBRootPath("")
 {
     this->mCCNodeLoaderLibrary = pCCNodeLoaderLibrary;
     this->mCCNodeLoaderLibrary->retain();
@@ -96,6 +97,7 @@ CCBReader::CCBReader(CCBReader * pCCBReader)
 , mOwnerCallbackNodes(NULL)
 , m_sCCBResourcePrefix("")
 , m_sCCBResourcePostfix("")
+, mCCBRootPath("")
 {
     this->mLoadedSpriteSheets = pCCBReader->mLoadedSpriteSheets;
     this->mCCNodeLoaderLibrary = pCCBReader->mCCNodeLoaderLibrary;
