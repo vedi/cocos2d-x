@@ -40,6 +40,8 @@ assets/
 local.properties
 
 projects
+.idea
+*.iml
 
 # Ignore files built by NaCl
 samples/Cpp/HelloCpp/proj.nacl/Resources/
