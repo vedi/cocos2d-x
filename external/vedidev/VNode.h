@@ -20,6 +20,8 @@ class VNode : public CCNodeRGBA
 public:
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
     virtual cocos2d::extension::SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, char const *pSelectorName) {return NULL;}
+    virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {return false;};
+    virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {};
 
     virtual void cleanup();
 };

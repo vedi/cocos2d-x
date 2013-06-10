@@ -1,5 +1,5 @@
 /*
- * MyLayer.cpp
+ * VLayer.cpp
  *
  *  Created on: Sep 19, 2012
  *      Author: vedi

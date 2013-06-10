@@ -1,5 +1,5 @@
 /*
- * MyLayer.h
+ * VLayer.h
  *
  *  Created on: Sep 19, 2012
  *      Author: vedi
