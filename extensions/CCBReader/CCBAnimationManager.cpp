@@ -27,6 +27,7 @@ CCBAnimationManager::CCBAnimationManager()
 , mRunningSequence(NULL)
 , jsControlled(false)
 , mOwner(NULL)
+, mRestore(true)
 {
     init();
 }
@@ -722,9 +723,9 @@ void CCBAnimationManager::runAction(CCNode *pNode, CCBSequenceProperty *pSeqProp
     }
 }
 
-void extension::CCBAnimationManager::runAnimationsForSequenceNamedWithDuration(char const *pName, float fDuration, bool bRestore) {
+void extension::CCBAnimationManager::runAnimationsForSequenceNamedWithDuration(char const *pName, float fDuration) {
     int seqId = getSequenceId(pName);
-    runAnimationsForSequenceIdTweenDuration(seqId, 0, fDuration, bRestore);
+    runAnimationsForSequenceIdTweenDuration(seqId, 0, fDuration);
 }
 
 void CCBAnimationManager::runAnimations(const char *pName, float fTweenDuration)
@@ -742,8 +743,7 @@ void CCBAnimationManager::runAnimations(int nSeqId, float fTweenDuration)
     runAnimationsForSequenceIdTweenDuration(nSeqId, fTweenDuration, 0);
 }
 
-void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, float fTweenDuration, float fDuration,
-        bool bRestore) {
+void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, float fTweenDuration, float fDuration) {
 
     CCAssert(nSeqId != -1, "Sequence id couldn't be found");
 
@@ -781,7 +781,7 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
         }
 
         // Reset the nodes that may have been changed by other timelines
-        if (bRestore) {
+        if (mRestore) {
             CCDictionary *nodeBaseValues = (CCDictionary*)mBaseValues->objectForKey(pElement->getIntKey());
             if (nodeBaseValues)
             {
@@ -826,18 +826,18 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
     mRunningSequence = getSequence(nSeqId);
 }
 
-void CCBAnimationManager::runAnimationsForSequenceNamedTweenDuration(const char *pName, float fTweenDuration, bool bRestore)
+void CCBAnimationManager::runAnimationsForSequenceNamedTweenDuration(const char *pName, float fTweenDuration)
 {
     int seqId = getSequenceId(pName);
 
     CCAssert(seqId != -1, "Unknown sequence");
 
-    runAnimationsForSequenceIdTweenDuration(seqId, fTweenDuration, 0, bRestore);
+    runAnimationsForSequenceIdTweenDuration(seqId, fTweenDuration, 0);
 }
 
-void CCBAnimationManager::runAnimationsForSequenceNamed(const char *pName, bool bRestore)
+void CCBAnimationManager::runAnimationsForSequenceNamed(const char *pName)
 {
-    runAnimationsForSequenceNamedTweenDuration(pName, 0, bRestore);
+    runAnimationsForSequenceNamedTweenDuration(pName, 0);
 }
 
 void CCBAnimationManager::gotoAnimationFrameForSequenceNamed(unsigned int uFrameIdx, const char *pName) {

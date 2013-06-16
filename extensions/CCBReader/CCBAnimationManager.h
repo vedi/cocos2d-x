@@ -15,8 +15,8 @@ public:
     virtual void completedAnimationSequenceNamed(CCNode *pRootNode, const char *name) = 0;
 };
 
-class CCBAnimationManager : public CCObject
-{
+class CCBAnimationManager : public CCObject {
+    CC_SYNTHESIZE(bool, mRestore, Restore);
 private:
     CCArray *mSequences;
     CCDictionary *mNodeSequences;
@@ -42,7 +42,6 @@ private:
 
     SEL_CallFunc mAnimationCompleteCallbackFunc;
     CCObject *mTarget;
-
 
 public:
     bool jsControlled;
@@ -104,10 +103,10 @@ public:
     /** @deprecated This interface will be deprecated sooner or later.*/
     CC_DEPRECATED_ATTRIBUTE void runAnimations(int nSeqId, float fTweenDuration);
 
-    void runAnimationsForSequenceNamedTweenDuration(const char *pName, float fTweenDuration, bool bRestore = true);
-    void runAnimationsForSequenceNamedWithDuration(const char *pName, float fDuration, bool bRestore = true);
-    void runAnimationsForSequenceNamed(const char *pName, bool bRestore = true);
-    void runAnimationsForSequenceIdTweenDuration(int nSeqId, float fTweenDuration, float fDuration, bool bRestore = true);
+    void runAnimationsForSequenceNamedTweenDuration(const char *pName, float fTweenDuration);
+    void runAnimationsForSequenceNamedWithDuration(const char *pName, float fDuration);
+    void runAnimationsForSequenceNamed(const char *pName);
+    void runAnimationsForSequenceIdTweenDuration(int nSeqId, float fTweenDuration, float fDuration);
 
     void gotoAnimationFrameForSequenceNamed(unsigned int uFrameIdx, const char *pName);
     void gotoAnimationFrameForSequenceId(unsigned int uFrameIdx, int nSeqId);
