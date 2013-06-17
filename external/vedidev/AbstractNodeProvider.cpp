@@ -15,6 +15,11 @@ CCNode* AbstractNodeProvider::getNodeFromCcbFile(const char* pCcbFileName) {
     pReader->setCCBResourcePostfix(getResourcePostfix());
 	CCNode* pNode = pReader->readNodeGraphFromFile(pCcbFileName);
 
+    AnimationManagerAssigner *pAnimationManagerAssigner = dynamic_cast<AnimationManagerAssigner *>(pNode);
+    if (pAnimationManagerAssigner != NULL) {
+        pAnimationManagerAssigner->setAnimationManagers(pReader->getAnimationManagers());
+    }
+
 	pReader->release();
 
 	return pNode;

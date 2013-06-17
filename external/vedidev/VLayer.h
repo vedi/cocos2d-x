@@ -30,9 +30,11 @@ public:
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
     virtual cocos2d::extension::SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, char const *pSelectorName) {return NULL;}
 
+    virtual void setUserObject(CCObject *pUserObject);
     virtual void cleanup();
 protected:
     VLayer();
+
 };
 
 #endif /* VLAYER_H_ */

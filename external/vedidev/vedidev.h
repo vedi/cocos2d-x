@@ -14,11 +14,6 @@ using namespace std;
 
 #define V_CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(T) virtual T * createCCNode(cocos2d::CCNode * pParent, cocos2d::extension::CCBReader * pCCBReader) { \
     T *pRet = T::create(); \
-    AnimationManagerAssigner *pAnimationManagerAssigner = dynamic_cast<AnimationManagerAssigner *>(pRet); \
-    if (pAnimationManagerAssigner != NULL) { \
-        pAnimationManagerAssigner->setAnimationManager(pCCBReader->getAnimationManager()); \
-        pAnimationManagerAssigner->setAnimationManagers(pCCBReader->getAnimationManagers()); \
-    } \
     return pRet; \
 }
 
