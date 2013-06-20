@@ -37,16 +37,16 @@ void VUtils::alignRelative(CCNode *targetNode, CCNode *anchorNode, CCPoint ancho
 void VUtils::fill(CCNode *targetNode, CCPoint fill, int fillStrategy) {
     CCPoint newSize = ccpCompMult(ccpFromSize(CCDirector::sharedDirector()->getWinSize()), fill);
     CCRect rect = CCRectApplyAffineTransform(CCRectMake(0, 0, newSize.x, newSize.y),
-            targetNode->worldToNodeTransform());
+                                             targetNode->worldToNodeTransform());
     newSize = ccp(rect.size.width, rect.size.height);
     CCPoint scale = ccp(targetNode->getScaleX(), targetNode->getScaleY());
     if (fill.x >= 0) {
-        scale.x = newSize.x / targetNode->getContentSize().width;
+        scale.x *= newSize.x / targetNode->getContentSize().width;
     }
     if (fill.y >= 0) {
-        scale.y = newSize.y/ targetNode->getContentSize().height;
+        scale.y *= newSize.y/ targetNode->getContentSize().height;
     }
-
+    
     if (fillStrategy == V_FILL_STRATEGY_CROP) {
         targetNode->setScale(MAX(scale.x, scale.y));
     } else if (fillStrategy == V_FILL_STRATEGY_FIT) {
@@ -209,4 +209,3 @@ void VUtils::setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState) {
 
     pMenuItemImage->setNormalImage(pSprite);
 }
-

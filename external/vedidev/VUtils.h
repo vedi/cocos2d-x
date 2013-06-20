@@ -83,6 +83,7 @@ public:
 
 
     static void setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState);
+
 };
 
 #endif /* VUTILS_H_ */
