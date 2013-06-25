@@ -20,4 +20,15 @@ protected:
     virtual const char *getResourcePostfix() {return "";};
 };
 
+class VNodeLoader : public cocos2d::extension::CCNodeLoader {
+public:
+    virtual CCNode *loadCCNode(CCNode *node, extension::CCBReader *pCCBReader);
+};
+
+class VLayerLoader : public cocos2d::extension::CCLayerLoader {
+public:
+    virtual CCNode *loadCCNode(CCNode *node, extension::CCBReader *pCCBReader);
+};
+
+
 #endif /* ABSTRACT_NODEPROVIDER_H_ */

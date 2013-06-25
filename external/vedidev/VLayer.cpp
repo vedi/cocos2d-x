@@ -28,10 +28,3 @@ void VLayer::onEnter() {
 	CCLayer::onEnter();
 	this->setKeypadEnabled(true);
 }
-
-void VLayer::setUserObject(CCObject *pUserObject) {
-    CCBAnimationManager *animationManager = dynamic_cast<CCBAnimationManager *>(pUserObject);
-    if (animationManager) {
-        this->setAnimationManager(animationManager);
-    }
-}

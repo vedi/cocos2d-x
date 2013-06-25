@@ -12,9 +12,3 @@ void VNode::cleanup() {
     CCNode::cleanup();
 }
 
-void VNode::setUserObject(CCObject *pUserObject) {
-    CCBAnimationManager *animationManager = dynamic_cast<CCBAnimationManager *>(pUserObject);
-    if (animationManager) {
-        this->setAnimationManager(animationManager);
-    }
-}

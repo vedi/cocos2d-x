@@ -23,7 +23,6 @@ public:
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {return false;};
     virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {};
 
-    virtual void setUserObject(CCObject *pUserObject);
     virtual void cleanup();
 };
 
