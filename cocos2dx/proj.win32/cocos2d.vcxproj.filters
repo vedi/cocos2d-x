@@ -103,6 +103,9 @@
     <Filter Include="3d_model_support">
       <UniqueIdentifier>{e1da6de7-49b8-454a-9e74-13717ef1b128}</UniqueIdentifier>
     </Filter>
+    <Filter Include="support\component">
+      <UniqueIdentifier>{485f1c18-d463-48d0-bcaa-a10e32aa3332}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\base_nodes\CCAtlasNode.cpp">
@@ -460,12 +463,6 @@
     </ClCompile>
     <ClCompile Include="..\support\tinyxml2\tinyxml2.cpp">
       <Filter>support\tinyxml2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\3d_model_support\md2.cpp">
-      <Filter>3d_model_support</Filter>
-    </ClCompile>
-    <ClCompile Include="..\sprite_nodes\CCSprite3D.cpp">
-      <Filter>sprite_nodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -922,15 +919,6 @@
     </ClInclude>
     <ClInclude Include="..\support\tinyxml2\tinyxml2.h">
       <Filter>support\tinyxml2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\3d_model_support\md2.h">
-      <Filter>3d_model_support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\3d_model_support\model.h">
-      <Filter>3d_model_support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\sprite_nodes\CCSprite3D.h">
-      <Filter>sprite_nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

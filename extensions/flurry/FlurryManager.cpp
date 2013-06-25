@@ -62,6 +62,6 @@ void FlurryManager::logTimedEventEnd(char const *eventId, cocos2d::CCDictionary*
 }
 
 CCObject *FlurryManager::callNative(CCDictionary *pDictionary) {
-    return sendMessageWithParams(EASY_NDK_METHOD, pDictionary, false);
+    return NDKHelper::sendMessageWithParams(EASY_NDK_METHOD, pDictionary);
 }
 
