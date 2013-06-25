@@ -11,12 +11,12 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.PushService;
 
-public class ParseCocos2dx 
+public class ParseBridge
 {
 	private static Activity activity;
 
     public static void setActivity(Activity activity) {
-    	ParseCocos2dx.activity = activity;
+    	ParseBridge.activity = activity;
     }
     
     public static JSONObject dispatchNDKCall(JSONObject params) {
