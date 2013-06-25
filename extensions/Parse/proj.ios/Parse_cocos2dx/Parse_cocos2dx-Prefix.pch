@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'ParseIOS' target in the 'ParseIOS' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+
+#endif
