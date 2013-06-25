@@ -6,7 +6,7 @@ LOCAL_MODULE := cocos2dx_flurry_static
 
 LOCAL_MODULE_FILENAME := libcocos2dxflurry
 
-LOCAL_SRC_FILES := ../../FlurryManager.cpp
+LOCAL_SRC_FILES := ../../FlurryModule.cpp
 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../..
 

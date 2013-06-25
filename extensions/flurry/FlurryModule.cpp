@@ -3,7 +3,7 @@
  *
  */
 
-#include "FlurryManager.h"
+#include "FlurryModule.h"
 #include "NDKHelper.h"
 
 USING_NS_CC;
