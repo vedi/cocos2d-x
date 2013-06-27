@@ -84,61 +84,150 @@ public:
      @brief Preload background music
      @param pszFilePath The path of the background music file,or the FileName of T_SoundResInfo
      */
-    void preloadBackgroundMusic(const char* pszFilePath);
+    void preloadBackgroundMusic(const char* pszFilePath) {
+        this->preloadSound(pszFilePath, 0);
+    }
     
     /**
     @brief Play background music
     @param pszFilePath The path of the background music file,or the FileName of T_SoundResInfo
     @param bLoop Whether the background music loop or not
     */
-    void playBackgroundMusic(const char* pszFilePath, bool bLoop);
+    void playBackgroundMusic(const char* pszFilePath, bool bLoop) {
+        this->playSound(pszFilePath, bLoop, 0);
+    }
     void playBackgroundMusic(const char* pszFilePath) {
-    	this->playBackgroundMusic(pszFilePath, false);
+    	this->playSound(pszFilePath, false, 0);
     }
 
     /**
     @brief Stop playing background music
     @param bReleaseData If release the background music data or not.As default value is false
     */
-    void stopBackgroundMusic(bool bReleaseData);
+    void stopBackgroundMusic(bool bReleaseData) {
+        this->stopSound(bReleaseData, 0);
+    }
     void stopBackgroundMusic() {
-    	this->stopBackgroundMusic(false);
+    	this->stopSound(0);
     }
 
     /**
     @brief Pause playing background music
     */
-    void pauseBackgroundMusic();
+    void pauseBackgroundMusic() {
+        this->pauseSound(0);
+    }
 
     /**
     @brief Resume playing background music
     */
-    void resumeBackgroundMusic();
+    void resumeBackgroundMusic() {
+        this->resumeSound(0);
+    }
 
     /**
     @brief Rewind playing background music
     */
-    void rewindBackgroundMusic();
+    void rewindBackgroundMusic() {
+        this->rewindSound(0);
+    }
 
-    bool willPlayBackgroundMusic();
+    bool willPlayBackgroundMusic() {
+        return this->willPlaySound();
+    }
 
     /**
     @brief Whether the background music is playing
     @return If is playing return true,or return false
     */
-    bool isBackgroundMusicPlaying();
+    bool isBackgroundMusicPlaying() {
+        return this->isSoundPlaying(0);
+    }
 
     // properties
     /**
     @brief The volume of the background music max value is 1.0,the min value is 0.0
     */
-    float getBackgroundMusicVolume();
+    float getBackgroundMusicVolume() {
+        return this->getSoundVolume(0);
+    }
 
     /**
     @brief set the volume of background music
     @param volume must be in 0.0~1.0
     */
-    void setBackgroundMusicVolume(float volume);
+    void setBackgroundMusicVolume(float volume) {
+        this->setSoundVolume(volume, 0);
+    }
+
+
+    /**
+     @brief Preload sound at channelNum
+     @param pszFilePath The path of the background music file,or the FileName of T_SoundResInfo
+     @param channelNum The channelNum number
+     */
+    void preloadSound(char const *pszFilePath, unsigned int channelNum);
+
+    /**
+     @brief Play sound at channelNum
+     @param pszFilePath The path of the background music file,or the FileName of T_SoundResInfo
+     @param bLoop Whether the background music loop or not
+     @param channelNum The channelNum number
+    */
+    void playSound(char const *pszFilePath, bool bLoop, unsigned int channelNum);
+    void playSound(char const *pszFilePath, unsigned int channelNum) {
+        this->playSound(pszFilePath, false, channelNum);
+    }
+
+    /**
+    @brief Stop playing sound
+    @param bReleaseData If release the background music data or not.As default value is false
+     @param channelNum The channelNum number
+    */
+    void stopSound(bool bReleaseData, unsigned int channelNum);
+    void stopSound(unsigned int channelNum) {
+        this->stopSound(false, 0);
+    }
+
+    /**
+    @brief Pause playing sound
+     @param channelNum The channelNum number
+    */
+    void pauseSound(unsigned int channelNum);
+
+    /**
+    @brief Resume playing sound
+     @param channelNum The channelNum number
+    */
+    void resumeSound(unsigned int channelNum);
+
+    /**
+    @brief Rewind playing sound
+     @param channelNum The channelNum number
+    */
+    void rewindSound(unsigned int channelNum);
+
+    bool willPlaySound();
+
+    /**
+    @brief Whether the sound is playing
+     @param channelNum The channelNum number
+    @return If is playing return true,or return false
+    */
+    bool isSoundPlaying(unsigned int channelNum);
+
+    // properties
+    /**
+    @brief The volume of the sound max value is 1.0,the min value is 0.0
+    */
+    float getSoundVolume(unsigned int channelNum);
+
+    /**
+    @brief set the volume of sound
+    @param volume must be in 0.0~1.0
+     @param channelNum The channelNum number
+    */
+    void setSoundVolume(float volume, unsigned int channelNum);
 
     /**
     @brief The volume of the effects max value is 1.0,the min value is 0.0

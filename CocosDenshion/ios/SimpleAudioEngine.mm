@@ -32,55 +32,53 @@ static void static_end()
     [SimpleAudioEngine  end];
 }
 
-static void static_preloadBackgroundMusic(const char* pszFilePath)
+static void static_preloadSound(const char *pszFilePath, unsigned int channelNum)
 {
-    [[SimpleAudioEngine sharedEngine] preloadBackgroundMusic: [NSString stringWithUTF8String: pszFilePath]];
+    [[SimpleAudioEngine sharedEngine] preloadSound:[NSString stringWithUTF8String:pszFilePath] atChannelNum: channelNum];
 }
 
-static void static_playBackgroundMusic(const char* pszFilePath, bool bLoop)
-{
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic: [NSString stringWithUTF8String: pszFilePath] loop: bLoop];
+static void static_playSound(char const *pszFilePath, bool bLoop, unsigned int channelNum) {
+    [[SimpleAudioEngine sharedEngine] playSound:[NSString stringWithUTF8String:pszFilePath] loop:bLoop atChannelNum: channelNum];
 }
 
-static void static_stopBackgroundMusic()
-{
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+static void static_stopSound(unsigned int channelNum) {
+    [[SimpleAudioEngine sharedEngine] stopSound: channelNum];
 }
 
-static void static_pauseBackgroundMusic()
+static void static_pauseSound(unsigned int channelNum)
 {
-     [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] pauseSound: channelNum];
 }
 
-static void static_resumeBackgroundMusic()
+static void static_resumeSound(unsigned int channelNum)
 {
-    [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] resumeSound: channelNum];
 } 
 
-static void static_rewindBackgroundMusic()
+static void static_rewindSound(unsigned int channelNum)
 {
-    [[SimpleAudioEngine sharedEngine] rewindBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] rewindSound: channelNum];
 }
 
-static bool static_willPlayBackgroundMusic()
+static bool static_willPlaySound()
 {
-    return [[SimpleAudioEngine sharedEngine] willPlayBackgroundMusic];
+    return [[SimpleAudioEngine sharedEngine] willPlaySound];
 }
 
-static bool static_isBackgroundMusicPlaying()
+static bool static_isSoundPlaying(unsigned int channelNum)
 {
-    return [[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying];
+    return [[SimpleAudioEngine sharedEngine] isSoundPlaying: channelNum];
 }
 
-static float static_getBackgroundMusicVolume()
+static float static_getSoundVolume(unsigned int channelNum)
 {
-    return [[SimpleAudioEngine sharedEngine] backgroundMusicVolume];
+    return [[SimpleAudioEngine sharedEngine] getSoundVolume: channelNum];
 }
 
-static void static_setBackgroundMusicVolume(float volume)
+static void static_setSoundVolume(float volume, unsigned int channelNum)
 {
     volume = MAX( MIN(volume, 1.0), 0 );
-    [SimpleAudioEngine sharedEngine].backgroundMusicVolume = volume;
+    [[SimpleAudioEngine sharedEngine] setSoundVolume:volume atChannelNum: channelNum];
 }
      
 static float static_getEffectsVolume()
@@ -174,58 +172,48 @@ void SimpleAudioEngine::end()
     static_end();
 }
 
-void SimpleAudioEngine::preloadBackgroundMusic(const char* pszFilePath)
-{
+void SimpleAudioEngine::preloadSound(const char* pszFilePath, unsigned int channelNum) {
     // Changing file path to full path
     std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(pszFilePath);
-    static_preloadBackgroundMusic(fullPath.c_str());
+    static_preloadSound(fullPath.c_str(), channelNum);
 }
 
-void SimpleAudioEngine::playBackgroundMusic(const char* pszFilePath, bool bLoop)
-{
+void SimpleAudioEngine::playSound(const char* pszFilePath, bool bLoop, unsigned int channelNum) {
     // Changing file path to full path
     std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(pszFilePath);
-    static_playBackgroundMusic(fullPath.c_str(), bLoop);
+    static_playSound(fullPath.c_str(), bLoop, channelNum);
 }
 
-void SimpleAudioEngine::stopBackgroundMusic(bool bReleaseData)
-{
-    static_stopBackgroundMusic();
+void SimpleAudioEngine::stopSound(bool bReleaseData, unsigned int channelNum) {
+    static_stopSound(channelNum);
 }
 
-void SimpleAudioEngine::pauseBackgroundMusic()
-{
-    static_pauseBackgroundMusic();
+void SimpleAudioEngine::pauseSound(unsigned int channelNum) {
+    static_pauseSound(channelNum);
 }
 
-void SimpleAudioEngine::resumeBackgroundMusic()
-{
-    static_resumeBackgroundMusic();
+void SimpleAudioEngine::resumeSound(unsigned int channelNum) {
+    static_resumeSound(channelNum);
 } 
 
-void SimpleAudioEngine::rewindBackgroundMusic()
-{
-    static_rewindBackgroundMusic();
+void SimpleAudioEngine::rewindSound(unsigned int channelNum) {
+    static_rewindSound(channelNum);
 }
 
-bool SimpleAudioEngine::willPlayBackgroundMusic()
-{
-    return static_willPlayBackgroundMusic();
+bool SimpleAudioEngine::willPlaySound() {
+    return static_willPlaySound();
 }
 
-bool SimpleAudioEngine::isBackgroundMusicPlaying()
-{
-    return static_isBackgroundMusicPlaying();
+bool SimpleAudioEngine::isSoundPlaying(unsigned int channelNum) {
+    return static_isSoundPlaying(channelNum);
 }
 
-float SimpleAudioEngine::getBackgroundMusicVolume()
-{
-    return static_getBackgroundMusicVolume();
+float SimpleAudioEngine::getSoundVolume(unsigned int channelNum) {
+    return static_getSoundVolume(channelNum);
 }
 
-void SimpleAudioEngine::setBackgroundMusicVolume(float volume)
-{
-    static_setBackgroundMusicVolume(volume);
+void SimpleAudioEngine::setSoundVolume(float volume, unsigned int channelNum) {
+    static_setSoundVolume(volume, channelNum);
 }
 
 float SimpleAudioEngine::getEffectsVolume()

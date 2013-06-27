@@ -217,7 +217,7 @@ NSString * const kCDN_AudioManagerInitialised = @"kCDN_AudioManagerInitialised";
         //Check if background music can play as rules may have changed during 
         //the interruption. This is to address a specific issue in 4.x when
         //fast task switching
-        if([CDAudioManager sharedManager].willPlayBackgroundMusic) {
+        if([CDAudioManager sharedManager].willPlaySound) {
             [player play];
         }    
     } else {
@@ -237,8 +237,9 @@ NSString * const kCDN_AudioManagerInitialised = @"kCDN_AudioManagerInitialised";
 
 @implementation CDAudioManager
 #define BACKGROUND_MUSIC_CHANNEL kASC_Left
+#define ANOTHER_SOUND_CHANNEL kASC_Right
 
-@synthesize soundEngine, willPlayBackgroundMusic;
+@synthesize soundEngine, willPlaySound;
 static CDAudioManager *sharedManager;
 static tAudioManagerState _sharedManagerState = kAMStateUninitialised;
 static tAudioManagerMode configuredMode;
@@ -339,7 +340,7 @@ static BOOL configured = FALSE;
             CDLOGINFO(@"Denshion::CDAudioManager - Audio will be shared");
             //_audioSessionCategory = kAudioSessionCategory_AmbientSound;
             _audioSessionCategory = AVAudioSessionCategoryAmbient;
-            willPlayBackgroundMusic = NO;
+            willPlaySound = NO;
             break;
             
         case kAMM_FxPlusMusic:
@@ -347,7 +348,7 @@ static BOOL configured = FALSE;
             CDLOGINFO(@"Denshion::CDAudioManager -  Audio will be exclusive");
             //_audioSessionCategory = kAudioSessionCategory_SoloAmbientSound;
             _audioSessionCategory = AVAudioSessionCategorySoloAmbient;
-            willPlayBackgroundMusic = YES;
+            willPlaySound = YES;
             break;
             
         case kAMM_MediaPlayback:
@@ -355,7 +356,7 @@ static BOOL configured = FALSE;
             CDLOGINFO(@"Denshion::CDAudioManager -  Media playback mode, audio will be exclusive");
             //_audioSessionCategory = kAudioSessionCategory_MediaPlayback;
             _audioSessionCategory = AVAudioSessionCategoryPlayback;
-            willPlayBackgroundMusic = YES;
+            willPlaySound = YES;
             break;
             
         case kAMM_PlayAndRecord:
@@ -363,7 +364,7 @@ static BOOL configured = FALSE;
             CDLOGINFO(@"Denshion::CDAudioManager -  Play and record mode, audio will be exclusive");
             //_audioSessionCategory = kAudioSessionCategory_PlayAndRecord;
             _audioSessionCategory = AVAudioSessionCategoryPlayAndRecord;
-            willPlayBackgroundMusic = YES;
+            willPlaySound = YES;
             break;
             
         default:
@@ -372,12 +373,12 @@ static BOOL configured = FALSE;
                 CDLOGINFO(@"Denshion::CDAudioManager - Other audio is playing audio will be shared");
                 //_audioSessionCategory = kAudioSessionCategory_AmbientSound;
                 _audioSessionCategory = AVAudioSessionCategoryAmbient;
-                willPlayBackgroundMusic = NO;
+                willPlaySound = NO;
             } else {
                 CDLOGINFO(@"Denshion::CDAudioManager - Other audio is not playing audio will be exclusive");
                 //_audioSessionCategory = kAudioSessionCategory_SoloAmbientSound;
                 _audioSessionCategory = AVAudioSessionCategorySoloAmbient;
-                willPlayBackgroundMusic = YES;
+                willPlaySound = YES;
             }    
             
             break;
@@ -429,9 +430,11 @@ static BOOL configured = FALSE;
         [leftChannel release];
         [rightChannel release];
         //Used to support legacy APIs
-        backgroundMusic = [self audioSourceForChannel:BACKGROUND_MUSIC_CHANNEL];
-        backgroundMusic.delegate = self;
-        
+        backgroundMusicChannel = [self audioSourceForChannel:BACKGROUND_MUSIC_CHANNEL];
+        backgroundMusicChannel.delegate = self;
+        anotherSoundChannel = [self audioSourceForChannel:ANOTHER_SOUND_CHANNEL];
+        anotherSoundChannel.delegate = self;
+
         //Add handler for bad al context messages, these are posted by the sound engine.
         [[NSNotificationCenter defaultCenter] addObserver:self    selector:@selector(badAlContextHandler) name:kCDN_BadAlContext object:nil];
 
@@ -441,7 +444,7 @@ static BOOL configured = FALSE;
 
 -(void) dealloc {
     CDLOGINFO(@"Denshion::CDAudioManager - deallocating");
-    [self stopBackgroundMusic];
+    [self stopSound:0];
     [soundEngine release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self audioSessionSetActive:NO];
@@ -463,10 +466,10 @@ static BOOL configured = FALSE;
         [audioSource load:filePath];
     }
     return audioSource;
-}    
+}
 
--(BOOL) isBackgroundMusicPlaying {
-    return [self.backgroundMusic isPlaying];
+- (BOOL)isSoundPlaying:(unsigned int)channelNum {
+    return [[self getSoundForChanel:channelNum] isPlaying];
 }    
 
 //NB: originally I tried using a route change listener and intended to store the current route,
@@ -535,66 +538,75 @@ static BOOL configured = FALSE;
 
 -(CDLongAudioSource*) backgroundMusic
 {
-    return backgroundMusic;
-}    
+    return backgroundMusicChannel;
+}
 
 //Load background music ready for playing
--(void) preloadBackgroundMusic:(NSString*) filePath
-{
-    [self.backgroundMusic load:filePath];    
-}    
+- (void)preloadSound:(NSString *)filePath atChannelNum:(unsigned int)channelNum {
+    [[self getSoundForChanel: channelNum] load:filePath];
+}
 
--(void) playBackgroundMusic:(NSString*) filePath loop:(BOOL) loop
-{
-    [self.backgroundMusic load:filePath];
+- (void)playSound:(NSString *)filePath loop:(BOOL)loop atChannelNum:(unsigned int)channelNum {
+    CDLongAudioSource *sound = [self getSoundForChanel: channelNum];
+    [sound load:filePath];
 
 	if (loop) {
-		[self.backgroundMusic setNumberOfLoops:-1];
+		[sound setNumberOfLoops:-1];
 	} else {
-		[self.backgroundMusic setNumberOfLoops:0];
+		[sound setNumberOfLoops:0];
 	}
 
-	if (!willPlayBackgroundMusic || _mute) {
+	if (!willPlaySound || _mute) {
 		CDLOGINFO(@"Denshion::CDAudioManager - play bgm aborted because audio is not exclusive or sound is muted");
 		return;
 	}
 
-	[self.backgroundMusic play];
+	[sound play];
 }
 
--(void) stopBackgroundMusic
-{
-    [self.backgroundMusic stop];
+- (void)stopSound:(unsigned int)channelNum {
+    [[self getSoundForChanel: channelNum] stop];
 }
 
--(void) pauseBackgroundMusic
-{
-    [self.backgroundMusic pause];
-}    
+- (void)pauseSound:(unsigned int)channelNum {
+    [[self getSoundForChanel: channelNum] pause];
+}
 
--(void) resumeBackgroundMusic
-{
-    if (!willPlayBackgroundMusic || _mute) {
+- (void)resumeSound:(unsigned int)channelNum {
+    CDLongAudioSource *sound = [self getSoundForChanel: channelNum];
+    if (!willPlaySound || _mute) {
         CDLOGINFO(@"Denshion::CDAudioManager - resume bgm aborted because audio is not exclusive or sound is muted");
         return;
     }
     
-    if (![self.backgroundMusic paused]) {
+    if (![sound paused]) {
         return;
     }
     
-    [self.backgroundMusic resume];
-}    
+    [sound resume];
+}
 
--(void) rewindBackgroundMusic
-{
-    [self.backgroundMusic rewind];
+- (void)rewindSound:(unsigned int)channelNum {
+    [[self getSoundForChanel: channelNum] rewind];
 }    
 
 -(void) setBackgroundMusicCompletionListener:(id) listener selector:(SEL) selector {
     backgroundMusicCompletionListener = listener;
     backgroundMusicCompletionSelector = selector;
-}    
+}
+
+- (CDLongAudioSource *)getSoundForChanel:(unsigned int)channelNum {
+    if (channelNum == 0) {
+        return backgroundMusicChannel;
+    }
+    else if (channelNum == 1) {
+        return anotherSoundChannel;
+    }
+    else {
+        NSLog(@"ERROR: wrong channel number");
+        return backgroundMusicChannel;
+    }
+}
 
 /*
  * Call this method to have the audio manager automatically handle application resign and
@@ -675,7 +687,7 @@ static BOOL configured = FALSE;
                 //so playing again will continue from where music was before resign active.
                 //We check if music can be played because while we were inactive the user might have
                 //done something that should force music to not play such as starting a track in the iPod
-                if (self.willPlayBackgroundMusic) {
+                if (self.willPlaySound) {
                     for( CDLongAudioSource *audioSource in audioSourceChannels) {
                         if (audioSource->systemPaused) {
                             [audioSource resume];
@@ -703,7 +715,7 @@ static BOOL configured = FALSE;
 - (void) applicationWillTerminate:(NSNotification *) notification
 {
     CDLOGINFO(@"Denshion::CDAudioManager - audio manager handling terminate");
-    [self stopBackgroundMusic];
+    [self stopSound:0];
 }
 
 /** The audio source completed playing */

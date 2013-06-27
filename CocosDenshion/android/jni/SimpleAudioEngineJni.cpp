@@ -106,147 +106,147 @@ extern "C"
         return bRet;
     }
     
-    void preloadBackgroundMusicJNI(const char *path)
+    void preloadSoundJNI(const char *path, unsigned int channelNum)
     {
-        // void playBackgroundMusic(String,boolean)
+        // void playSound(String,boolean)
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "preloadBackgroundMusic", "(Ljava/lang/String;)V"))
+        if (! getStaticMethodInfo(methodInfo, "preloadSound", "(Ljava/lang/String;I)V"))
         {            
             return;
         }
         
         jstring stringArg = methodInfo.env->NewStringUTF(path);
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg, (int)channelNum);
         methodInfo.env->DeleteLocalRef(stringArg);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    void playBackgroundMusicJNI(const char *path, bool isLoop)
+    void playSoundJNI(const char *path, bool isLoop, unsigned int channelNum)
     {
-        // void playBackgroundMusic(String,boolean)
+        // void playSound(String,boolean)
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "playBackgroundMusic", "(Ljava/lang/String;Z)V"))
+        if (! getStaticMethodInfo(methodInfo, "playSound", "(Ljava/lang/String;ZI)V"))
         {
             return;
         }
         
         jstring stringArg = methodInfo.env->NewStringUTF(path);
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg, isLoop);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, stringArg, isLoop, (int)channelNum);
         methodInfo.env->DeleteLocalRef(stringArg);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    void stopBackgroundMusicJNI()
+    void stopSoundJNI(unsigned int channelNum)
     {
-        // void stopBackgroundMusic()
+        // void stopSound()
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "stopBackgroundMusic", "()V"))
+        if (! getStaticMethodInfo(methodInfo, "stopSound", "(I)V"))
         {
             return;
         }
         
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    void pauseBackgroundMusicJNI()
+    void pauseSoundJNI(unsigned int channelNum)
     {
-        // void pauseBackgroundMusic()
+        // void pauseSound()
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "pauseBackgroundMusic", "()V"))
+        if (! getStaticMethodInfo(methodInfo, "pauseSound", "(I)V"))
         {
             return;
         }
         
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    void resumeBackgroundMusicJNI()
+    void resumeSoundJNI(unsigned int channelNum)
     {
-        // void resumeBackgroundMusic()
+        // void resumeSound()
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "resumeBackgroundMusic", "()V"))
+        if (! getStaticMethodInfo(methodInfo, "resumeSound", "(I)V"))
         {
             return;
         }
         
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    void rewindBackgroundMusicJNI()
+    void rewindSoundJNI(unsigned int channelNum)
     {
-        // void rewindBackgroundMusic()
+        // void rewindSound()
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "rewindBackgroundMusic", "()V"))
+        if (! getStaticMethodInfo(methodInfo, "rewindSound", "(I)V"))
         {
             return;
         }
         
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
-    bool isBackgroundMusicPlayingJNI()
+    bool isSoundPlayingJNI(unsigned int channelNum)
     {
-        // boolean rewindBackgroundMusic()
+        // boolean rewindSound()
         
         JniMethodInfo methodInfo;
         jboolean ret = false;
         
-        if (! getStaticMethodInfo(methodInfo, "isBackgroundMusicPlaying", "()Z"))
+        if (! getStaticMethodInfo(methodInfo, "isSoundPlaying", "(I)Z"))
         {
             return ret;
         }
         
-        ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID);
+        ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
         
         return ret;
     }
     
-    float getBackgroundMusicVolumeJNI()
+    float getSoundVolumeJNI(unsigned int channelNum)
     {
-        // float getBackgroundMusicVolume()
+        // float getSoundVolume()
         
         JniMethodInfo methodInfo;
         jfloat ret = -1.0;
         
-        if (! getStaticMethodInfo(methodInfo, "getBackgroundMusicVolume", "()F"))
+        if (! getStaticMethodInfo(methodInfo, "getSoundVolume", "(I)F"))
         {
             return ret;
         }
         
-        ret = methodInfo.env->CallStaticFloatMethod(methodInfo.classID, methodInfo.methodID);
+        ret = methodInfo.env->CallStaticFloatMethod(methodInfo.classID, methodInfo.methodID, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
         
         return ret;
     }
     
-    void setBackgroundMusicVolumeJNI(float volume)
+    void setSoundVolumeJNI(float volume, unsigned int channelNum)
     {
-        // void setBackgroundMusicVolume()
+        // void setSoundVolume()
         
         JniMethodInfo methodInfo;
         
-        if (! getStaticMethodInfo(methodInfo, "setBackgroundMusicVolume", "(F)V"))
+        if (! getStaticMethodInfo(methodInfo, "setSoundVolume", "(FI)V"))
         {
             return ;
         }
         
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, volume);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, volume, (int)channelNum);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     

@@ -82,44 +82,46 @@ static CDBufferManager *bufferManager = nil;
 
 #pragma mark SimpleAudioEngine - background music
 
--(void) preloadBackgroundMusic:(NSString*) filePath {
-    [am preloadBackgroundMusic:filePath];
+- (void)preloadSound:(NSString *)filePath atChannelNum:(unsigned int)channelNum {
+    [am preloadSound:filePath atChannelNum: channelNum];
 }
 
--(void) playBackgroundMusic:(NSString*) filePath
-{
-    [am playBackgroundMusic:filePath loop:TRUE];
+- (void)playSound:(NSString *)filePath loop:(BOOL)loop atChannelNum:(unsigned int)channelNum {
+    [am playSound:filePath loop:loop atChannelNum: channelNum];
 }
 
--(void) playBackgroundMusic:(NSString*) filePath loop:(BOOL) loop
-{
-    [am playBackgroundMusic:filePath loop:loop];
+- (void)stopSound:(unsigned int)channelNum {
+    [am stopSound: channelNum];
 }
 
--(void) stopBackgroundMusic
-{
-    [am stopBackgroundMusic];
+- (void)pauseSound:(unsigned int)channelNum {
+    [am pauseSound: channelNum];
 }
 
--(void) pauseBackgroundMusic {
-    [am pauseBackgroundMusic];
-}    
-
--(void) resumeBackgroundMusic {
-    [am resumeBackgroundMusic];
-}    
-
--(void) rewindBackgroundMusic {
-    [am rewindBackgroundMusic];
+- (void)resumeSound:(unsigned int)channelNum {
+    [am resumeSound: channelNum];
 }
 
--(BOOL) isBackgroundMusicPlaying {
-    return [am isBackgroundMusicPlaying];
-}    
-
--(BOOL) willPlayBackgroundMusic {
-    return [am willPlayBackgroundMusic];
+- (void)rewindSound:(unsigned int) channelNum {
+    [am rewindSound: channelNum];
 }
+
+- (BOOL)isSoundPlaying:(unsigned int)channelNum {
+    return [am isSoundPlaying: channelNum];
+}
+
+- (BOOL)willPlaySound {
+    return [am willPlaySound];
+}
+
+- (float)getSoundVolume:(unsigned int)channelNum {
+    return [am getSoundForChanel:channelNum].volume;
+}
+
+- (void)setSoundVolume:(float)volume atChannelNum:(unsigned int)channelNum {
+    [am getSoundForChanel:channelNum].volume = volume;
+}
+
 
 #pragma mark SimpleAudioEngine - sound effects
 
@@ -203,26 +205,12 @@ static CDBufferManager *bufferManager = nil;
     }    
 }
 
-
-#pragma mark SimpleAudioEngine - BackgroundMusicVolume
--(float) backgroundMusicVolume
-{
-    return am.backgroundMusic.volume;
-}    
-
--(void) setBackgroundMusicVolume:(float) volume
-{
-    am.backgroundMusic.volume = volume;
-}    
-
 #pragma mark SimpleAudioEngine - EffectsVolume
--(float) effectsVolume
-{
+-(float) effectsVolume {
     return am.soundEngine.masterGain;
 }    
 
--(void) setEffectsVolume:(float) volume
-{
+-(void) setEffectsVolume:(float) volume {
     am.soundEngine.masterGain = volume;
 }    
 
@@ -235,6 +223,6 @@ static CDBufferManager *bufferManager = nil;
     } else {
         return nil;
     }    
-}    
+}
 
-@end 
+@end

@@ -116,56 +116,56 @@ void SimpleAudioEngine::end()
 	}
 }
 
-void SimpleAudioEngine::preloadBackgroundMusic(const char* pszFilePath)
+void SimpleAudioEngine::preloadSound(const char* pszFilePath, unsigned int channelNum)
 {
     std::string fullPath = getFullPathWithoutAssetsPrefix(pszFilePath);
-    preloadBackgroundMusicJNI(fullPath.c_str());
+    preloadSoundJNI(fullPath.c_str(), channelNum);
 }
 
-void SimpleAudioEngine::playBackgroundMusic(const char* pszFilePath, bool bLoop)
+void SimpleAudioEngine::playSound(const char* pszFilePath, bool bLoop, unsigned int channelNum)
 {
 	std::string fullPath = getFullPathWithoutAssetsPrefix(pszFilePath);
-    playBackgroundMusicJNI(fullPath.c_str(), bLoop);
+    playSoundJNI(fullPath.c_str(), bLoop, channelNum);
 }
 
-void SimpleAudioEngine::stopBackgroundMusic(bool bReleaseData)
+void SimpleAudioEngine::stopSound(bool bReleaseData, unsigned int channelNum)
 {
-    stopBackgroundMusicJNI();
+    stopSoundJNI(channelNum);
 }
 
-void SimpleAudioEngine::pauseBackgroundMusic()
+void SimpleAudioEngine::pauseSound(unsigned int channelNum)
 {
-    pauseBackgroundMusicJNI();
+    pauseSoundJNI(channelNum);
 }
 
-void SimpleAudioEngine::resumeBackgroundMusic()
+void SimpleAudioEngine::resumeSound(unsigned int channelNum)
 {
-    resumeBackgroundMusicJNI();
+    resumeSoundJNI(channelNum);
 } 
 
-void SimpleAudioEngine::rewindBackgroundMusic()
+void SimpleAudioEngine::rewindSound(unsigned int channelNum)
 {
-    rewindBackgroundMusicJNI();
+    rewindSoundJNI(channelNum);
 }
 
-bool SimpleAudioEngine::willPlayBackgroundMusic()
+bool SimpleAudioEngine::willPlaySound()
 {
     return true;
 }
 
-bool SimpleAudioEngine::isBackgroundMusicPlaying()
+bool SimpleAudioEngine::isSoundPlaying(unsigned int channelNum)
 {
-    return isBackgroundMusicPlayingJNI();
+    return isSoundPlayingJNI(channelNum);
 }
 
-float SimpleAudioEngine::getBackgroundMusicVolume()
+float SimpleAudioEngine::getSoundVolume(unsigned int channelNum)
 {
-    return getBackgroundMusicVolumeJNI();
+    return getSoundVolumeJNI(channelNum);
 }
 
-void SimpleAudioEngine::setBackgroundMusicVolume(float volume)
+void SimpleAudioEngine::setSoundVolume(float volume, unsigned int channelNum)
 {
-    setBackgroundMusicVolumeJNI(volume);
+    setSoundVolumeJNI(volume, channelNum);
 }
 
 float SimpleAudioEngine::getEffectsVolume()

@@ -43,33 +43,38 @@
     BOOL    enabled_;
 }
 
-/** Background music volume. Range is 0.0f to 1.0f. This will only have an effect if willPlayBackgroundMusic returns YES */
-@property (readwrite) float backgroundMusicVolume;
 /** Effects volume. Range is 0.0f to 1.0f */
 @property (readwrite) float effectsVolume;
-/** If NO it indicates background music will not be played either because no background music is loaded or the audio session does not permit it.*/
-@property (readonly) BOOL willPlayBackgroundMusic;
 
 /** returns the shared instance of the SimpleAudioEngine object */
 + (SimpleAudioEngine*) sharedEngine;
 
 /** Preloads a music file so it will be ready to play as background music */
--(void) preloadBackgroundMusic:(NSString*) filePath;
+- (void)preloadSound:(NSString *)filePath atChannelNum:(unsigned int)channelNum;
 
-/** plays background music in a loop*/
--(void) playBackgroundMusic:(NSString*) filePath;
 /** plays background music, if loop is true the music will repeat otherwise it will be played once */
--(void) playBackgroundMusic:(NSString*) filePath loop:(BOOL) loop;
+- (void)playSound:(NSString *)filePath loop:(BOOL)loop atChannelNum:(unsigned int)channelNum;
+
 /** stops playing background music */
--(void) stopBackgroundMusic;
+- (void)stopSound:(unsigned int)channelNum;
+
 /** pauses the background music */
--(void) pauseBackgroundMusic;
+- (void)pauseSound:(unsigned int)channelNum;
+
 /** resume background music that has been paused */
--(void) resumeBackgroundMusic;
+- (void)resumeSound:(unsigned int)channelNum;
+
 /** rewind the background music */
--(void) rewindBackgroundMusic;
+- (void)rewindSound:(unsigned int)channelNum;
+
+/** If NO it indicates background music will not be played either because no background music is loaded or the audio session does not permit it.*/
+- (BOOL)willPlaySound;
+
 /** returns whether or not the background music is playing */
--(BOOL) isBackgroundMusicPlaying;
+- (BOOL)isSoundPlaying:(unsigned int)channelNum;
+
+- (float)getSoundVolume:(unsigned int)channelNum;
+- (void)setSoundVolume:(float) volume atChannelNum: (unsigned int)channelNum;
 
 /** plays an audio effect with a file path*/
 -(ALuint) playEffect:(NSString*) filePath loop:(BOOL) loop;
