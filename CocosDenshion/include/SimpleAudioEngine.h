@@ -230,6 +230,13 @@ public:
     void setSoundVolume(float volume, unsigned int channelNum);
 
     /**
+     @brief Preload sound at channelNum
+     @param pszFilePath The path of the background music file,or the FileName of T_SoundResInfo
+     @param channelNum The channelNum number
+     */
+    float getSoundDuration(char const *pszFilePath, unsigned int channelNum);
+
+    /**
     @brief The volume of the effects max value is 1.0,the min value is 0.0
     */
     float getEffectsVolume();

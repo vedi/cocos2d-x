@@ -250,6 +250,24 @@ extern "C"
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     
+    float getSoundDurationJNI(const char *path, unsigned int channelNum)
+    {
+        JniMethodInfo methodInfo;
+        jfloat ret = -1.0;
+        
+        if (! getStaticMethodInfo(methodInfo, "getSoundDuration", "(Ljava/lang/String;I)F"))
+        {
+            return ret;
+        }
+        
+        jstring stringArg = methodInfo.env->NewStringUTF(path);
+        ret = methodInfo.env->CallStaticFloatMethod(methodInfo.classID, methodInfo.methodID, stringArg, (int)channelNum);
+        methodInfo.env->DeleteLocalRef(stringArg);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        
+        return ret;
+    }
+    
     unsigned int playEffectJNI(const char* path, bool bLoop)
     {
         // int playEffect(String)

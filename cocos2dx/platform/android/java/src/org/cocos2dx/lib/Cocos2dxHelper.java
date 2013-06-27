@@ -170,7 +170,11 @@ public class Cocos2dxHelper {
 		Cocos2dxHelper.sCocos2dMusic.setSoundVolume(volume, channelNum);
 	}
 
-	public static void preloadEffect(final String path) {
+    public static float getSoundDuration(final String pPath, int channelNum) {
+        return Cocos2dxHelper.sCocos2dMusic.getSoundDuration(pPath, channelNum);
+    }
+
+    public static void preloadEffect(final String path) {
 		Cocos2dxHelper.sCocos2dSound.preloadEffect(path);
 	}
 

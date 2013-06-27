@@ -81,6 +81,10 @@ static void static_setSoundVolume(float volume, unsigned int channelNum)
     [[SimpleAudioEngine sharedEngine] setSoundVolume:volume atChannelNum: channelNum];
 }
      
+static float static_getSoundDuration(char const *pszFilePath, unsigned int channelNum) {
+    return [[SimpleAudioEngine sharedEngine] getSoundDuration:[NSString stringWithUTF8String:pszFilePath] atChannelNum: channelNum];
+}
+
 static float static_getEffectsVolume()
 {
     return [[SimpleAudioEngine sharedEngine] effectsVolume];
@@ -214,6 +218,10 @@ float SimpleAudioEngine::getSoundVolume(unsigned int channelNum) {
 
 void SimpleAudioEngine::setSoundVolume(float volume, unsigned int channelNum) {
     static_setSoundVolume(volume, channelNum);
+}
+
+float SimpleAudioEngine::getSoundDuration(char const *pszFilePath, unsigned int channelNum) {
+    return static_getSoundDuration(pszFilePath, channelNum);
 }
 
 float SimpleAudioEngine::getEffectsVolume()

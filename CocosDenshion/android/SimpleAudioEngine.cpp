@@ -168,6 +168,12 @@ void SimpleAudioEngine::setSoundVolume(float volume, unsigned int channelNum)
     setSoundVolumeJNI(volume, channelNum);
 }
 
+float SimpleAudioEngine::getSoundDuration(char const *pszFilePath, unsigned int channelNum) {
+    std::string fullPath = getFullPathWithoutAssetsPrefix(pszFilePath);
+    return getSoundDurationJNI(fullPath.c_str(), channelNum);
+}
+
+
 float SimpleAudioEngine::getEffectsVolume()
 {
 	if (s_bI9100)

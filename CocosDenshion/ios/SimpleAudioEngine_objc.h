@@ -76,6 +76,8 @@
 - (float)getSoundVolume:(unsigned int)channelNum;
 - (void)setSoundVolume:(float) volume atChannelNum: (unsigned int)channelNum;
 
+- (float)getSoundDuration:(NSString *)filePath atChannelNum:(unsigned int)channelNum;
+
 /** plays an audio effect with a file path*/
 -(ALuint) playEffect:(NSString*) filePath loop:(BOOL) loop;
 /** stop a sound that is playing, note you must pass in the soundId that is returned when you started playing the sound with playEffect */

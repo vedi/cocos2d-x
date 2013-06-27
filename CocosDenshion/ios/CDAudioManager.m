@@ -470,7 +470,7 @@ static BOOL configured = FALSE;
 
 - (BOOL)isSoundPlaying:(unsigned int)channelNum {
     return [[self getSoundForChanel:channelNum] isPlaying];
-}    
+}
 
 //NB: originally I tried using a route change listener and intended to store the current route,
 //however, on a 3gs running 3.1.2 no route change is generated when the user switches the 
@@ -812,7 +812,7 @@ static BOOL configured = FALSE;
 +(void) end {
     [sharedManager release];
     sharedManager = nil;
-}    
+}
 
 @end
 

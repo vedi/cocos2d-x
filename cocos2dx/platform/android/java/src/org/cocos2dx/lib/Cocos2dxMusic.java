@@ -210,7 +210,22 @@ public class Cocos2dxMusic {
 		}
 	}
 
-	private void initData() {
+    public float getSoundDuration(final String pPath, final int channelNum) {
+        MediaPlayerContainer mediaPlayerContainer = getMediaPlayerContrainer(channelNum);
+        String currentPath = mediaPlayerContainer.mCurrentPath;
+        if (mediaPlayerContainer.mMediaPlayer != null || (currentPath == null) || (!currentPath.equals(pPath))) {
+            releaseChannel(channelNum);
+            createChannel(pPath, channelNum);
+        }
+        if (mediaPlayerContainer.mMediaPlayer != null) {
+            return mediaPlayerContainer.mMediaPlayer.getDuration() / 1000f;
+        } else {
+            Log.e(Cocos2dxMusic.TAG, "getSoundDuration: media player is null");
+            return 0f;
+        }
+    }
+
+    private void initData() {
         mMediaPlayerContainer = new MediaPlayerContainer[2];
         mMediaPlayerContainer[0] = new MediaPlayerContainer();
         mMediaPlayerContainer[1] = new MediaPlayerContainer();

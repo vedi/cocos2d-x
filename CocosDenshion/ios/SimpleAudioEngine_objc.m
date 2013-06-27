@@ -122,6 +122,10 @@ static CDBufferManager *bufferManager = nil;
     [am getSoundForChanel:channelNum].volume = volume;
 }
 
+- (float)getSoundDuration:(NSString *)filePath atChannelNum:(unsigned int)channelNum {
+    return [[self soundSourceForFile:filePath] durationInSeconds];
+}
+
 
 #pragma mark SimpleAudioEngine - sound effects
 

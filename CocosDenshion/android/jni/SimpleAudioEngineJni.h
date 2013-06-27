@@ -14,6 +14,8 @@ extern "C"
     extern bool isSoundPlayingJNI(unsigned int channelNum);
     extern float getSoundVolumeJNI(unsigned int channelNum);
     extern void setSoundVolumeJNI(float volume, unsigned int channelNum);
+    extern float getSoundDurationJNI(const char *path, unsigned int channelNum);
+    
     extern unsigned int playEffectJNI(const char* path, bool bLoop);
     extern void stopEffectJNI(unsigned int nSoundId);
     extern void endJNI();
