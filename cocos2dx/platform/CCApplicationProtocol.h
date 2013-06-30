@@ -37,6 +37,10 @@ public:
     */
     virtual bool applicationDidFinishLaunching() = 0;
 
+    virtual void applicationDidBecomeActive() {};
+
+    virtual void applicationWillResignActive() {};
+
     /**
     @brief  The function be called when the application enter background
     @param  the pointer of the application
@@ -51,7 +55,7 @@ public:
 
     /**
     @brief    Callback by CCDirector for limit FPS.
-    @interval       The time, expressed in seconds, between current frame and next. 
+    @interval       The time, expressed in seconds, between current frame and next.
     */
     virtual void setAnimationInterval(double interval) = 0;
 
@@ -60,7 +64,7 @@ public:
     @return Current language config
     */
     virtual ccLanguageType getCurrentLanguage() = 0;
-    
+
     /**
      @brief Get target platform
      */

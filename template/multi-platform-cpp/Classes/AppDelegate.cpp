@@ -42,11 +42,19 @@ bool AppDelegate::applicationDidFinishLaunching()
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
-    AudioManager::sharedAudioManager()->pauseAll();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
+}
+
+void AppDelegate::applicationDidBecomeActive() {
     AudioManager::sharedAudioManager()->resumeAll();
+    cocos2d::CCDirector::sharedDirector()->resume();
+}
+
+void AppDelegate::applicationWillResignActive() {
+    cocos2d::CCDirector::sharedDirector()->pause();
+    AudioManager::sharedAudioManager()->pauseAll();
 }
