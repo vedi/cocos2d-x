@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Parse/Parse.h>
 #import "WebViewController.h"
 
 #import "NativeViewBridge.h"

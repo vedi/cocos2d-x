@@ -45,6 +45,7 @@ NSMutableDictionary *sViewControllerFactories = [[NSMutableDictionary alloc] ini
         [viewController.view setCenter:CGPointMake(scale * x.floatValue, scale * y.floatValue)];
 
         [sViewController.view addSubview: viewController.view];
+        [sViewControllers setObject:viewController forKey:key];
     } else {
         NSLog(@"Cannot find factory for key: %@", key);
     }
