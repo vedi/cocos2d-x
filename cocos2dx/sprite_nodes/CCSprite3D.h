@@ -190,7 +190,8 @@ protected:
     kmVec3 m_modelScale;
     CCModel* m_pModel;
     bool m_bDepthTestEnabled;
-};
+            CCTexture2D *mCustSkin;
+        };
 
 NS_CC_END
 

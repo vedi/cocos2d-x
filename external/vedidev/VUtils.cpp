@@ -59,11 +59,11 @@ void VUtils::fill(CCNode *targetNode, CCPoint fill, int fillStrategy) {
     }
 }
 
-
 void VUtils::applyScaleForNode(CCNode *targetNode) {
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float scale = std::min(winSize.width / targetNode->getContentSize().width,
-            winSize.height / targetNode->getContentSize().height);
+    float scaleX = winSize.width / targetNode->getContentSize().width;
+    float scaleY = winSize.height / targetNode->getContentSize().height;
+    float scale = std::min(scaleX, scaleY);
     targetNode->setScale(scale);
     targetNode->setPosition(ccp(
             (winSize.width - targetNode->getContentSize().width * scale) / 2,
