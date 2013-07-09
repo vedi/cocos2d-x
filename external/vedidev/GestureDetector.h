@@ -15,6 +15,7 @@ class GestureListener;
 class VelocityTracker;
 
 class GestureDetector: public CCObject, public CCTouchDelegate {
+    CC_SYNTHESIZE_READONLY(CCTouch *, mCurrentTouch, CurrentTouch);
 public:
     static GestureDetector *create(GestureListener *listener);
     static GestureDetector *create(int halfTapSquareSize, float tapCountInterval,
