@@ -71,6 +71,8 @@ public:
     virtual TargetPlatform getTargetPlatform() = 0;
 
     virtual std::string getAppID() = 0;
+
+    virtual void openURL(char const* url) = 0;
 };
 
 // end of platform group

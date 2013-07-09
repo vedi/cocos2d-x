@@ -34,6 +34,7 @@ extern void showEditTextDialogJNI(const char* pszTitle, const char* pszContent, 
 extern void terminateProcessJNI();
 extern std::string getCurrentLanguageJNI();
 extern std::string getPackageNameJNI();
+extern void openURLJNI(const char * url);
 extern std::string getFileDirectoryJNI();
 extern void enableAccelerometerJNI();
 extern void disableAccelerometerJNI();

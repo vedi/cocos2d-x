@@ -125,6 +125,23 @@ std::string getPackageNameJNI() {
     return ret;
 }
 
+void openURLJNI(const char * url) {
+    if (!url) {
+        return;
+    }
+
+    JniMethodInfo t;
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "openURL", "(Ljava/lang/String;)V")) {
+        jstring stringArg1;
+
+		stringArg1 = t.env->NewStringUTF(url);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
+
+        t.env->DeleteLocalRef(stringArg1);
+        t.env->DeleteLocalRef(t.classID);
+    }
+}
+
 std::string getFileDirectoryJNI() {
     JniMethodInfo t;
     std::string ret("");

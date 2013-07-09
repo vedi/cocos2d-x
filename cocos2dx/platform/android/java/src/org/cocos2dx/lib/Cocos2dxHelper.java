@@ -28,9 +28,11 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
@@ -98,6 +100,12 @@ public class Cocos2dxHelper {
 	public static String getCocos2dxPackageName() {
 		return Cocos2dxHelper.sPackageName;
 	}
+
+    public static void openURL(String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        sContext.startActivity(i);
+   }
 
 	public static String getCocos2dxWritablePath() {
 		return Cocos2dxHelper.sFileDirectory;

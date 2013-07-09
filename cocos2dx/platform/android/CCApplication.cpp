@@ -128,5 +128,8 @@ std::string CCApplication::getAppID() {
     return getPackageNameJNI();
 }
 
+void CCApplication::openURL(char const* url) {
+	openURLJNI(url);
+}
 
 NS_CC_END
