@@ -25,18 +25,22 @@ public:
     bool init();
     bool init(const char *pKey);
     void setKey(const char *pKey);
+    void setViewParams(CCDictionary *viewParams);
     void setData(const char *pData);
     void sendMessage(const char *pData);
     void show();
     void close();
+    bool isShown() {return mShown;}
     void setSelector(CCNode *pTarget, SEL_CallFuncO pSelector);
 private:
     NativeViewNode():
         m_pTarget(NULL)
         , m_pSelector(NULL)
+        , mViewParams(NULL)
         , m_sData("")
         , mShown(false)
     {}
+    CCDictionary *mViewParams;
     std::string m_sData;
     bool mShown;
     std::string m_sKey;

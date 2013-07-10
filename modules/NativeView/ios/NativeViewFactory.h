@@ -8,5 +8,5 @@
 @protocol NativeViewProtocol;
 
 @protocol NativeViewFactory <NSObject>
-- (UIViewController *)createNativeView:(NSString *)viewData;
+- (UIViewController *)createNativeViewWithParams:(NSDictionary *)viewParams viewData:(NSString *)viewData;
 @end

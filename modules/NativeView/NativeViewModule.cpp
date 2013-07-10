@@ -24,12 +24,13 @@ void NativeViewModule::removeListener(char const *key) {
     NDKHelper::removeSelectorsInGroup(key);
 }
 
-void NativeViewModule::createAndShowNative(char const *viewKey, char const *viewData,
+void NativeViewModule::createAndShowNative(char const *viewKey, CCDictionary *viewParams, char const *viewData,
         float x, float y, float w, float h) {
 
     CCDictionary *params = CCDictionary::create();
 
     params->setObject(CCString::create("createAndShowNative"), "method");
+    params->setObject(viewParams, "viewParams");
     params->setObject(CCString::create(viewKey), "viewKey");
     params->setObject(CCString::create(viewData), "viewData");
     params->setObject(CCFloat::create(x), "x");

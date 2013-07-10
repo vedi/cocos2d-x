@@ -16,6 +16,7 @@
     if ([methodName isEqualToString:@"init"]) {
         [NativeViewManager init];
     } else if ([methodName isEqualToString:@"createAndShowNative"]) {
+        NSDictionary *viewParams = (NSDictionary*)[parameters objectForKey:@"viewParams"];
         NSString *viewKey = (NSString*)[parameters objectForKey:@"viewKey"];
         NSString *viewData = (NSString*)[parameters objectForKey:@"viewData"];
         NSNumber *x = (NSNumber*)[parameters objectForKey:@"x"];
@@ -23,7 +24,7 @@
         NSNumber *w = (NSNumber*)[parameters objectForKey:@"w"];
         NSNumber *h = (NSNumber*)[parameters objectForKey:@"h"];
 
-        [NativeViewManager createAndShowNative:viewKey viewData:viewData x:x y:y w:w h:h];
+        [NativeViewManager createAndShowNativeWithKey:viewKey viewParams:viewParams viewData:viewData x:x y:y w:w h:h];
     }
     else if ([methodName isEqualToString:@"sendMessage"]) {
         NSString *viewKey = (NSString*)[parameters objectForKey:@"viewKey"];

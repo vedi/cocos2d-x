@@ -10,13 +10,8 @@
 
 #import "NativeViewBridge.h"
 
-@interface WebViewController ()
-
-@end
-
 @implementation WebViewController {
 }
-@synthesize scrollView;
 @synthesize data = _data;
 
 
@@ -38,6 +33,7 @@
 
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
 
+    [[_webView scrollView] setBounces:NO];
     //Load the request in the UIWebView.
     [_webView loadRequest:requestObj];
     [_webView setDelegate:self];
@@ -45,7 +41,6 @@
 
 - (void)viewDidUnload
 {
-    [self setScrollView:nil];
     [self setWebView:nil];
     [self setCloseButton:nil];
     [super viewDidUnload];
@@ -75,6 +70,21 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 
+}
+
+- (void)setParams:(NSDictionary *)params {
+    _params = params;
+    if ([params objectForKey:@"backgroundColor"]) {
+        NSString *colorStr = [params objectForKey:@"backgroundColor"];
+        NSArray *colorArr = [colorStr componentsSeparatedByString:@","];
+        _webView.backgroundColor = [UIColor
+                colorWithRed:[[colorArr objectAtIndex:0] floatValue]
+                       green:[[colorArr objectAtIndex:1] floatValue]
+                        blue:[[colorArr objectAtIndex:2] floatValue]
+                       alpha:[[colorArr objectAtIndex:3] floatValue]];
+    } else {
+//        _webView.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -160,7 +170,6 @@
 
 - (void)dealloc {
     [_data release];
-    [scrollView release];
     [_webView release];
     [_closeButton release];
     [super dealloc];

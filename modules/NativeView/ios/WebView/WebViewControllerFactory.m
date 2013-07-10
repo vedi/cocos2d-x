@@ -19,10 +19,11 @@
     }
 }
 
-- (UIViewController *)createNativeView:(NSString *)viewData {
+- (UIViewController *)createNativeViewWithParams:(NSDictionary *)viewParams viewData:(NSString *)viewData {
     WebViewController *viewController = [[WebViewController alloc]
             initWithNibName:@"WebViewController" bundle:nil];
 
+    viewController.params = viewParams;
     viewController.data = viewData;
 
     return viewController;

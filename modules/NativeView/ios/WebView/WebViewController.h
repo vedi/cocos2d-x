@@ -18,11 +18,11 @@
 
 - (IBAction)close:(id)sender;
 
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 
 @property (retain, nonatomic) IBOutlet UIButton *closeButton;
 
 @property(nonatomic, copy) NSString *data;
+
+@property(nonatomic, assign) NSDictionary *params;
 @end

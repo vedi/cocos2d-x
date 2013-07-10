@@ -28,6 +28,12 @@ void NativeViewNode::setKey(char const *pKey) {
     init(pKey);
 }
 
+void NativeViewNode::setViewParams(CCDictionary *viewParams) {
+    CC_SAFE_RELEASE(this->mViewParams);
+    this->mViewParams = viewParams;
+    CC_SAFE_RETAIN(this->mViewParams);
+}
+
 void NativeViewNode::cleanup() {
     if (mShown) {
         close();
@@ -43,7 +49,7 @@ void NativeViewNode::show() {
     CCPoint globalPos = m_pParent->convertToWorldSpace(getPosition());
     CCPoint sizePoint = ccpSub(convertToWorldSpace(ccpFromSize(getContentSize())), convertToWorldSpace(CCPointZero));
 
-    NativeViewModule::createAndShowNative(m_sKey.c_str(), m_sData.c_str(),
+    NativeViewModule::createAndShowNative(m_sKey.c_str(), mViewParams, m_sData.c_str(),
             globalPos.x, globalPos.y, sizePoint.x, sizePoint.y);
 
     mShown = true;

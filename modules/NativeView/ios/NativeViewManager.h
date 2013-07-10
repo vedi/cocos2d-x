@@ -12,7 +12,8 @@
 + (void)init;
 + (void)addFactory:(id <NativeViewFactory>)factory forKey:(NSString *)viewKey;
 + (void)setViewController:(UIViewController *)viewController;
-+ (void)createAndShowNative:(NSString *)key viewData:(NSString *)viewData x:(NSNumber *)x y:(NSNumber *)y w:(NSNumber *)w h:(NSNumber *)h;
+
++ (void)createAndShowNativeWithKey:(NSString *)key viewParams:(NSDictionary *)viewParams viewData:(NSString *)viewData x:(NSNumber *)x y:(NSNumber *)y w:(NSNumber *)w h:(NSNumber *)h;
 + (void)nativeSendMessage:(NSString *)key messageData:(NSString *)messageData;
 + (void)closeNative:(NSString *)key;
 @end

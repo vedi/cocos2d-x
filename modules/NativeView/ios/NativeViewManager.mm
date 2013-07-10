@@ -26,7 +26,7 @@ NSMutableDictionary *sViewControllerFactories = [[NSMutableDictionary alloc] ini
     [sViewControllerFactories setValue:factory forKey:viewKey];
 }
 
-+ (void)createAndShowNative:(NSString *)key viewData:(NSString *)viewData x:(NSNumber *)x y:(NSNumber *)y w:(NSNumber *)w h:(NSNumber *)h {
++ (void)createAndShowNativeWithKey:(NSString *)key viewParams:(NSDictionary *)viewParams viewData:(NSString *)viewData x:(NSNumber *)x y:(NSNumber *)y w:(NSNumber *)w h:(NSNumber *)h {
     float scale = 1 / sViewController.view.contentScaleFactor;
 
     y = [NSNumber numberWithFloat: cocos2d::CCDirector::sharedDirector()->getWinSize().height - y.floatValue];
@@ -37,7 +37,7 @@ NSMutableDictionary *sViewControllerFactories = [[NSMutableDictionary alloc] ini
     id<NativeViewFactory>nativeViewFactory = [sViewControllerFactories objectForKey:key];
 
     if (nativeViewFactory != nil) {
-        UIViewController *viewController = [nativeViewFactory createNativeView:viewData];
+        UIViewController *viewController = [nativeViewFactory createNativeViewWithParams:viewParams viewData:viewData];
 
         [viewController.view setContentScaleFactor:2];
 
