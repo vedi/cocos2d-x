@@ -23,7 +23,7 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.hellocpp;
 
-import com.easyndk.classes.AndroidNDKHelper;
+import com.easyndk.AndroidNDKHelper;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
