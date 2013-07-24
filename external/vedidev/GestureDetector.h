@@ -82,7 +82,7 @@ public:
     virtual bool longPress(CCPoint &touchPoint) {return false;};
     virtual bool fling(float velocityX, float velocityY) {return false;};
     virtual bool pan(CCPoint &touchPoint, float deltaX, float deltaY) {return false;};
-    virtual bool zoom(float originalDistance, float currentDistance) {return false;};
+    virtual bool zoom() {return false;};
     virtual bool rotate(float angle) {return false;};
 };
 

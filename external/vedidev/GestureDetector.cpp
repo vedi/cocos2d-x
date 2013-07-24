@@ -175,7 +175,7 @@ bool GestureDetector::touchDragged(CCPoint &touchPoint, int pointer) {
         if (listener != NULL) {
             bRet = listener->rotate(angle);
             if (!bRet) {
-                bRet = listener->zoom(initialDistance, ccpDistance(firstPointer, secondPointer));
+                bRet = listener->zoom();
             }
         } else {
             bRet = false;
@@ -245,6 +245,9 @@ bool GestureDetector::touchUp(CCPoint &touchPoint, int pointer) {
         lastTapTime = now;
         CCPoint tapPoint = ccp(tapSquareCenterX, tapSquareCenterY);
         bRet = listener->tap(tapPoint, tapCount);
+        if (bRet) {
+            tapCount = 0;
+        }
     } else if (pinching) {
         // handle pinch end
         pinching = false;
