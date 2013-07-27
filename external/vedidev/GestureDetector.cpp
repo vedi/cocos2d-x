@@ -12,6 +12,8 @@ GestureDetector::GestureDetector() {
     tracker->autorelease();
     tracker->retain();
 
+    mCurrentTouch = NULL;
+
     m_pTrackingNodes = CCArray::create();
     m_pTrackingNodes->retain();
 
@@ -51,14 +53,13 @@ GestureDetector *GestureDetector::create(int halfTapSquareSize, float tapCountIn
 void GestureDetector::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
 
-    CCTouch *pTouch;
     CCPoint tTouchPoint;
 //    CCObject *pObj;
 //    CCNode *pNode;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
-        pTouch = (CCTouch *) (*iter);
-        tTouchPoint = pTouch->getLocation();
-        touchDown(tTouchPoint, pTouch->getID());
+        mCurrentTouch = (CCTouch *) (*iter);
+        tTouchPoint = mCurrentTouch->getLocation();
+        touchDown(tTouchPoint, mCurrentTouch->getID());
 
 //        CCARRAY_FOREACH(m_pTrackingNodes, pObj) {
 //            pNode = static_cast<CCNode *>(pObj);
@@ -78,24 +79,22 @@ void GestureDetector::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent) {
 void GestureDetector::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
 
-    CCTouch *pTouch;
     CCPoint tTouchPoint;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
-        pTouch = (CCTouch *) (*iter);
-        tTouchPoint = pTouch->getLocation();
-        touchDragged(tTouchPoint, pTouch->getID());
+        mCurrentTouch = (CCTouch *) (*iter);
+        tTouchPoint = mCurrentTouch->getLocation();
+        touchDragged(tTouchPoint, mCurrentTouch->getID());
     }
 }
 
 void GestureDetector::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
 
-    CCTouch *pTouch;
     CCPoint tTouchPoint;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
-        pTouch = (CCTouch *) (*iter);
-        tTouchPoint = pTouch->getLocation();
-        touchUp(tTouchPoint, pTouch->getID());
+        mCurrentTouch = (CCTouch *) (*iter);
+        tTouchPoint = mCurrentTouch->getLocation();
+        touchUp(tTouchPoint, mCurrentTouch->getID());
     }
 }
 
@@ -176,7 +175,7 @@ bool GestureDetector::touchDragged(CCPoint &touchPoint, int pointer) {
         if (listener != NULL) {
             bRet = listener->rotate(angle);
             if (!bRet) {
-                bRet = listener->zoom(initialDistance, ccpDistance(firstPointer, secondPointer));
+                bRet = listener->zoom();
             }
         } else {
             bRet = false;
@@ -246,6 +245,9 @@ bool GestureDetector::touchUp(CCPoint &touchPoint, int pointer) {
         lastTapTime = now;
         CCPoint tapPoint = ccp(tapSquareCenterX, tapSquareCenterY);
         bRet = listener->tap(tapPoint, tapCount);
+        if (bRet) {
+            tapCount = 0;
+        }
     } else if (pinching) {
         // handle pinch end
         pinching = false;

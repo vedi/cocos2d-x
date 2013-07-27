@@ -15,6 +15,7 @@ class GestureListener;
 class VelocityTracker;
 
 class GestureDetector: public CCObject, public CCTouchDelegate {
+    CC_SYNTHESIZE_READONLY(CCTouch *, mCurrentTouch, CurrentTouch);
 public:
     static GestureDetector *create(GestureListener *listener);
     static GestureDetector *create(int halfTapSquareSize, float tapCountInterval,
@@ -81,7 +82,7 @@ public:
     virtual bool longPress(CCPoint &touchPoint) {return false;};
     virtual bool fling(float velocityX, float velocityY) {return false;};
     virtual bool pan(CCPoint &touchPoint, float deltaX, float deltaY) {return false;};
-    virtual bool zoom(float originalDistance, float currentDistance) {return false;};
+    virtual bool zoom() {return false;};
     virtual bool rotate(float angle) {return false;};
 };
 

@@ -135,9 +135,16 @@ TargetPlatform CCApplication::getTargetPlatform()
     }
 }
 
-std::string cocos2d::CCApplication::getAppID() {
+std::string CCApplication::getAppID() {
     return [[[NSBundle mainBundle] bundleIdentifier] UTF8String];
 }
+
+void CCApplication::openURL(char const* url) {
+    NSString *msg = [NSString stringWithCString:url encoding:NSASCIIStringEncoding];
+    NSURL *nsUrl = [NSURL URLWithString:msg];
+    [[UIApplication sharedApplication] openURL:nsUrl];
+}
+
 
 NS_CC_END
 

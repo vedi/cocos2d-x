@@ -40,6 +40,10 @@ void AnimationManagerAssigner::setAnimationManager(CCBAnimationManager *pManager
     }
 }
 
+CCBAnimationManager *AnimationManagerAssigner::getAnimationManager() {
+    return m_pAnimationManager;
+}
+
 CCBAnimationManager *AnimationManagerAssigner::getAnimationManagerForNode(CCNode *pNode) {
     CC_ASSERT(pNode);
     return dynamic_cast<CCBAnimationManager *>(m_pAnimationManagers->objectForKey((int) pNode));;

@@ -21,6 +21,7 @@
 #include "shaders/CCShaderCache.h"
 #include "textures/CCTexture2D.h"
 #include "textures/CCTextureCache.h"
+#include "CCPointExtension.h"
 
 NS_CC_BEGIN
 
@@ -40,8 +41,7 @@ CCModelMd2* CCModelMd2::create(const char* pszFilename)
 //- Load
 //- Loads an MD2 model from file
 //-------------------------------------------------------------
-bool CCModelMd2::load(const char * szFilename)
-{
+bool CCModelMd2::load(const char * szFilename) {
     if (szFilename == NULL || strlen(szFilename) == 0) return false;
 
 	unsigned char * ucpBuffer = 0;
@@ -157,55 +157,161 @@ void CCModelMd2::draw()
 //- Render
 //- Renders a specific frame of the MD2 model
 //-------------------------------------------------------------
-void CCModelMd2::draw(unsigned int uiFrame)
-{
-    float* m_pUV = new float[m_Head.numTriangles * 6];
-    memset(m_pUV, 0, m_Head.numTriangles * 6);
+void CCModelMd2::draw(unsigned int uiFrame) {
 
-    float* m_pVertices = new float[m_Head.numTriangles * 9];
-    memset(m_pVertices, 0, m_Head.numTriangles * 9);
-    int uvIdx = 0;
-    int vertexIdx = 0;
-    for (int i =0; i < m_Head.numTriangles; i++)
-    {
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].x;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].y;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].z;
+    CCPoint const & origin = ccp(0, 0);
+    CCPoint const & destination = ccp(100, 100);
 
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].x;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].y;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].z;
+    ccVertex3F vertices[3] = {
+//        {origin.x, origin.y, 100},
+        {destination.x, origin.y, 200},
+        {destination.x, destination.y, 100},
+        {origin.x, destination.y, 200}
+    };
 
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].x;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].y;
-        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].z;
+    ccTex2F uv[3] = {
+//        {0.0f, 0.0f},
+        {1.0f, 0.0f},
+        {1.0f, 1.0f},
+        {0.0f, 1.0f}
+    };
 
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[0]].s;
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[0]].t;
-
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[1]].s;
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[1]].t;
-
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[2]].s;
-        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[2]].t;
-    }
-
-    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords);
+    ccColor4B colors[3] = {
+//        {255, 255, 255, 255},
+        {128, 128, 128, 128},
+        {128, 128, 128, 128},
+        {255, 255, 255, 255}
+    };
 
     if(!m_bIsCustomSkin)
         ccGLBindTexture2D(m_pSkins[m_uiSkin].m_Image->getName());
     else
         ccGLBindTexture2D(m_pCustSkin->getName());
 
-    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, 0, m_pVertices);
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, m_pUV);
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
+    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, uv);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, colors);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    glDrawArrays(GL_TRIANGLES, 0, m_Head.numTriangles * 3);
+    CHECK_GL_ERROR_DEBUG();
+
+
+//    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, 0, m_pVertices);
+//    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, m_pUV);
+//
+//    glDrawArrays(GL_TRIANGLES, 0, m_Head.numTriangles * 3);
 
     CC_INCREMENT_GL_DRAWS(1);
-    CHECK_GL_ERROR_DEBUG();
-    CC_SAFE_DELETE_ARRAY(m_pUV);
-    CC_SAFE_DELETE_ARRAY(m_pVertices);
+
+//    float* m_pUV = new float[m_Head.numTriangles * 6];
+//    memset(m_pUV, 0, m_Head.numTriangles * 6);
+//
+//    float* m_pVertices = new float[m_Head.numTriangles * 9];
+//    memset(m_pVertices, 0, m_Head.numTriangles * 9);
+//
+//    GLubyte* colors = new GLubyte[m_Head.numTriangles * 12];
+//    memset(colors, 0, m_Head.numTriangles * 12);
+//
+//    int uvIdx = 0;
+//    int vertexIdx = 0;
+//    int colorIdx = 0;
+////    for (int i =0; i < m_Head.numTriangles; i++)
+////    {
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].x;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].y;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[0]].z;
+////
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].x;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].y;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[1]].z;
+////
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].x;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].y;
+////        m_pVertices[vertexIdx++] = m_pFrames[uiFrame].verts[m_pTriangles[i].vertIndices[2]].z;
+////
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[0]].s;
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[0]].t;
+////
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[1]].s;
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[1]].t;
+////
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[2]].s;
+////        m_pUV[uvIdx++] = m_pTexCoords[m_pTriangles[i].texIndices[2]].t;
+////
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////        colors[colorIdx++] = 255;
+////    }
+//
+/////////
+//
+//        m_pVertices[vertexIdx++] = 100;
+//        m_pVertices[vertexIdx++] = 0;
+//        m_pVertices[vertexIdx++] = 200;
+//
+//        m_pVertices[vertexIdx++] = 100;
+//        m_pVertices[vertexIdx++] = 100;
+//        m_pVertices[vertexIdx++] = 100;
+//
+//        m_pVertices[vertexIdx++] = 0;
+//        m_pVertices[vertexIdx++] = 100;
+//        m_pVertices[vertexIdx++] = 200;
+//
+//        m_pUV[uvIdx++] = 1.0f;
+//        m_pUV[uvIdx++] = 0.0f;
+//
+//        m_pUV[uvIdx++] = 1.0f;
+//        m_pUV[uvIdx++] = 1.0f;
+//
+//        m_pUV[uvIdx++] = 0.0f;
+//        m_pUV[uvIdx++] = 1.0f;
+//
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//        colors[colorIdx++] = 255;
+//
+//            /////////////////
+//    ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex);
+//
+//    if(!m_bIsCustomSkin)
+//        ccGLBindTexture2D(m_pSkins[m_uiSkin].m_Image->getName());
+//    else
+//        ccGLBindTexture2D(m_pCustSkin->getName());
+//
+//    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, 0, m_pVertices);
+//    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, m_pUV);
+//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
+//
+//    glDrawArrays(GL_TRIANGLES, 0, 3);
+//
+//    CC_INCREMENT_GL_DRAWS(1);
+//    CHECK_GL_ERROR_DEBUG();
+//    CC_SAFE_DELETE_ARRAY(m_pUV);
+//    CC_SAFE_DELETE_ARRAY(m_pVertices);
+//    CC_SAFE_DELETE_ARRAY(colors);
 }
 
 //-------------------------------------------------------------

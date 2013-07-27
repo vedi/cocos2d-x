@@ -212,6 +212,7 @@
 		372B795E2E2E9386199F69F5 /* Android.mk in Resources */ = {isa = PBXBuildFile; fileRef = 372B7436B808F6F6DC6C5F8E /* Android.mk */; };
 		372B79F2ECFF6A91784E84E6 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7FA66872799AE1A96053 /* error.c */; };
 		372B7A9ACBBEDD5A1449A170 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7CAD722CBA73ABBA53DA /* load.c */; };
+		372B7B0927D5A7ACA107F7BD /* JsonHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B72AF581DDC47DBBB1D43 /* JsonHelper.cpp */; };
 		372B7C3E93A69E65232A3A9F /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B7428BD8FC95A027E6FCE /* memory.c */; };
 		372B7D130D4A9B552BE09633 /* NDKCallbackData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
@@ -665,6 +666,7 @@
 		372B704F0D3D8ACCB10DDD26 /* strconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strconv.c; sourceTree = "<group>"; };
 		372B708ACBE07EA6DCC9606A /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
 		372B71EBA09C85D34744115C /* NDKCallbackData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDKCallbackData.h; sourceTree = "<group>"; };
+		372B72AF581DDC47DBBB1D43 /* JsonHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonHelper.cpp; sourceTree = "<group>"; };
 		372B72FCCAE192431D4E9FDA /* IOSNDKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSNDKHelper.h; sourceTree = "<group>"; };
 		372B7428BD8FC95A027E6FCE /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
 		372B7436B808F6F6DC6C5F8E /* Android.mk */ = {isa = PBXFileReference; lastKnownFileType = file.mk; path = Android.mk; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 		372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NDKCallbackData.cpp; sourceTree = "<group>"; };
 		372B7A158D77ED52D38A50A9 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf.h; sourceTree = "<group>"; };
 		372B7B33155360641C283082 /* jansson_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jansson_private.h; sourceTree = "<group>"; };
+		372B7B5DF5010D8573E92C34 /* JsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonHelper.h; sourceTree = "<group>"; };
 		372B7BA87765D7EE8905214A /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashtable.h; sourceTree = "<group>"; };
 		372B7CAD722CBA73ABBA53DA /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = load.c; sourceTree = "<group>"; };
 		372B7D7541ABB997B4D8F1A7 /* NDKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDKHelper.h; sourceTree = "<group>"; };
@@ -1053,7 +1056,6 @@
 				15A3D9EC1682F826002FB0C5 /* GUI */,
 				15A3DA1A1682F826002FB0C5 /* network */,
 				15A3DA1F1682F826002FB0C5 /* physics_nodes */,
-				1A40E6F71727BF48006D4861 /* spine */,
 				372B7A79DA660CAE82BD973C /* EasyNDK */,
 				1A8F3B42175E05DA00049216 /* spine */,
 			);
@@ -1605,6 +1607,8 @@
 				372B7E995189C984E5C33B23 /* NDKHelper.cpp */,
 				372B71EBA09C85D34744115C /* NDKCallbackData.h */,
 				372B791531CCAA2884C4D36E /* NDKCallbackData.cpp */,
+				372B72AF581DDC47DBBB1D43 /* JsonHelper.cpp */,
+				372B7B5DF5010D8573E92C34 /* JsonHelper.h */,
 			);
 			path = EasyNDK;
 			sourceTree = "<group>";
@@ -1739,9 +1743,6 @@
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
-				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
-				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
-				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				1A9CE8881765A12C000E3062 /* json_internalarray.inl in Resources */,
 				1A9CE8891765A12C000E3062 /* json_internalmap.inl in Resources */,
 				1A9CE88C1765A12C000E3062 /* json_valueiterator.inl in Resources */,
@@ -1889,25 +1890,6 @@
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,
 				1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */,
-				1A40E71F1727BF49006D4861 /* Animation.cpp in Sources */,
-				1A40E7201727BF49006D4861 /* AnimationState.cpp in Sources */,
-				1A40E7211727BF49006D4861 /* AnimationStateData.cpp in Sources */,
-				1A40E7221727BF49006D4861 /* Atlas.cpp in Sources */,
-				1A40E7231727BF49006D4861 /* AtlasAttachmentLoader.cpp in Sources */,
-				1A40E7241727BF49006D4861 /* Attachment.cpp in Sources */,
-				1A40E7251727BF49006D4861 /* AttachmentLoader.cpp in Sources */,
-				1A40E7261727BF49006D4861 /* Bone.cpp in Sources */,
-				1A40E7271727BF49006D4861 /* BoneData.cpp in Sources */,
-				1A40E7281727BF49006D4861 /* extension.cpp in Sources */,
-				1A40E7291727BF49006D4861 /* Json.cpp in Sources */,
-				1A40E72A1727BF49006D4861 /* RegionAttachment.cpp in Sources */,
-				1A40E72B1727BF49006D4861 /* Skeleton.cpp in Sources */,
-				1A40E72C1727BF49006D4861 /* SkeletonData.cpp in Sources */,
-				1A40E72D1727BF49006D4861 /* SkeletonJson.cpp in Sources */,
-				1A40E72E1727BF49006D4861 /* Skin.cpp in Sources */,
-				1A40E72F1727BF49006D4861 /* Slot.cpp in Sources */,
-				1A40E7301727BF49006D4861 /* SlotData.cpp in Sources */,
-				1A40E7311727BF49006D4861 /* spine-cocos2dx.cpp in Sources */,
 				9D7360151737A8B80036983A /* AbstractNodeProvider.cpp in Sources */,
 				9D7360161737A8B80036983A /* AbstractSceneDispatcher.cpp in Sources */,
 				9D7360181737A8B80036983A /* AnimationManagerAssigner.cpp in Sources */,
@@ -1987,6 +1969,7 @@
 				1A9CE8981765A12C000E3062 /* CCComAudio.cpp in Sources */,
 				1A9CE8991765A12C000E3062 /* CCComController.cpp in Sources */,
 				1A9CE89A1765A12C000E3062 /* CCInputDelegate.cpp in Sources */,
+				372B7B0927D5A7ACA107F7BD /* JsonHelper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2041,6 +2024,10 @@
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
 				);
 				OTHER_CFLAGS = "-O2";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(BUILT_PRODUCTS_DIR)/libcocos2dx.a",
+				);
 				PRODUCT_NAME = HelloCpp;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2087,6 +2074,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries\"",
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(BUILT_PRODUCTS_DIR)/libcocos2dx.a",
 				);
 				PRODUCT_NAME = HelloCpp;
 				PROVISIONING_PROFILE = "";

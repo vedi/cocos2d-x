@@ -419,7 +419,8 @@ void CCMenuItemSprite::setNormalImage(CCNode* pImage)
         if (pImage)
         {
             addChild(pImage, 0, kNormalTag);
-            pImage->setAnchorPoint(ccp(0, 0));
+            pImage->setAnchorPoint(this->getAnchorPoint());
+            pImage->setPosition(ccpCompMult(ccpFromSize(pImage->getContentSize()), this->getAnchorPoint()));
         }
 
         if (m_pNormalImage)
@@ -445,7 +446,8 @@ void CCMenuItemSprite::setSelectedImage(CCNode* pImage)
         if (pImage)
         {
             addChild(pImage, 0, kSelectedTag);
-            pImage->setAnchorPoint(ccp(0, 0));
+            pImage->setAnchorPoint(this->getAnchorPoint());
+            pImage->setPosition(ccpCompMult(ccpFromSize(this->getContentSize()), this->getAnchorPoint()));
         }
 
         if (m_pSelectedImage)
@@ -470,7 +472,8 @@ void CCMenuItemSprite::setDisabledImage(CCNode* pImage)
         if (pImage)
         {
             addChild(pImage, 0, kDisableTag);
-            pImage->setAnchorPoint(ccp(0, 0));
+            pImage->setAnchorPoint(this->getAnchorPoint());
+            pImage->setPosition(ccpCompMult(ccpFromSize(this->getContentSize()), this->getAnchorPoint()));
         }
 
         if (m_pDisabledImage)
@@ -577,7 +580,23 @@ void CCMenuItemSprite::setEnabled(bool bEnabled)
     }
 }
 
-// Helper 
+void CCMenuItemSprite::setAnchorPoint(cocos2d::CCPoint const & anchorPoint) {
+    CCMenuItem::setAnchorPoint(anchorPoint);
+    if (m_pNormalImage) {
+        m_pNormalImage->setAnchorPoint(anchorPoint);
+        m_pNormalImage->setPosition(ccpCompMult(ccpFromSize(this->getContentSize()), this->getAnchorPoint()));
+    }
+    if (m_pSelectedImage) {
+        m_pSelectedImage->setAnchorPoint(anchorPoint);
+        m_pSelectedImage->setPosition(ccpCompMult(ccpFromSize(this->getContentSize()), this->getAnchorPoint()));
+    }
+    if (m_pDisabledImage) {
+        m_pDisabledImage->setAnchorPoint(anchorPoint);
+        m_pDisabledImage->setPosition(ccpCompMult(ccpFromSize(this->getContentSize()), this->getAnchorPoint()));
+    }
+}
+
+// Helper
 void CCMenuItemSprite::updateImagesVisibility()
 {
     if (m_bEnabled)

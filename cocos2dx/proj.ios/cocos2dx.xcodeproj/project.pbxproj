@@ -267,6 +267,8 @@
 		1551A874158F2B4700E66CFE /* cocos2dx-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1551A873158F2B4700E66CFE /* cocos2dx-Prefix.pch */; };
 		15768F5F167ACFE4007CDCDD /* md2.h in Headers */ = {isa = PBXBuildFile; fileRef = 15768F5E167ACFE4007CDCDD /* md2.h */; };
 		15768F61167AD03C007CDCDD /* md2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15768F60167AD03C007CDCDD /* md2.cpp */; };
+		15A3CDF31681B24B002FB0C5 /* CCSprite3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15A3CDF11681B24B002FB0C5 /* CCSprite3D.cpp */; };
+		15A3CDF41681B24B002FB0C5 /* CCSprite3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 15A3CDF21681B24B002FB0C5 /* CCSprite3D.h */; };
 		15FBEE5C164B87F2008CB2C3 /* CCClippingNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 15FBEE5B164B87F2008CB2C3 /* CCClippingNode.h */; };
 		15FBEE5F164B8B5B008CB2C3 /* CCClippingNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15FBEE5E164B8B5B008CB2C3 /* CCClippingNode.cpp */; };
 		15FBEE68164BBA98008CB2C3 /* CCDrawingPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15FBEE66164BBA98008CB2C3 /* CCDrawingPrimitives.cpp */; };
@@ -295,10 +297,10 @@
 		2628297A15EC7064002C4240 /* ccTypeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 2628297915EC7064002C4240 /* ccTypeInfo.h */; };
 		372B73AC3D73405322F9919C /* CCGLBufferedNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B73866CE3F85939D78E71 /* CCGLBufferedNode.cpp */; };
 		372B73B0DE9D8A4D61881FA1 /* CCGLBufferedNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7BAB8CAC6164A62F8E6F /* CCGLBufferedNode.h */; };
-		372B77FD441EEBC4B5BB0EA7 /* UIDevice-IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */; };
-		372B7E8B78804F2772A78C4F /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */; };
-		372B7F1D81B67C8F09BC1FF0 /* UIDevice-IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */; };
-		372B7F8E7660C69D9FF002B1 /* NSString-MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */; };
+		372B74C95F8521C9E1825163 /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B795EA6720D756344AB46 /* NSString-MD5Addition.m */; };
+		372B79270D470AB75DECEB8E /* NSString-MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7C2CF6E89B5144E5D42D /* NSString-MD5Addition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		372B79C6E9C0AFC45E74E816 /* UIDevice-IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B7C4C3B4B6A5DC78D0491 /* UIDevice-IdentifierAddition.m */; };
+		372B7FCFE2D161130515714C /* UIDevice-IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B755721AB58DDEACF0F85 /* UIDevice-IdentifierAddition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37EEEBF8175DDF3A003C1193 /* CCComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EEEBF4175DDF3A003C1193 /* CCComponent.cpp */; };
 		37EEEBF9175DDF3A003C1193 /* CCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EEEBF5175DDF3A003C1193 /* CCComponent.h */; };
 		37EEEBFA175DDF3A003C1193 /* CCComponentContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EEEBF6175DDF3A003C1193 /* CCComponentContainer.cpp */; };
@@ -591,6 +593,8 @@
 		1551A873158F2B4700E66CFE /* cocos2dx-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2dx-Prefix.pch"; sourceTree = "<group>"; };
 		15768F5E167ACFE4007CDCDD /* md2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md2.h; sourceTree = "<group>"; };
 		15768F60167AD03C007CDCDD /* md2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md2.cpp; sourceTree = "<group>"; };
+		15A3CDF11681B24B002FB0C5 /* CCSprite3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSprite3D.cpp; sourceTree = "<group>"; };
+		15A3CDF21681B24B002FB0C5 /* CCSprite3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSprite3D.h; sourceTree = "<group>"; };
 		15FBEE5B164B87F2008CB2C3 /* CCClippingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCClippingNode.h; sourceTree = "<group>"; };
 		15FBEE5E164B8B5B008CB2C3 /* CCClippingNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCClippingNode.cpp; sourceTree = "<group>"; };
 		15FBEE66164BBA98008CB2C3 /* CCDrawingPrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCDrawingPrimitives.cpp; sourceTree = "<group>"; };
@@ -617,13 +621,13 @@
 		1AC6CE8616B910CD00330EFD /* CCFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCFileUtils.cpp; sourceTree = "<group>"; };
 		1AC6CE8716B910CD00330EFD /* CCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileUtils.h; sourceTree = "<group>"; };
 		2628297915EC7064002C4240 /* ccTypeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypeInfo.h; sourceTree = "<group>"; };
-		372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-MD5Addition.m"; sourceTree = "<group>"; };
 		372B73866CE3F85939D78E71 /* CCGLBufferedNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGLBufferedNode.cpp; sourceTree = "<group>"; };
-		372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-MD5Addition.h"; sourceTree = "<group>"; };
-		372B789A0C95221217BBC930 /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
-		372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-IdentifierAddition.h"; sourceTree = "<group>"; };
+		372B755721AB58DDEACF0F85 /* UIDevice-IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-IdentifierAddition.h"; sourceTree = "<group>"; };
+		372B795EA6720D756344AB46 /* NSString-MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-MD5Addition.m"; sourceTree = "<group>"; };
+		372B79D6D69DE920D2CBE478 /* license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
 		372B7BAB8CAC6164A62F8E6F /* CCGLBufferedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGLBufferedNode.h; sourceTree = "<group>"; };
-		372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-IdentifierAddition.m"; sourceTree = "<group>"; };
+		372B7C2CF6E89B5144E5D42D /* NSString-MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-MD5Addition.h"; sourceTree = "<group>"; };
+		372B7C4C3B4B6A5DC78D0491 /* UIDevice-IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-IdentifierAddition.m"; sourceTree = "<group>"; };
 		37EEEBF4175DDF3A003C1193 /* CCComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponent.cpp; sourceTree = "<group>"; };
 		37EEEBF5175DDF3A003C1193 /* CCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComponent.h; sourceTree = "<group>"; };
 		37EEEBF6175DDF3A003C1193 /* CCComponentContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponentContainer.cpp; sourceTree = "<group>"; };
@@ -1057,7 +1061,7 @@
 				1551A493158F2ADE00E66CFE /* EAGLView.mm */,
 				1551A4A0158F2ADE00E66CFE /* OpenGL_Internal.h */,
 				1551A4A1158F2ADE00E66CFE /* Simulation */,
-				372B772AE475565948D5EC6D /* UIDevice-UUID */,
+				372B7DC996CCFDE3D2C88D29 /* UIDevice-UUID */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -1112,6 +1116,8 @@
 		1551A5DA158F2ADE00E66CFE /* sprite_nodes */ = {
 			isa = PBXGroup;
 			children = (
+				15A3CDF11681B24B002FB0C5 /* CCSprite3D.cpp */,
+				15A3CDF21681B24B002FB0C5 /* CCSprite3D.h */,
 				1551A5DB158F2ADE00E66CFE /* CCAnimation.cpp */,
 				1551A5DC158F2ADE00E66CFE /* CCAnimation.h */,
 				1551A5DD158F2ADE00E66CFE /* CCAnimationCache.cpp */,
@@ -1298,14 +1304,14 @@
 			path = webp;
 			sourceTree = "<group>";
 		};
-		372B772AE475565948D5EC6D /* UIDevice-UUID */ = {
+		372B7DC996CCFDE3D2C88D29 /* UIDevice-UUID */ = {
 			isa = PBXGroup;
 			children = (
-				372B789A0C95221217BBC930 /* license */,
-				372B73CCC63C6C2B18256134 /* NSString-MD5Addition.h */,
-				372B70DE7EA3B22D01A61065 /* NSString-MD5Addition.m */,
-				372B7B6A9BC10F1C866F30B1 /* UIDevice-IdentifierAddition.h */,
-				372B7DD65053139D2E6B645B /* UIDevice-IdentifierAddition.m */,
+				372B79D6D69DE920D2CBE478 /* license */,
+				372B7C2CF6E89B5144E5D42D /* NSString-MD5Addition.h */,
+				372B795EA6720D756344AB46 /* NSString-MD5Addition.m */,
+				372B755721AB58DDEACF0F85 /* UIDevice-IdentifierAddition.h */,
+				372B7C4C3B4B6A5DC78D0491 /* UIDevice-IdentifierAddition.m */,
 			);
 			path = "UIDevice-UUID";
 			sourceTree = "<group>";
@@ -1348,6 +1354,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372B79270D470AB75DECEB8E /* NSString-MD5Addition.h in Headers */,
+				372B7FCFE2D161130515714C /* UIDevice-IdentifierAddition.h in Headers */,
 				1551A629158F2ADE00E66CFE /* CCAction.h in Headers */,
 				1551A62B158F2ADE00E66CFE /* CCActionCamera.h in Headers */,
 				1551A62D158F2ADE00E66CFE /* CCActionCatmullRom.h in Headers */,
@@ -1518,8 +1526,7 @@
 				1A5B48EB16F084CC008568FC /* CCDouble.h in Headers */,
 				1A5B48EC16F084CC008568FC /* CCFloat.h in Headers */,
 				15768F5F167ACFE4007CDCDD /* md2.h in Headers */,
-				372B7F8E7660C69D9FF002B1 /* NSString-MD5Addition.h in Headers */,
-				372B77FD441EEBC4B5BB0EA7 /* UIDevice-IdentifierAddition.h in Headers */,
+				15A3CDF41681B24B002FB0C5 /* CCSprite3D.h in Headers */,
 				1A5429001720F0650074EC5C /* CCDataVisitor.h in Headers */,
 				4698CFAA174CBB700066A57B /* CCTextureETC.h in Headers */,
 				37EEEBF9175DDF3A003C1193 /* CCComponent.h in Headers */,
@@ -1714,9 +1721,10 @@
 				37EEEBF8175DDF3A003C1193 /* CCComponent.cpp in Sources */,
 				37EEEBFA175DDF3A003C1193 /* CCComponentContainer.cpp in Sources */,
 				15768F61167AD03C007CDCDD /* md2.cpp in Sources */,
-				372B7E8B78804F2772A78C4F /* NSString-MD5Addition.m in Sources */,
-				372B7F1D81B67C8F09BC1FF0 /* UIDevice-IdentifierAddition.m in Sources */,
+				15A3CDF31681B24B002FB0C5 /* CCSprite3D.cpp in Sources */,
 				372B73AC3D73405322F9919C /* CCGLBufferedNode.cpp in Sources */,
+				372B74C95F8521C9E1825163 /* NSString-MD5Addition.m in Sources */,
+				372B79C6E9C0AFC45E74E816 /* UIDevice-IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1746,6 +1754,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-fdiagnostics-show-option";
 			};
@@ -1771,6 +1780,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-fdiagnostics-show-option";

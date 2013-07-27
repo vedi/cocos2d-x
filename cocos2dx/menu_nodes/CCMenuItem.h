@@ -260,6 +260,8 @@ public:
     
     virtual void setOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
     virtual bool isOpacityModifyRGB(void) { return false;}
+
+    virtual void setAnchorPoint(const CCPoint& anchorPoint);
 protected:
     virtual void updateImagesVisibility();
 };

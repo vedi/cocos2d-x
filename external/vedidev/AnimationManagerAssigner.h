@@ -28,6 +28,7 @@ protected:
     CCBAnimationManager *m_pAnimationManager;
     CCDictionary *m_pAnimationManagers;
 
+    CCBAnimationManager *getAnimationManager();
     CCBAnimationManager *getAnimationManagerForNode(CCNode *pNode);
 };
 

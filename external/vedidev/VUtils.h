@@ -51,6 +51,8 @@ public:
 
     static void fill(CCNode *targetNode, CCPoint fill, int fillStrategy);
 
+    static void fill(CCNode *targetNode, CCPoint size, CCPoint fill, int fillStrategy);
+
     static void applyScaleForNode(CCNode *targetNode);
 
 

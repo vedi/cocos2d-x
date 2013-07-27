@@ -35,7 +35,12 @@ void VUtils::alignRelative(CCNode *targetNode, CCNode *anchorNode, CCPoint ancho
 }
 
 void VUtils::fill(CCNode *targetNode, CCPoint fill, int fillStrategy) {
+    VUtils::fill(targetNode, ccp(1, 1), fill, fillStrategy);
+}
+
+void VUtils::fill(CCNode *targetNode, CCPoint size, CCPoint fill, int fillStrategy) {
     CCPoint newSize = ccpCompMult(ccpFromSize(CCDirector::sharedDirector()->getWinSize()), fill);
+    newSize = ccpCompMult(newSize, size);
     CCRect rect = CCRectApplyAffineTransform(CCRectMake(0, 0, newSize.x, newSize.y),
                                              targetNode->worldToNodeTransform());
     newSize = ccp(rect.size.width, rect.size.height);
@@ -59,11 +64,11 @@ void VUtils::fill(CCNode *targetNode, CCPoint fill, int fillStrategy) {
     }
 }
 
-
 void VUtils::applyScaleForNode(CCNode *targetNode) {
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float scale = std::min(winSize.width / targetNode->getContentSize().width,
-            winSize.height / targetNode->getContentSize().height);
+    float scaleX = winSize.width / targetNode->getContentSize().width;
+    float scaleY = winSize.height / targetNode->getContentSize().height;
+    float scale = std::min(scaleX, scaleY);
     targetNode->setScale(scale);
     targetNode->setPosition(ccp(
             (winSize.width - targetNode->getContentSize().width * scale) / 2,
