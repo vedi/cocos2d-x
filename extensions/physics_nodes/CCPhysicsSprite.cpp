@@ -52,7 +52,7 @@ CCPhysicsSprite* CCPhysicsSprite::create()
     {
         CC_SAFE_DELETE(pRet);
     }
-    
+
     return pRet;
 }
 
@@ -99,6 +99,10 @@ CCPhysicsSprite* CCPhysicsSprite::createWithSpriteFrame(CCSpriteFrame *pSpriteFr
     }
 
     return pRet;
+}
+
+CCPhysicsSprite::~CCPhysicsSprite() {
+
 }
 
 CCPhysicsSprite* CCPhysicsSprite::createWithSpriteFrameName(const char *pszSpriteFrameName)

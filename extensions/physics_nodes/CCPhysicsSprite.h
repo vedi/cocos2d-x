@@ -62,6 +62,8 @@ protected:
 public:
     CCPhysicsSprite();
 
+                    ~CCPhysicsSprite();
+
     static CCPhysicsSprite* create();
     /** Creates an sprite with a texture.
      The rect used will be the size of the texture.
