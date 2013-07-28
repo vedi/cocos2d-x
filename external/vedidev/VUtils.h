@@ -47,11 +47,13 @@ public:
 
     static void align(CCNode *targetNode, CCPoint anchor);
 
+    static void align(CCNode *targetNode, CCRect rect, CCPoint anchor);
+
     static void alignRelative(CCNode *targetNode, CCNode *anchorNode, CCPoint anchor);
 
     static void fill(CCNode *targetNode, CCPoint fill, int fillStrategy);
 
-    static void fill(CCNode *targetNode, CCPoint size, CCPoint fill, int fillStrategy);
+    static void fill(CCNode *targetNode, CCRect rect, CCPoint fill, int fillStrategy);
 
     static void applyScaleForNode(CCNode *targetNode);
 
