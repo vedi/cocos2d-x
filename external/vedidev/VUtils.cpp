@@ -177,6 +177,7 @@ void VUtils::copyNode(cocos2d::CCNode* pSource,
     pDest->setSkewX(pSource->getSkewX());
     pDest->setSkewY(pSource->getSkewY());
     pDest->setTag(pSource->getTag());
+    pDest->setVisible(pSource->isVisible());
     pDest->setZOrder(pSource->getZOrder());
 }
 
