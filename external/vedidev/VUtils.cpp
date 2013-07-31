@@ -226,3 +226,18 @@ void VUtils::setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState) {
 
     pMenuItemImage->setNormalImage(pSprite);
 }
+
+bool VUtils::adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constraint) {
+    float size = initialSize;
+    do {
+        target->setFontSize(size);
+        if (target->getTextureRect().size.width <= constraint.width &&
+                target->getTextureRect().size.height <= constraint.height) {
+            return true;
+        }
+        size -= 1.0;
+    } while(size > 0.0);
+    target->setFontSize(initialSize);
+    return false;
+}
+
