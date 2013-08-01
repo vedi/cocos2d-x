@@ -30,7 +30,9 @@ void NativeViewModule::createAndShowNative(char const *viewKey, CCDictionary *vi
     CCDictionary *params = CCDictionary::create();
 
     params->setObject(CCString::create("createAndShowNative"), "method");
-    params->setObject(viewParams, "viewParams");
+    if (viewParams != NULL) {
+        params->setObject(viewParams, "viewParams");
+    }
     params->setObject(CCString::create(viewKey), "viewKey");
     params->setObject(CCString::create(viewData), "viewData");
     params->setObject(CCFloat::create(x), "x");
