@@ -186,10 +186,10 @@ void CCNode::_setZOrder(int z)
 
 void CCNode::setZOrder(int z)
 {
-    _setZOrder(z);
-    if (m_pParent)
-    {
+    if (m_pParent) {
         m_pParent->reorderChild(this, z);
+    } else {
+        _setZOrder(z);
     }
 }
 
