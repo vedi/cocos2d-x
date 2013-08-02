@@ -417,6 +417,8 @@ public:
      */
     virtual const CCSize& getContentSize() const;
 
+    virtual const CCSize getScaledContentSize() const;
+
     
     /**
      * Sets whether the node is visible

@@ -175,7 +175,7 @@ bool GestureDetector::touchDragged(CCPoint &touchPoint, int pointer) {
         if (listener != NULL) {
             bRet = listener->rotate(angle);
             if (!bRet) {
-                bRet = listener->zoom();
+                bRet = listener->zoom(initialDistance, ccpDistance(firstPointer, secondPointer));
             }
         } else {
             bRet = false;

@@ -8,8 +8,15 @@
 #include "VUtils.h"
 
 void VUtils::align(CCNode *targetNode, CCPoint anchor) {
+    CCRect rect;
+    rect.origin = CCPointZero;
+    rect.size = CCDirector::sharedDirector()->getWinSize();
+    VUtils::align(targetNode, rect, anchor);
+}
+
+void VUtils::align(CCNode *targetNode, CCRect rect, CCPoint anchor) {
     CC_ASSERT(targetNode->getParent());
-    CCPoint newSize = ccpCompMult(ccpFromSize(CCDirector::sharedDirector()->getWinSize()), anchor);
+    CCPoint newSize = ccpAdd(ccpCompMult(rect.size, anchor), rect.origin);
     CCPoint position = targetNode->getParent()->convertToNodeSpace(newSize);
     if (anchor.x < 0) {
         position.x = targetNode->getPositionX();
@@ -35,15 +42,18 @@ void VUtils::alignRelative(CCNode *targetNode, CCNode *anchorNode, CCPoint ancho
 }
 
 void VUtils::fill(CCNode *targetNode, CCPoint fill, int fillStrategy) {
-    VUtils::fill(targetNode, ccp(1, 1), fill, fillStrategy);
+    CCRect rect;
+    rect.origin = CCPointZero;
+    rect.size = CCDirector::sharedDirector()->getWinSize();
+    VUtils::fill(targetNode, rect, fill, fillStrategy);
 }
 
-void VUtils::fill(CCNode *targetNode, CCPoint size, CCPoint fill, int fillStrategy) {
-    CCPoint newSize = ccpCompMult(ccpFromSize(CCDirector::sharedDirector()->getWinSize()), fill);
-    newSize = ccpCompMult(newSize, size);
-    CCRect rect = CCRectApplyAffineTransform(CCRectMake(0, 0, newSize.x, newSize.y),
+void VUtils::fill(CCNode *targetNode, CCRect rect, CCPoint fill, int fillStrategy) {
+    rect.size = ccpCompMult(rect.size, fill);
+    CCRect nodeRect = CCRectApplyAffineTransform(rect,
                                              targetNode->worldToNodeTransform());
-    newSize = ccp(rect.size.width, rect.size.height);
+
+    CCPoint newSize = ccp(nodeRect.size.width, nodeRect.size.height);
     CCPoint scale = ccp(targetNode->getScaleX(), targetNode->getScaleY());
     if (fill.x >= 0) {
         scale.x *= newSize.x / targetNode->getContentSize().width;
@@ -112,7 +122,8 @@ cocos2d::CCSprite*VUtils::createSpriteWithCopy(cocos2d::CCSprite* pSource) {
 cocos2d::CCLabelTTF*VUtils::createLabelTTFWithCopy(cocos2d::CCLabelTTF* pSource) {
 	
 	CCLabelTTF* pRet = CCLabelTTF::create(pSource->getString(),
-			pSource->getFontName(), pSource->getFontSize());
+			pSource->getFontName(), pSource->getFontSize(), pSource->getDimensions(),
+            pSource->getHorizontalAlignment(), pSource->getVerticalAlignment());
 
 	pRet->setColor(pSource->getColor());
 
@@ -166,6 +177,7 @@ void VUtils::copyNode(cocos2d::CCNode* pSource,
     pDest->setSkewX(pSource->getSkewX());
     pDest->setSkewY(pSource->getSkewY());
     pDest->setTag(pSource->getTag());
+    pDest->setVisible(pSource->isVisible());
     pDest->setZOrder(pSource->getZOrder());
 }
 
@@ -214,3 +226,18 @@ void VUtils::setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState) {
 
     pMenuItemImage->setNormalImage(pSprite);
 }
+
+bool VUtils::adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constraint) {
+    float size = initialSize;
+    do {
+        target->setFontSize(size);
+        if (target->getTextureRect().size.width <= constraint.width &&
+                target->getTextureRect().size.height <= constraint.height) {
+            return true;
+        }
+        size -= 1.0;
+    } while(size > 0.0);
+    target->setFontSize(initialSize);
+    return false;
+}
+

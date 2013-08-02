@@ -298,9 +298,9 @@
 		372B73AC3D73405322F9919C /* CCGLBufferedNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B73866CE3F85939D78E71 /* CCGLBufferedNode.cpp */; };
 		372B73B0DE9D8A4D61881FA1 /* CCGLBufferedNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7BAB8CAC6164A62F8E6F /* CCGLBufferedNode.h */; };
 		372B74C95F8521C9E1825163 /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B795EA6720D756344AB46 /* NSString-MD5Addition.m */; };
-		372B79270D470AB75DECEB8E /* NSString-MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7C2CF6E89B5144E5D42D /* NSString-MD5Addition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		372B79270D470AB75DECEB8E /* NSString-MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7C2CF6E89B5144E5D42D /* NSString-MD5Addition.h */; settings = {ATTRIBUTES = (); }; };
 		372B79C6E9C0AFC45E74E816 /* UIDevice-IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B7C4C3B4B6A5DC78D0491 /* UIDevice-IdentifierAddition.m */; };
-		372B7FCFE2D161130515714C /* UIDevice-IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B755721AB58DDEACF0F85 /* UIDevice-IdentifierAddition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		372B7FCFE2D161130515714C /* UIDevice-IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B755721AB58DDEACF0F85 /* UIDevice-IdentifierAddition.h */; settings = {ATTRIBUTES = (); }; };
 		37EEEBF8175DDF3A003C1193 /* CCComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EEEBF4175DDF3A003C1193 /* CCComponent.cpp */; };
 		37EEEBF9175DDF3A003C1193 /* CCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EEEBF5175DDF3A003C1193 /* CCComponent.h */; };
 		37EEEBFA175DDF3A003C1193 /* CCComponentContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37EEEBF6175DDF3A003C1193 /* CCComponentContainer.cpp */; };
@@ -1756,6 +1756,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-fdiagnostics-show-option";
 			};
 			name = Debug;
@@ -1782,6 +1783,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-fdiagnostics-show-option";
 			};

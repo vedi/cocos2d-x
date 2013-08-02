@@ -186,10 +186,10 @@ void CCNode::_setZOrder(int z)
 
 void CCNode::setZOrder(int z)
 {
-    _setZOrder(z);
-    if (m_pParent)
-    {
+    if (m_pParent) {
         m_pParent->reorderChild(this, z);
+    } else {
+        _setZOrder(z);
     }
 }
 
@@ -403,6 +403,12 @@ const CCSize& CCNode::getContentSize() const
 {
     return m_obContentSize;
 }
+
+const CCSize CCNode::getScaledContentSize() const {
+    return ccpCompMult(m_obContentSize, ccp(m_fScaleX, m_fScaleY));
+}
+
+
 
 void CCNode::setContentSize(const CCSize & size)
 {
