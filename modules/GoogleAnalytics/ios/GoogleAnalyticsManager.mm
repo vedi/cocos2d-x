@@ -34,7 +34,7 @@ static id<GAITracker> tracker = nil;
 
     obj = [params objectForKey:@"trackingId"];
     if (obj != nil) {
-        tracker = [[GAI sharedInstance] trackerWithTrackingId: [obj stringValue]];
+        tracker = [[GAI sharedInstance] trackerWithTrackingId: obj];
     } else {
         [NSException raise:@"GoogleAnalytics" format:@"Tracking ID is not defined"];
     }

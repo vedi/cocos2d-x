@@ -25,7 +25,7 @@
         [GoogleAnalyticsManager sendEventWithCategory:category withAction:action withLabel:label withValue:value];
     }
     else if ([methodName isEqualToString:@"sendView"]) {
-        NSDictionary *viewName = [parameters objectForKey:@"appId"];
+        NSString *viewName = [parameters objectForKey:@"viewName"];
         [GoogleAnalyticsManager sendView:viewName];
     }
     else {
