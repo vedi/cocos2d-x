@@ -528,56 +528,58 @@ void AssetsManager::Helper::sendMessage(Message *msg)
 
 void AssetsManager::Helper::update(float dt)
 {
-    Message *msg = NULL;
-    
-    // Returns quickly if no message
-    pthread_mutex_lock(&_messageQueueMutex);
-    if (0 == _messageQueue->size())
-    {
+    while (true) {
+        Message *msg = NULL;
+
+        // Returns quickly if no message
+        pthread_mutex_lock(&_messageQueueMutex);
+        if (0 == _messageQueue->size())
+        {
+            pthread_mutex_unlock(&_messageQueueMutex);
+            return;
+        }
+
+        // Gets message
+        msg = *(_messageQueue->begin());
+        _messageQueue->pop_front();
         pthread_mutex_unlock(&_messageQueueMutex);
-        return;
+
+        switch (msg->what) {
+            case ASSETSMANAGER_MESSAGE_UPDATE_SUCCEED:
+                handleUpdateSucceed(msg);
+
+                break;
+            case ASSETSMANAGER_MESSAGE_RECORD_DOWNLOADED_VERSION:
+                CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION,
+                        ((AssetsManager*)msg->obj)->_version.c_str());
+                CCUserDefault::sharedUserDefault()->flush();
+
+                break;
+            case ASSETSMANAGER_MESSAGE_PROGRESS:
+                if (((ProgressMessage*)msg->obj)->manager->_delegate)
+                {
+                    ((ProgressMessage*)msg->obj)->manager->_delegate->onProgress(((ProgressMessage*)msg->obj)->percent);
+                }
+
+                delete (ProgressMessage*)msg->obj;
+
+                break;
+            case ASSETSMANAGER_MESSAGE_ERROR:
+                // error call back
+                if (((ErrorMessage*)msg->obj)->manager->_delegate)
+                {
+                    ((ErrorMessage*)msg->obj)->manager->_delegate->onError(((ErrorMessage*)msg->obj)->code);
+                }
+
+                delete ((ErrorMessage*)msg->obj);
+
+                break;
+            default:
+                break;
+        }
+
+        delete msg;
     }
-    
-    // Gets message
-    msg = *(_messageQueue->begin());
-    _messageQueue->pop_front();
-    pthread_mutex_unlock(&_messageQueueMutex);
-    
-    switch (msg->what) {
-        case ASSETSMANAGER_MESSAGE_UPDATE_SUCCEED:
-            handleUpdateSucceed(msg);
-            
-            break;
-        case ASSETSMANAGER_MESSAGE_RECORD_DOWNLOADED_VERSION:
-            CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION,
-                                                                ((AssetsManager*)msg->obj)->_version.c_str());
-            CCUserDefault::sharedUserDefault()->flush();
-            
-            break;
-        case ASSETSMANAGER_MESSAGE_PROGRESS:
-            if (((ProgressMessage*)msg->obj)->manager->_delegate)
-            {
-                ((ProgressMessage*)msg->obj)->manager->_delegate->onProgress(((ProgressMessage*)msg->obj)->percent);
-            }
-            
-            delete (ProgressMessage*)msg->obj;
-            
-            break;
-        case ASSETSMANAGER_MESSAGE_ERROR:
-            // error call back
-            if (((ErrorMessage*)msg->obj)->manager->_delegate)
-            {
-                ((ErrorMessage*)msg->obj)->manager->_delegate->onError(((ErrorMessage*)msg->obj)->code);
-            }
-            
-            delete ((ErrorMessage*)msg->obj);
-            
-            break;
-        default:
-            break;
-    }
-    
-    delete msg;
 }
 
 void AssetsManager::Helper::handleUpdateSucceed(Message *msg)
