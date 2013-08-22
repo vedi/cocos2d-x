@@ -74,15 +74,25 @@ void VUtils::fill(CCNode *targetNode, CCRect rect, CCPoint fill, int fillStrateg
     }
 }
 
+void VUtils::applyScaleForNode(CCNode *targetNode, CCRect rect) {
+    VUtils::fill(targetNode, V_FILL_BOTH, V_FILL_STRATEGY_FIT);
+    float scaleX = rect.size.width / targetNode->getContentSize().width;
+    float scaleY = rect.size.height / targetNode->getContentSize().height;
+    float scale = MIN(scaleX, scaleY);
+    targetNode->setScale(scale);
+
+    targetNode->setPosition(ccp(
+    (rect.size.width - targetNode->getScaledContentSize().width) / 2,
+    (rect.size.height - targetNode->getScaledContentSize().height) / 2));
+//    targetNode->setPosition(ccp(
+//            rect.origin.x + (rect.size.width - targetNode->getScaledContentSize().width) / 2,
+//            rect.origin.y + (rect.size.height - targetNode->getScaledContentSize().height * scale) / 2)
+//    );
+}
+
 void VUtils::applyScaleForNode(CCNode *targetNode) {
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    float scaleX = winSize.width / targetNode->getContentSize().width;
-    float scaleY = winSize.height / targetNode->getContentSize().height;
-    float scale = std::min(scaleX, scaleY);
-    targetNode->setScale(scale);
-    targetNode->setPosition(ccp(
-            (winSize.width - targetNode->getContentSize().width * scale) / 2,
-            (winSize.height - targetNode->getContentSize().height * scale) / 2));
+    applyScaleForNode(targetNode, CCRectMake(0, 0, winSize.width, winSize.height));
 }
 
 void VUtils::fitToRect(CCRect rect, float &x, float &y) {
