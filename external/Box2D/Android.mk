@@ -54,6 +54,7 @@ Dynamics/b2WorldCallbacks.cpp \
 Rope/b2Rope.cpp 
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/..
+LOCAL_EXPORT_C_INCLUDES += $(LOCAL_PATH)/../..
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/..
                                  
