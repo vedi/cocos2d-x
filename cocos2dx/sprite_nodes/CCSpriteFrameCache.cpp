@@ -234,6 +234,9 @@ void CCSpriteFrameCache::addSpriteFramesWithFile(const char *pszPlist)
     {
         std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(pszPlist);
         CCDictionary *dict = CCDictionary::createWithContentsOfFileThreadSafe(fullPath.c_str());
+        if (!dict) {
+            CCAssert(dict, CCString::createWithFormat("Cannot read file: %s", fullPath.c_str())->getCString());
+        }
 
         string texturePath("");
 
