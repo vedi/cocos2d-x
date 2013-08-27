@@ -116,8 +116,8 @@ public :
     virtual bool CCListView_canSwipe(CCListView *listView) {return true;};
     virtual void CCListView_numberOfCells(CCListView *listView, CCListViewProtrolData *data)=0;
     virtual void CCListView_cellForRow(CCListView *listView, CCListViewProtrolData *data)=0;
-    virtual void CCListView_didClickCellAtRow(CCListView *listView, CCListViewProtrolData *data)=0;
-    virtual void CCListView_didScrollToRow(CCListView *listView, CCListViewProtrolData *data)=0;
+    virtual void CCListView_didClickCellAtRow(CCListView *listView, CCListViewProtrolData *data) {};
+    virtual void CCListView_didScrollToRow(CCListView *listView, CCListViewProtrolData *data) {};
 };
 
 
