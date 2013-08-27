@@ -71,6 +71,8 @@ public:
 
     static CCLabelTTF *createLabelTTFWithCopy(CCLabelTTF *pSource);
 
+    static CCLabelBMFont *createLabelBMFontWithCopy(CCLabelBMFont *source);
+
     static CCMenu *createMenuWithCopy(CCMenu *pSource);
 
     static CCMenuItemImage *createMenuItemImageWithCopy(CCMenuItemImage *pSource);
@@ -90,6 +92,7 @@ public:
     static void setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState);
 
     static bool adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constraint);
+
 };
 
 #endif /* VUTILS_H_ */

@@ -142,6 +142,16 @@ cocos2d::CCLabelTTF*VUtils::createLabelTTFWithCopy(cocos2d::CCLabelTTF* pSource)
 	return pRet;
 }
 
+
+CCLabelBMFont *VUtils::createLabelBMFontWithCopy(CCLabelBMFont *source) {
+    CCLabelBMFont *ret = CCLabelBMFont::create(source->getString(), source->getFntFile(),
+            source->getContentSize().width);
+
+    copyNode(source, ret);
+
+    return ret;
+}
+
 CCMenu *VUtils::createMenuWithCopy(CCMenu *pSource) {
     CCMenu *pRet = CCMenu::create();
 
