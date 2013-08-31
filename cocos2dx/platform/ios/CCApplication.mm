@@ -140,8 +140,9 @@ std::string CCApplication::getAppID() {
 }
 
 void CCApplication::openURL(char const* url) {
-    NSString *msg = [NSString stringWithCString:url encoding:NSASCIIStringEncoding];
-    NSURL *nsUrl = [NSURL URLWithString:msg];
+    NSString *urlAddress = [[NSString stringWithUTF8String:url]
+            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *nsUrl = [NSURL URLWithString:urlAddress];
     [[UIApplication sharedApplication] openURL:nsUrl];
 }
 
