@@ -33,6 +33,11 @@
 
 NS_CC_EXT_BEGIN
 
+CCTableView* CCTableView::create()
+{
+    return CCTableView::create(NULL, CCSizeZero, NULL);
+}
+
 CCTableView* CCTableView::create(CCTableViewDataSource* dataSource, CCSize size)
 {
     return CCTableView::create(dataSource, size, NULL);
@@ -44,8 +49,10 @@ CCTableView* CCTableView::create(CCTableViewDataSource* dataSource, CCSize size,
     table->initWithViewSize(size, container);
     table->autorelease();
     table->setDataSource(dataSource);
-    table->_updateCellPositions();
-    table->_updateContentSize();
+    if (dataSource) {
+        table->_updateCellPositions();
+        table->_updateContentSize();
+    }
 
     return table;
 }
