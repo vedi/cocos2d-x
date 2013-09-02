@@ -180,6 +180,8 @@ public:
     virtual void registerWithTouchDispatcher(void);
     virtual void visit(void);
 
+    float getSwingKoef() {return mfSwingKoef;}
+    void setSwingKoef(float swingKoef) {mfSwingKoef = swingKoef;}
 protected:
     void displayVisibleRows(void);
     CCListViewCell* appendRowToBack(unsigned int nRow);
@@ -226,7 +228,7 @@ private:
     bool                   m_bIsEnabled;
     bool                   m_bIsOnTouch;
     bool                   m_bIsSwiping;
-    float m_fSwingKoef;
+    float mfSwingKoef;
 
     void unswipe() {
         m_bIsSwiping = false;

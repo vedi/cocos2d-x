@@ -83,7 +83,7 @@ CCListView::CCListView(void)
     ,m_nNumberOfRows(0)
     ,m_bIsOnTouch(false)
     ,m_bIsSwiping(false)
-    , m_fSwingKoef(0.1f)
+    , mfSwingKoef(0.1f)
 {
     m_drawedRows = CCRangeMake(0, 0);
     m_visibleRows = CCRangeMake(0, 0);
@@ -1536,6 +1536,7 @@ void CCListView::fixLastRow(void)
 
 void CCListView::easeOutWithDistance(float dis)
 {
+    return;
     float disX = 0;
     float disY = 0;
 
@@ -1976,7 +1977,7 @@ void CCListView::ccTouchMoved(CCTouch* touch, CCEvent* event)
                     }
                 }
             } else {
-                float maxSwing = this->getContentSize().width * m_fSwingKoef;
+                float maxSwing = this->getContentSize().width * mfSwingKoef;
                 if (fabsf(m_ptTouchEnd.x - m_ptTouchBegan.x) > maxSwing) {
                     newLayerPos.x = m_ptPanelOffset.x - maxSwing;
                     m_ptTouchBegan.x += (m_ptTouchEnd.x - prevTouchEnd.x);
@@ -1995,7 +1996,7 @@ void CCListView::ccTouchMoved(CCTouch* touch, CCEvent* event)
                     appendRowToFront(nFirstRow - 1);
                 }
             } else {
-                float maxSwing = this->getContentSize().width * m_fSwingKoef;
+                float maxSwing = this->getContentSize().width * mfSwingKoef;
                 if (fabsf(m_ptTouchEnd.x - m_ptTouchBegan.x) > maxSwing) {
                     newLayerPos.x = m_ptPanelOffset.x + maxSwing;
                     m_ptTouchBegan.x += (m_ptTouchEnd.x - prevTouchEnd.x);
@@ -2019,7 +2020,7 @@ void CCListView::ccTouchMoved(CCTouch* touch, CCEvent* event)
                     appendRowToBack(nLastRow + 1);
                 }
             } else {
-                float maxSwing = this->getContentSize().height * m_fSwingKoef;
+                float maxSwing = this->getContentSize().height * mfSwingKoef;
                 if (fabsf(m_ptTouchEnd.y - m_ptTouchBegan.y) > maxSwing) {
                     newLayerPos.y = m_ptPanelOffset.y + maxSwing;
                     m_ptTouchBegan.y += (m_ptTouchEnd.y - prevTouchEnd.x);
@@ -2039,7 +2040,7 @@ void CCListView::ccTouchMoved(CCTouch* touch, CCEvent* event)
                     appendRowToFront(nFirstRow - 1);
                 }
             } else {
-                float maxSwing = this->getContentSize().height * m_fSwingKoef;
+                float maxSwing = this->getContentSize().height * mfSwingKoef;
                 if (fabsf(m_ptTouchEnd.y - m_ptTouchBegan.y) > maxSwing) {
                     newLayerPos.y = m_ptPanelOffset.y - maxSwing;
                     m_ptTouchBegan.y += (m_ptTouchEnd.y - prevTouchEnd.x);
