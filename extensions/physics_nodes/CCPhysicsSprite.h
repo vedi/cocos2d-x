@@ -58,8 +58,6 @@ protected:
 
     // Pixels to Meters ratio
     float   m_fPTMRatio;
-#else
-    #error "NO PHYSICS ENGINE DEFINED"
 #endif // CC_ENABLE_CHIPMUNK_INTEGRATION
 public:
     CCPhysicsSprite();
