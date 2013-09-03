@@ -39,7 +39,11 @@ CCPhysicsSprite::CCPhysicsSprite()
 , m_pB2Body(NULL)
 , m_fPTMRatio(0.0f)
 #endif
-{}
+{
+#if !CC_ENABLE_CHIPMUNK_INTEGRATION && !CC_ENABLE_BOX2D_INTEGRATION
+    CCAssert(false, "You must define either CC_ENABLE_CHIPMUNK_INTEGRATION or CC_ENABLE_BOX2D_INTEGRATION to use CCPhysicsSprite.h");
+#endif
+}
 
 CCPhysicsSprite* CCPhysicsSprite::create()
 {
@@ -355,6 +359,10 @@ CCAffineTransform CCPhysicsSprite::nodeToParentTransform() {
     }
 }
 
+#else
+void CCPhysicsSprite::updatePosFromPhysics()
+{
+}
 #endif
 
 NS_CC_EXT_END
