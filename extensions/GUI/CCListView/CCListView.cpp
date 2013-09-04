@@ -2227,5 +2227,10 @@ CCPoint CCListView::getViewPoint() {
 	return CCPointZero;
 }
 
+int CCListView::getCurrentRow()
+{
+    return m_nCurrentRow;
+}
+
 NS_CC_EXT_END
 

@@ -179,6 +179,8 @@ public:
 
     virtual void registerWithTouchDispatcher(void);
     virtual void visit(void);
+    
+    int getCurrentRow();
 
     float getSwingKoef() {return mfSwingKoef;}
     void setSwingKoef(float swingKoef) {mfSwingKoef = swingKoef;}
