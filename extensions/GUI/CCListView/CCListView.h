@@ -181,6 +181,7 @@ public:
     virtual void visit(void);
     
     int getCurrentRow();
+    CCRange getDrawedRows();
 
     float getSwingKoef() {return mfSwingKoef;}
     void setSwingKoef(float swingKoef) {mfSwingKoef = swingKoef;}

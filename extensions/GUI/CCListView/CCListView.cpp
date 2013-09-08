@@ -2232,5 +2232,10 @@ int CCListView::getCurrentRow()
     return m_nCurrentRow;
 }
 
+CCRange CCListView::getDrawedRows()
+{
+    return m_drawedRows;
+}
+
 NS_CC_EXT_END
 
