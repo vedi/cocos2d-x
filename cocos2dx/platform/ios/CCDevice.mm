@@ -11,12 +11,8 @@ int CCDevice::getDPI()
 
     if (dpi == -1)
     {
-        float scale = 1.0f;
-        
-        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-            scale = [[UIScreen mainScreen] scale];
-        }
-        
+        float scale= getScreenScale();
+
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             dpi = 132 * scale;
         } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -28,8 +24,22 @@ int CCDevice::getDPI()
     return dpi;
 }
 
+
+float CCDevice::getStatusBarHeight() {
+    return 20 * getScreenScale();
+}
+
 std::string CCDevice::getDeviceId() {
     return [[[UIDevice currentDevice] uniqueDeviceIdentifier] UTF8String];
+}
+
+float CCDevice::getScreenScale() {
+    float scale = 1.0f;
+
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    }
+    return scale;
 }
 
 NS_CC_END
