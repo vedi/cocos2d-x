@@ -1536,7 +1536,7 @@ void CCListView::fixLastRow(void)
 
 void CCListView::easeOutWithDistance(float dis)
 {
-    return;
+    //return;
     float disX = 0;
     float disY = 0;
 

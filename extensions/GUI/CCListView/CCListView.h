@@ -35,11 +35,6 @@ THE SOFTWARE.
 
 NS_CC_EXT_BEGIN
 
-/**
- * @addtogroup GUI
- * @{
- */
-
 class CC_DLL CCRange
 {
 public:
@@ -185,6 +180,7 @@ public:
 
     float getSwingKoef() {return mfSwingKoef;}
     void setSwingKoef(float swingKoef) {mfSwingKoef = swingKoef;}
+
 protected:
     void displayVisibleRows(void);
     CCListViewCell* appendRowToBack(unsigned int nRow);
@@ -208,6 +204,7 @@ protected:
 
     CCPoint getCellPoint(CCNode* cell);
     CCPoint getViewPoint();
+
 private:
     CCListViewState       m_nState;
     CCListViewMode        m_nMode;
@@ -237,9 +234,6 @@ private:
         m_bIsSwiping = false;
     }
 };
-
-// end of GUI group
-/// @}
 
 NS_CC_EXT_END
 
