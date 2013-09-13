@@ -16,7 +16,10 @@ public:
      *  @return The DPI of device.
      */
     static int getDPI();
+    static float getStatusBarHeight();
     static std::string getDeviceId();
+
+    static float getScreenScale();
 };
 
 

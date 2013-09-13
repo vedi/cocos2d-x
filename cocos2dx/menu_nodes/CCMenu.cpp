@@ -258,6 +258,7 @@ void CCMenu::ccTouchEnded(CCTouch *touch, CCEvent* event)
     {
         m_pSelectedItem->unselected();
         m_pSelectedItem->activate();
+        touch->setProceeded(true);
     }
     m_eState = kCCMenuStateWaiting;
 }

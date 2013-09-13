@@ -14,6 +14,11 @@ int CCDevice::getDPI()
     return dpi;
 }
 
+float CCDevice::getStatusBarHeight() i{
+    // TODO: It's just a mock-up. Implement it properly.
+    return 20;
+}
+
 std::string CCDevice::getDeviceId() {
     return getDeviceIdJNI();
 }

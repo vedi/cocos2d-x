@@ -240,10 +240,12 @@ void CCTableView::removeCellAtIndex(unsigned int idx)
     m_pIndices->erase(idx);
     this->_updateCellPositions();
 //    [m_pIndices shiftIndexesStartingAtIndex:idx+1 by:-1];
-    for (unsigned int i=m_pCellsUsed->count()-1; i > newIdx; i--)
-    {
-        cell = (CCTableViewCell*)m_pCellsUsed->objectAtIndex(i);
-        this->_setIndexForCell(cell->getIdx()-1, cell);
+    if (m_pCellsUsed->count() > 0) {
+        for (unsigned int i=m_pCellsUsed->count()-1; i > newIdx; i--)
+        {
+            cell = (CCTableViewCell*)m_pCellsUsed->objectAtIndex(i);
+            this->_setIndexForCell(cell->getIdx()-1, cell);
+        }
     }
 }
 
