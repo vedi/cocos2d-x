@@ -16,6 +16,7 @@ class VelocityTracker;
 
 class GestureDetector: public CCObject, public CCTouchDelegate {
     CC_SYNTHESIZE_READONLY(CCTouch *, mCurrentTouch, CurrentTouch);
+    CC_SYNTHESIZE(bool, mIgnoreProceeded, IgnoreProceeded);
 public:
     static GestureDetector *create(GestureListener *listener);
     static GestureDetector *create(int halfTapSquareSize, float tapCountInterval,
@@ -35,10 +36,10 @@ public:
     virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
     virtual void ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent);
 
-    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {return false;};
-    virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {};
-    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {};
-    virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent) {};
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {CC_ASSERT(false); return false;};
+    virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {CC_ASSERT(false);};
+    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {CC_ASSERT(false);};
+    virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent) {CC_ASSERT(false);};
 private:
     CCArray *m_pTrackingNodes;
 

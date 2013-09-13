@@ -37,10 +37,12 @@ NS_CC_BEGIN
 
 class CC_DLL CCTouch : public CCObject
 {
+    CC_SYNTHESIZE(bool, mProceeded, Proceeded)
 public:
     CCTouch() 
         : m_nId(0),
-        m_startPointCaptured(false)
+        m_startPointCaptured(false),
+        mProceeded(false)
     {}
 
     /** returns the current touch location in OpenGL coordinates */
