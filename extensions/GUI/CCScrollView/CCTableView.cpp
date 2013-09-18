@@ -82,7 +82,7 @@ CCTableView::CCTableView()
 , m_pTableViewDelegate(NULL)
 , m_eOldDirection(kCCScrollViewDirectionNone)
 {
-
+    setCurrentTouch(CCPoint(0, 0));
 }
 
 CCTableView::~CCTableView()
@@ -604,7 +604,9 @@ bool CCTableView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
         CCPoint           point;
 
         point = this->getContainer()->convertTouchToNodeSpace(pTouch);
-
+        
+        setCurrentTouch(point);
+        
         index = this->_indexFromOffset(point);
 		if (index == CC_INVALID_INDEX)
 		{
@@ -634,6 +636,8 @@ void CCTableView::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 {
     CCScrollView::ccTouchMoved(pTouch, pEvent);
 
+    setCurrentTouch(this->getContainer()->convertTouchToNodeSpace(pTouch));
+    
     if (m_pTouchedCell && isTouchMoved()) {
         if(m_pTableViewDelegate != NULL) {
             m_pTableViewDelegate->tableCellUnhighlight(this, m_pTouchedCell);
