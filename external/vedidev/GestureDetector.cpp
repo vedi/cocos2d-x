@@ -60,7 +60,7 @@ void GestureDetector::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
 //    CCNode *pNode;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
         CCTouch *touch = (CCTouch *) (*iter);
-        if (mIgnoreProceeded && !touch->getProceeded()) {
+        if (mIgnoreProceeded || !touch->getProceeded()) {
             mCurrentTouch = touch;
             tTouchPoint = mCurrentTouch->getLocation();
             touch->setProceeded(touchDown(tTouchPoint, mCurrentTouch->getID()));
@@ -87,7 +87,7 @@ void GestureDetector::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
     CCPoint tTouchPoint;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
         CCTouch *touch = (CCTouch *) (*iter);
-        if (mIgnoreProceeded && !touch->getProceeded()) {
+        if (mIgnoreProceeded || !touch->getProceeded()) {
             mCurrentTouch = touch;
             tTouchPoint = mCurrentTouch->getLocation();
             touch->setProceeded(touchDragged(tTouchPoint, mCurrentTouch->getID()));
@@ -101,7 +101,7 @@ void GestureDetector::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
     CCPoint tTouchPoint;
     for (CCSetIterator iter = pTouches->begin(); iter != pTouches->end(); iter++) {
         CCTouch *touch = (CCTouch *) (*iter);
-        if (mIgnoreProceeded && !touch->getProceeded()) {
+        if (mIgnoreProceeded || !touch->getProceeded()) {
             mCurrentTouch = touch;
             tTouchPoint = mCurrentTouch->getLocation();
             mCurrentTouch->setProceeded(touchUp(tTouchPoint, mCurrentTouch->getID()));
