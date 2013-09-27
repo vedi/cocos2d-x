@@ -121,7 +121,8 @@ class CC_DLL CCListView : public CCLayerColor
 public:
     virtual ~CCListView(void);
     CCListView(void);
-
+    CC_SYNTHESIZE(bool, mShiftToCell, ShiftToCell);
+    CC_SYNTHESIZE(bool, mEndAnimation, EndAnimation);
     // @deprecated: This interface will be deprecated sooner or later.
     CC_DEPRECATED_ATTRIBUTE static CCListView* viewWithMode(CCListViewMode mode);
 

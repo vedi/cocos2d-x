@@ -88,6 +88,8 @@ CCListView::CCListView(void)
     m_drawedRows = CCRangeMake(0, 0);
     m_visibleRows = CCRangeMake(0, 0);
     m_bTouchEnabled = true;
+    setShiftToCell(false);
+    setEndAnimation(false);
 }
 
 CCListView::~CCListView(void) 
@@ -999,6 +1001,8 @@ void CCListView::finishFix(void)
     {
         nCount = children->count();
     }
+    
+    setEndAnimation(false);
     //CCLog("row num left:%d [%d, %d]", nCount, m_drawedRows.location, CCRange::CCMaxRange(m_drawedRows));
 }
 
@@ -1897,7 +1901,11 @@ bool CCListView::ccTouchBegan(CCTouch* touch, CCEvent* event)
     {
         return false;
     }
-
+    //-----
+    if (getShiftToCell() && getEndAnimation()) {
+        return false;
+    }
+    //----
     m_ptTouchBegan = m_ptTouchEnd = this->convertToNodeSpace(touch->getLocation());
     m_ptPanelOffset = m_layerPanel->getPosition();
 
@@ -2072,6 +2080,10 @@ void CCListView::ccTouchEnded(CCTouch* touch, CCEvent* event)
         scheduleOnce(schedule_selector(CCListView::unswipe), 0);
         return;
     }
+    
+    if (getShiftToCell() && getEndAnimation()) {
+        return;
+    }
 
     m_fActionDuration = ND_LISTVIEW_ACTION_INTERVAL;
     clock_t timeElapse = clock() - m_timeTouchBegan;
@@ -2083,12 +2095,15 @@ void CCListView::ccTouchEnded(CCTouch* touch, CCEvent* event)
     {
         float dis = m_ptTouchEnd.x - m_ptTouchBegan.x;
         float speed = dis / timeElapse;
-        if (fabs(speed) > 0.1 && timeElapse < 300)
+        if (fabs(speed) > 0.1 && timeElapse < 300 && !getShiftToCell())
         {
             easeOutWithDistance(dis * 3);
         }
         else
         {
+            if (getShiftToCell()) {
+                setEndAnimation(true);
+            }
             if (CCListViewSlideDirLeft == m_nSlideDir && isFullFill())
             {
                 // drag up
@@ -2105,12 +2120,15 @@ void CCListView::ccTouchEnded(CCTouch* touch, CCEvent* event)
     {
         float dis = m_ptTouchEnd.y - m_ptTouchBegan.y;
         float speed = dis / timeElapse;
-        if (fabs(speed) > 0.1 && timeElapse < 300)
+        if (fabs(speed) > 0.1 && timeElapse < 300 && !getShiftToCell())
         {
             easeOutWithDistance(dis * 3);
         }
         else
         {
+            if (getShiftToCell()) {
+                setEndAnimation(true);
+            }
             if (CCListViewSlideDirUp == m_nSlideDir && isFullFill())
             {
                 // drag up
