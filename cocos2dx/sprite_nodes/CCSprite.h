@@ -484,7 +484,16 @@ public:
      * @param bFlipY true if the sprite should be flipped vertically, flase otherwise.
      */
     void setFlipY(bool bFlipY);
-    
+
+     /**
+     * Get image name
+     *
+     * @return image name.
+     */
+    inline std::string getSpriteImageName() {return m_sImageName; };
+
+    inline void setSpriteImageName(std::string imageName) {m_sImageName = imageName; };
+
     /// @} End of Sprite properties getter/setters
     
 protected:
@@ -534,6 +543,8 @@ protected:
     // image is flipped
     bool m_bFlipX;                              /// Whether the sprite is flipped horizaontally or not.
     bool m_bFlipY;                              /// Whether the sprite is flipped vertically or not.
+
+    std::string m_sImageName;
 };
 
 

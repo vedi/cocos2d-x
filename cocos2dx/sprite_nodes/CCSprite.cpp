@@ -222,6 +222,7 @@ bool CCSprite::initWithFile(const char *pszFilename)
     {
         CCRect rect = CCRectZero;
         rect.size = pTexture->getContentSize();
+        setSpriteImageName(pszFilename);
         return initWithTexture(pTexture, rect);
     }
 
