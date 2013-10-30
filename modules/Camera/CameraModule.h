@@ -11,8 +11,10 @@
 
 #include "cocos2d.h"
 
+#define CAMERA_MODULE_CALLBACK "onPhotoWasTaken"
 
-class CameraModule {
+
+class CameraModule : public cocos2d::CCObject {
 public:
     static void getPhoto();
     static void getPhotoFromGallery();

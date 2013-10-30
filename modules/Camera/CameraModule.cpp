@@ -18,13 +18,13 @@ cocos2d::CCObject *CameraModule::callNative(cocos2d::CCDictionary *pDictionary) 
 void CameraModule::getPhoto() {
     CCDictionary *params = CCDictionary::create();
     params->setObject(CCString::create("getPhoto"), "method");
-    params->setObject(CCString::create("imagesPath"), CCFileUtils::sharedFileUtils()->getWritablePath() + "pictures");
+    params->setObject(CCString::create(CCFileUtils::sharedFileUtils()->getWritablePath()), "imagesPath");
     callNative(params);
 }
 
 void CameraModule::getPhotoFromGallery() {
     CCDictionary *params = CCDictionary::create();
     params->setObject(CCString::create("getPhotoFromGallery"), "method");
-    params->setObject(CCString::create("imagesPath"), CCFileUtils::sharedFileUtils()->getWritablePath() + "pictures");
+    params->setObject(CCString::create(CCFileUtils::sharedFileUtils()->getWritablePath().c_str()), "imagesPath");
     callNative(params);
 }
