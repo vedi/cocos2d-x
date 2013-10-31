@@ -53,9 +53,7 @@
         [rooViewController presentModalViewController:picker animated:YES];
         //TODO implement gallery work here
         CCLOG("Gallery work");
-       // NSString *key = [NSString stringWithUTF8String:"onPhotoWasTaken"];
-       // NSDictionary *params = [NSDictionary ]  // only one parameter for dict string with key "photoFileName"
-        //[IOsCameraBridge dispatchNDKCallback:key withParameters:params];
+       
     }
     else {
         NSLog(@"Unsupported method %@", methodName);
