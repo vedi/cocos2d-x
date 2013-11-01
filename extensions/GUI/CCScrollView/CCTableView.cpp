@@ -256,9 +256,9 @@ CCTableViewCell *CCTableView::dequeueCell()
     if (m_pCellsFreed->count() == 0) {
         cell = NULL;
     } else {
-        cell = (CCTableViewCell*)m_pCellsFreed->objectAtIndex(0);
+        cell = (CCTableViewCell*)m_pCellsFreed->lastObject();//objectAtIndex(0);
         cell->retain();
-        m_pCellsFreed->removeObjectAtIndex(0);
+        m_pCellsFreed->removeLastObject(true);//removeObjectAtIndex(0);
         cell->autorelease();
     }
     return cell;
