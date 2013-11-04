@@ -47,10 +47,11 @@
         CameraViewController *controller = [[CameraViewController alloc] init];
         //[controller setImagesPath:imagesPath];
         controller.imagesPath = imagesPath;
+        RootViewController *rooViewController = ((AppController *)[UIApplication sharedApplication].delegate).viewController;
         picker.delegate = controller;
         picker.allowsEditing = YES;
-        RootViewController *rooViewController = ((AppController *)[UIApplication sharedApplication].delegate).viewController;
-        [rooViewController presentModalViewController:picker animated:YES];
+
+        [rooViewController presentViewController:picker animated:YES completion:nil];
         //TODO implement gallery work here
         CCLOG("Gallery work");
        
