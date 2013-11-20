@@ -68,6 +68,7 @@ public:
 
     virtual std::string getAppID();
 
+    virtual bool canOpenURL(char const* url);
     virtual void openURL(char const* url);
 protected:
     static CCApplication * sm_pSharedApplication;

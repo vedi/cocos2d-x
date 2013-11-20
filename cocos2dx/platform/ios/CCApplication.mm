@@ -139,6 +139,13 @@ std::string CCApplication::getAppID() {
     return [[[NSBundle mainBundle] bundleIdentifier] UTF8String];
 }
 
+bool CCApplication::canOpenURL(char const *url) {
+    NSString *urlAddress = [[NSString stringWithUTF8String:url]
+            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *nsUrl = [NSURL URLWithString:urlAddress];
+    return [[UIApplication sharedApplication] canOpenURL:nsUrl];
+}
+
 void CCApplication::openURL(char const* url) {
     NSString *urlAddress = [[NSString stringWithUTF8String:url]
             stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
