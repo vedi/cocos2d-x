@@ -39,7 +39,10 @@ class CC_DLL CCTouch : public CCObject
 {
     CC_SYNTHESIZE(bool, mProceeded, Proceeded)
 public:
-    CCTouch() 
+    /**
+     * @js ctor
+     */
+    CCTouch()
         : m_nId(0),
         m_startPointCaptured(false),
         mProceeded(false)
@@ -72,7 +75,9 @@ public:
             m_startPointCaptured = true;
         }
     }
-
+    /**
+     *  @js getId
+     */
     int getID() const
     {
         return m_nId;

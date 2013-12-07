@@ -107,16 +107,11 @@ CCBReader::CCBReader(CCBReader * pCCBReader)
     this->mCCBSelectorResolver = pCCBReader->mCCBSelectorResolver;
     this->mCCNodeLoaderListener = pCCBReader->mCCNodeLoaderListener;
 
-    this->mOwnerCallbackNames = pCCBReader->mOwnerCallbackNames;
-    this->mOwnerCallbackNodes = pCCBReader->mOwnerCallbackNodes;
-    this->mOwnerCallbackNodes->retain();
-    this->mOwnerOutletNames = pCCBReader->mOwnerOutletNames;
-    this->mOwnerOutletNodes = pCCBReader->mOwnerOutletNodes;
-
     this->m_sCCBResourcePrefix = pCCBReader->m_sCCBResourcePrefix;
     this->m_sCCBResourcePostfix = pCCBReader->m_sCCBResourcePostfix;
 
-    this->mOwnerOutletNodes->retain();
+    this->mCCBRootPath = pCCBReader->getCCBRootPath();
+
     init();
 }
 
@@ -134,7 +129,6 @@ CCBReader::CCBReader()
 , mCCBSelectorResolver(NULL)
 , mNodesWithAnimationManagers(NULL)
 , mAnimationManagersForNodes(NULL)
-, hasScriptingOwner(false)
 {
     init();
 }
@@ -149,7 +143,7 @@ CCBReader::~CCBReader() {
     mOwnerOutletNames.clear();
     CC_SAFE_RELEASE(mOwnerCallbackNodes);
     mOwnerCallbackNames.clear();
-
+    CC_SAFE_RELEASE(mOwnerOwnerCallbackControlEvents);
     // Clear string cache.
 
     this->mStringCache.clear();
@@ -172,6 +166,9 @@ const std::string& CCBReader::getCCBRootPath() const
 
 bool CCBReader::init()
 {
+    mOwnerOutletNodes = new CCArray();
+    mOwnerCallbackNodes = new CCArray();
+    mOwnerOwnerCallbackControlEvents = new CCArray();
     // Setup action manager
     CCBAnimationManager *pActionManager = new CCBAnimationManager();
     setAnimationManager(pActionManager);
@@ -283,9 +280,7 @@ CCNode* CCBReader::readNodeGraphFromData(CCData *pData, CCObject *pOwner, const 
     CC_SAFE_RETAIN(mOwner);
 
     mActionManager->setRootContainerSize(parentSize);
-    mActionManager->mOwner = mOwner;
-    mOwnerOutletNodes = new CCArray();
-    mOwnerCallbackNodes = new CCArray();
+    mActionManager->mOwner = mOwner;  
     
     CCDictionary* animationManagers = CCDictionary::create();
     CCNode *pNodeGraph = readFileWithCleanUp(true, animationManagers);
@@ -997,7 +992,7 @@ bool CCBReader::isJSControlled() {
     return jsControlled;
 }
 
-void CCBReader::addOwnerCallbackName(std::string name) {
+void CCBReader::addOwnerCallbackName(const std::string& name) {
     mOwnerCallbackNames.push_back(name);
 }
 
@@ -1005,8 +1000,12 @@ void CCBReader::addOwnerCallbackNode(CCNode *node) {
     mOwnerCallbackNodes->addObject(node);
 }
 
+void CCBReader::addOwnerCallbackControlEvents(CCControlEvent type)
+{
+    mOwnerOwnerCallbackControlEvents->addObject(CCInteger::create((int)type));
+}
 
-void CCBReader::addDocumentCallbackName(std::string name) {
+void CCBReader::addDocumentCallbackName(const std::string& name) {
     mActionManager->addDocumentCallbackName(name);
 }
 
@@ -1014,6 +1013,10 @@ void CCBReader::addDocumentCallbackNode(CCNode *node) {
     mActionManager->addDocumentCallbackNode(node);
 }
 
+void CCBReader::addDocumentCallbackControlEvents(CCControlEvent eventType)
+{
+    mActionManager->addDocumentCallbackControlEvents(eventType);
+}
 
 CCArray* CCBReader::getOwnerCallbackNames() {
     CCArray* pRet = CCArray::createWithCapacity(mOwnerCallbackNames.size());
@@ -1028,6 +1031,11 @@ CCArray* CCBReader::getOwnerCallbackNames() {
 
 CCArray* CCBReader::getOwnerCallbackNodes() {
     return mOwnerCallbackNodes;
+}
+
+CCArray* CCBReader::getOwnerCallbackControlEvents()
+{
+    return mOwnerOwnerCallbackControlEvents;
 }
 
 CCArray* CCBReader::getOwnerOutletNames() {
@@ -1101,7 +1109,7 @@ void CCBReader::addOwnerOutletName(std::string name)
 }
 void CCBReader::addOwnerOutletNode(CCNode *node)
 {
-    if (NULL != node)
+    if (NULL == node)
         return;
     
     mOwnerOutletNodes->addObject(node);
