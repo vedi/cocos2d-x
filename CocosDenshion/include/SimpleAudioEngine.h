@@ -104,7 +104,10 @@ public:
     @param bLoop Whether the background music loop or not
     @js playMusic
     */
-    void playBackgroundMusic(const char* pszFilePath, bool bLoop);
+    void playBackgroundMusic(const char* pszFilePath, bool bLoop) {
+        this->playSound(pszFilePath, bLoop, 0);
+    };
+
     /**
      @js playMusic
      */
@@ -117,7 +120,10 @@ public:
     @param bReleaseData If release the background music data or not.As default value is false
     @js stopMusic
     */
-    void stopBackgroundMusic(bool bReleaseData);
+    void stopBackgroundMusic(bool bReleaseData) {
+        this->stopSound(bReleaseData, 0);
+    };
+
     /**
      @js stopMusic
      */
@@ -145,11 +151,16 @@ public:
     @brief Rewind playing background music
     @js rewindMusic
     */
-    void rewindBackgroundMusic();
+    void rewindBackgroundMusic() {
+        this->rewindSound(0);
+    }
+
     /**
      *  @js willPlayMusic
      */
-    bool willPlayBackgroundMusic();
+    bool willPlayBackgroundMusic() {
+        return this->willPlaySound();
+    }
 
     /**
     @brief Whether the background music is playing

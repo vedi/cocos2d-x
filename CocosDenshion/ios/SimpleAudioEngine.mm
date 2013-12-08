@@ -80,7 +80,7 @@ static void static_setSoundVolume(float volume, unsigned int channelNum)
     volume = MAX( MIN(volume, 1.0), 0 );
     [[SimpleAudioEngine sharedEngine] setSoundVolume:volume atChannelNum: channelNum];
 }
-     
+
 static float static_getSoundDuration(char const *pszFilePath, unsigned int channelNum) {
     return [[SimpleAudioEngine sharedEngine] getSoundDuration:[NSString stringWithUTF8String:pszFilePath] atChannelNum: channelNum];
 }
