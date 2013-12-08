@@ -107,6 +107,16 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    char *language, *country;
+	locale_get(&language, &country);
+	strncpy(code,language,2);
+    code[2]='\0';
+    return code;
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
 	ccLanguageType ret_language = kLanguageEnglish;

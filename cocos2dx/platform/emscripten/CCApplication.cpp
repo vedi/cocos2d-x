@@ -99,6 +99,11 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    return "en";
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
     return kLanguageEnglish;

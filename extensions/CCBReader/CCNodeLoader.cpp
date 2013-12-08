@@ -139,12 +139,11 @@ void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader *
             }
             case kCCBPropTypeScaleLock: 
             {
-                float * scaleLock = this->parsePropTypeScaleLock(pNode, pParent, pCCBReader, propertyName.c_str());
+                ScaleLock scaleLock = this->parsePropTypeScaleLock(pNode, pParent, pCCBReader, propertyName.c_str());
                 if(setProp) 
                 {
                     this->onHandlePropTypeScaleLock(pNode, pParent, propertyName.c_str(), scaleLock, pCCBReader);
                 }
-                CC_SAFE_DELETE_ARRAY(scaleLock);
                 break;
             }
             case kCCBPropTypeFloat: 
@@ -460,7 +459,7 @@ float * CCNodeLoader::parsePropTypeFloatXY(CCNode * pNode, CCNode * pParent, CCB
     return floatXY;
 }
 
-float * CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
+ScaleLock CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
     float x = pCCBReader->readFloat();
     float y = pCCBReader->readFloat();
     
@@ -483,9 +482,10 @@ float * CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, C
         y *= pCCBReader->getResolutionScale();
     }
     
-    float * scaleLock = new float[2];
-    scaleLock[0] = x;
-    scaleLock[1] = y;
+    ScaleLock scaleLock;
+    scaleLock.xScale = x;
+    scaleLock.yScale = y;
+    scaleLock.lock = type;
 
     return scaleLock;
 }
@@ -773,12 +773,12 @@ BlockData * CCNodeLoader::parsePropTypeBlock(CCNode * pNode, CCNode * pParent, C
                     CCBSelectorResolver * targetAsCCBSelectorResolver = dynamic_cast<CCBSelectorResolver *>(target);
                     
                     if(targetAsCCBSelectorResolver != NULL) {
-                        selMenuHandler = targetAsCCBSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str());
+                        selMenuHandler = targetAsCCBSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str(),pNode);
                     }
                     if(selMenuHandler == 0) {
                         CCBSelectorResolver * ccbSelectorResolver = pCCBReader->getCCBSelectorResolver();
                         if(ccbSelectorResolver != NULL) {
-                            selMenuHandler = ccbSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str());
+                            selMenuHandler = ccbSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str(),pNode);
                         }
                     }
                     
@@ -838,12 +838,12 @@ BlockCCControlData * CCNodeLoader::parsePropTypeBlockCCControl(CCNode * pNode, C
                     CCBSelectorResolver * targetAsCCBSelectorResolver = dynamic_cast<CCBSelectorResolver *>(target);
                     
                     if(targetAsCCBSelectorResolver != NULL) {
-                        selCCControlHandler = targetAsCCBSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str());
+                        selCCControlHandler = targetAsCCBSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str(), pNode);
                     }
                     if(selCCControlHandler == 0) {
                         CCBSelectorResolver * ccbSelectorResolver = pCCBReader->getCCBSelectorResolver();
                         if(ccbSelectorResolver != NULL) {
-                            selCCControlHandler = ccbSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str());
+                            selCCControlHandler = ccbSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str(), pNode);
                         }
                     }
                     
@@ -1007,10 +1007,10 @@ void CCNodeLoader::onHandlePropTypeFloatXY(CCNode * pNode, CCNode * pParent, con
 }
 
 
-void CCNodeLoader::onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float * pScaleLock, CCBReader * pCCBReader) {
+void CCNodeLoader::onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, ScaleLock pScaleLock, CCBReader * pCCBReader) {
     if(strcmp(pPropertyName, PROPERTY_SCALE) == 0) {
-        pNode->setScaleX(pScaleLock[0]);
-        pNode->setScaleY(pScaleLock[1]);
+        pNode->setScaleX(pScaleLock.xScale);
+        pNode->setScaleY(pScaleLock.yScale);
     } else {
         ASSERT_FAIL_UNEXPECTED_PROPERTY(pPropertyName);
     }

@@ -163,6 +163,19 @@ public:
      * Provided to make scroll view compatible with SWLayer's resume method
      */
     void resume(CCObject* sender);
+    /**
+     * Reset scroll position
+     */
+    virtual void reset() {
+        if (m_eDirection == kCCScrollViewDirectionHorizontal)
+            m_pContainer->setPosition(ccp(0, m_pContainer->getPosition().y));
+        if (m_eDirection == kCCScrollViewDirectionVertical)
+            m_pContainer->setPosition(ccp(m_pContainer->getPosition().x, 0));
+    }
+    /**
+     * Stop scroll moving
+     */
+    virtual void stopMoving() { m_tScrollDistance = CCPointZero; }
 
 
     bool isDragging() {return m_bDragging;}

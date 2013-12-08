@@ -3,13 +3,13 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-SEL_MenuHandler TestHeaderLayer::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName) {
+SEL_MenuHandler TestHeaderLayer::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName, CCNode* pNode) {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBackClicked", TestHeaderLayer::onBackClicked);
 
     return NULL;    
 }
 
-SEL_CCControlHandler TestHeaderLayer::onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName) {
+SEL_CCControlHandler TestHeaderLayer::onResolveCCBCCControlSelector(CCObject * pTarget, const char * pSelectorName, CCNode* pNode) {
 
     return NULL;
 }

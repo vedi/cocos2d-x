@@ -89,6 +89,9 @@ public:
     /** Whether or not PVR Texture Compressed is supported */
 	bool supportsPVRTC(void) const;
 
+    /** Whether or not ericsson Texture Compressed is supported */
+	bool supportsETC(void) const;
+
     /** Whether or not BGRA8888 textures are supported.
      @since v0.99.2
      */
@@ -145,6 +148,7 @@ protected:
     GLint           m_nMaxTextureSize;
     GLint           m_nMaxModelviewStackDepth;
     bool            m_bSupportsPVRTC;
+    bool            m_bSupportsETC;
     bool            m_bSupportsNPOT;
     bool            m_bSupportsBGRA8888;
     bool            m_bSupportsDiscardFramebuffer;

@@ -70,6 +70,12 @@ public:
     virtual ccLanguageType getCurrentLanguage();
     
     /**
+     @brief Get current language iso 639-1 code
+     @return Current language iso 639-1 code
+     */
+    virtual const char * getCurrentLanguageCode();
+    
+    /**
      @brief Get target platform
      */
     virtual TargetPlatform getTargetPlatform();

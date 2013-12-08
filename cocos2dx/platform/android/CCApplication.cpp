@@ -57,8 +57,16 @@ void CCApplication::setAnimationInterval(double interval)
 //////////////////////////////////////////////////////////////////////////
 CCApplication* CCApplication::sharedApplication()
 {
-    CCAssert(sm_pSharedApplication, "");
+    //CCAssert(sm_pSharedApplication, "");
     return sm_pSharedApplication;
+}
+
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    strncpy(code,getCurrentLanguageJNI().c_str(),2);
+    code[2]='\0';
+    return code;
 }
 
 ccLanguageType CCApplication::getCurrentLanguage()

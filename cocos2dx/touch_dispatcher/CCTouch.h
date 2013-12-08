@@ -72,6 +72,7 @@ public:
         if (!m_startPointCaptured)
         {
             m_startPoint = m_point;
+            m_prevPoint = m_point;
             m_startPointCaptured = true;
         }
     }
@@ -93,6 +94,12 @@ private:
 
 class CC_DLL CCEvent : public CCObject
 {
+public:
+    CCEvent():_allTouches(NULL){}
+    void setAllTouches(CCSet *value) {_allTouches=value;}
+    CCSet *getAllTouches() const { return _allTouches; }
+private:
+    CCSet *_allTouches;
 };
 
 // end of input group

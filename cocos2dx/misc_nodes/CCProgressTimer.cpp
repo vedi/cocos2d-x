@@ -85,7 +85,10 @@ bool CCProgressTimer::initWithSprite(CCSprite* sp)
     setBarChangeRate(ccp(1,1));
     setSprite(sp);
     // shader program
-    setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
+    if(sp)
+        setShaderProgram(sp->getShaderProgram());
+    else
+        setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
     return true;
 }
 
@@ -111,7 +114,14 @@ void CCProgressTimer::setSprite(CCSprite *pSprite)
         CC_SAFE_RETAIN(pSprite);
         CC_SAFE_RELEASE(m_pSprite);
         m_pSprite = pSprite;
-        setContentSize(m_pSprite->getContentSize());
+        
+        if(m_pSprite)
+        {
+            setShaderProgram(m_pSprite->getShaderProgram());
+            setContentSize(m_pSprite->getContentSize());
+        }
+        else
+            setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
 
         //    Every time we set a new sprite, we free the current vertex data
         if (m_pVertexData)
@@ -119,6 +129,7 @@ void CCProgressTimer::setSprite(CCSprite *pSprite)
             CC_SAFE_FREE(m_pVertexData);
             m_nVertexDataCount = 0;
         }
+        updateProgress();
     }        
 }
 
@@ -135,6 +146,7 @@ void CCProgressTimer::setType(CCProgressTimerType type)
         }
 
         m_eType = type;
+        updateProgress();
     }
 }
 
@@ -146,6 +158,7 @@ void CCProgressTimer::setReverseProgress(bool reverse)
         //    release all previous information
         CC_SAFE_FREE(m_pVertexData);
         m_nVertexDataCount = 0;
+        updateProgress();
     }
 }
 
@@ -250,6 +263,18 @@ CCPoint CCProgressTimer::getMidpoint(void)
 void CCProgressTimer::setMidpoint(CCPoint midPoint)
 {
     m_tMidpoint = ccpClamp(midPoint, CCPointZero, ccp(1,1));
+    updateProgress();
+}
+
+void CCProgressTimer::setBarChangeRate(cocos2d::CCPoint var)
+{
+    m_tBarChangeRate = var;
+    updateProgress();
+}
+
+CCPoint CCProgressTimer::getBarChangeRate()
+{
+    return m_tBarChangeRate;
 }
 
 ///

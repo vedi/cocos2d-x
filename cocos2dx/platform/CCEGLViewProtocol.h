@@ -176,6 +176,7 @@ public:
     float getScaleY() const;
 private:
     void getSetOfTouchesEndOrCancel(CCSet& set, int num, int ids[], float xs[], float ys[]);
+    void getCurrentSetOfTouches(CCSet& set);
 
 protected:
     EGLTouchDelegate* m_pDelegate;

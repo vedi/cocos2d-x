@@ -136,6 +136,15 @@ CCApplication* CCApplication::sharedApplication()	// MH Cocos2dx CCDirector clas
 	return sm_pSharedApplication;					// MH Cocos2dx CCDirector class expects this to return a pointer and not a reference
 }
 
+
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    strncpy(code,s3eDeviceGetString(S3E_DEVICE_LOCALE),2);
+    code[2]='\0';
+    return code;
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
 	int nLanguageIdx;

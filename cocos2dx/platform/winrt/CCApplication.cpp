@@ -142,6 +142,24 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    wchar_t localeName[LOCALE_NAME_MAX_LENGTH] = {0};
+    
+    if (GetUserDefaultLocaleName(localeName, LOCALE_NAME_MAX_LENGTH))
+    {
+        static char code[3]={0};
+        code[0] = static_cast<char>(localeName[0]);
+        code[0] = static_cast<char>(localeName[1]);
+        code[2]='\0';
+        return code;
+    }
+    else
+    {
+        return "en";
+    }
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
     ccLanguageType ret = kLanguageEnglish;

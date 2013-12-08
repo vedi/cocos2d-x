@@ -12,12 +12,12 @@ AnimationsTestLayer::~AnimationsTestLayer()
     CC_SAFE_RELEASE_NULL(mAnimationManager);
 }
 
-SEL_MenuHandler AnimationsTestLayer::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName)
+SEL_MenuHandler AnimationsTestLayer::onResolveCCBCCMenuItemSelector(CCObject * pTarget, const char * pSelectorName, CCNode* pNode)
 {
     return NULL;
 }
 
-SEL_CCControlHandler AnimationsTestLayer::onResolveCCBCCControlSelector(CCObject *pTarget, const char*pSelectorName) {
+SEL_CCControlHandler AnimationsTestLayer::onResolveCCBCCControlSelector(CCObject *pTarget, const char*pSelectorName, CCNode* pNode) {
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "onCCControlButtonIdleClicked", AnimationsTestLayer::onCCControlButtonIdleClicked);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "onCCControlButtonWaveClicked", AnimationsTestLayer::onCCControlButtonWaveClicked);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "onCCControlButtonJumpClicked", AnimationsTestLayer::onCCControlButtonJumpClicked);

@@ -44,6 +44,7 @@ CCConfiguration::CCConfiguration(void)
 : m_nMaxTextureSize(0) 
 , m_nMaxModelviewStackDepth(0)
 , m_bSupportsPVRTC(false)
+, m_bSupportsETC(false)
 , m_bSupportsNPOT(false)
 , m_bSupportsBGRA8888(false)
 , m_bSupportsDiscardFramebuffer(false)
@@ -128,6 +129,9 @@ void CCConfiguration::gatherGPUInfo()
     m_bSupportsPVRTC = checkForGLExtension("GL_IMG_texture_compression_pvrtc");
 	m_pValueDict->setObject( CCBool::create(m_bSupportsPVRTC), "gl.supports_PVRTC");
 
+    m_bSupportsETC = checkForGLExtension("GL_OES_compressed_ETC1_RGB8_texture");
+	m_pValueDict->setObject( CCBool::create(m_bSupportsETC), "gl.supports_ETC");
+
     m_bSupportsNPOT = true;
 	m_pValueDict->setObject( CCBool::create(m_bSupportsNPOT), "gl.supports_NPOT");
 	
@@ -200,6 +204,11 @@ bool CCConfiguration::supportsNPOT(void) const
 bool CCConfiguration::supportsPVRTC(void) const
 {
 	return m_bSupportsPVRTC;
+}
+
+bool CCConfiguration::supportsETC(void) const
+{
+	return m_bSupportsETC;
 }
 
 bool CCConfiguration::supportsBGRA8888(void) const

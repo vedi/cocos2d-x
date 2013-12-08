@@ -36,6 +36,8 @@ NS_CC_BEGIN
 #define SHADER_PROGRAM kCCShader_PositionTextureA8Color
 #endif
 
+CCDictionary CCLabelTTF::_textCash;
+
 //
 //CCLabelTTF
 //
@@ -48,12 +50,23 @@ CCLabelTTF::CCLabelTTF()
 , m_shadowEnabled(false)
 , m_strokeEnabled(false)
 , m_textFillColor(ccWHITE)
+, m_bDirty(true)
 {
 }
 
 CCLabelTTF::~CCLabelTTF()
 {
     CC_SAFE_DELETE(m_pFontName);
+    if(!m_oldKey.empty())
+    {
+        this->setTexture(NULL);
+        CCObject *obj=_textCash.objectForKey(m_oldKey);
+        if(obj)
+        {
+            if(obj->retainCount()==1)
+                _textCash.removeObjectForKey(m_oldKey);
+        }
+    }
 }
 
 CCLabelTTF * CCLabelTTF::create()
@@ -179,7 +192,8 @@ void CCLabelTTF::setString(const char *string)
     {
         m_string = string;
         
-        this->updateTexture();
+        //this->updateTexture();
+        m_bDirty = true;
     }
 }
 
@@ -207,7 +221,8 @@ void CCLabelTTF::setHorizontalAlignment(CCTextAlignment alignment)
         // Force update
         if (m_string.size() > 0)
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     }
 }
@@ -226,7 +241,8 @@ void CCLabelTTF::setVerticalAlignment(CCVerticalTextAlignment verticalAlignment)
         // Force update
         if (m_string.size() > 0)
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     }
 }
@@ -245,7 +261,8 @@ void CCLabelTTF::setDimensions(const CCSize &dim)
         // Force update
         if (m_string.size() > 0)
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     }
 }
@@ -264,7 +281,8 @@ void CCLabelTTF::setFontSize(float fontSize)
         // Force update
         if (m_string.size() > 0)
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     }
 }
@@ -284,35 +302,66 @@ void CCLabelTTF::setFontName(const char *fontName)
         // Force update
         if (m_string.size() > 0)
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     }
+}
+
+std::string CCLabelTTF::makeKeyString(const ccFontDefinition &textDef)
+{
+    char buff[512];
+    snprintf(buff, 512, "%s_%d_%f_%f_%d_%d",textDef.m_fontName.c_str(),textDef.m_fontSize,textDef.m_dimensions.width,textDef.m_dimensions.height,(int)textDef.m_alignment,(int)textDef.m_vertAlignment);
+    return buff + m_string;
+}
+
+void CCLabelTTF::visit()
+{
+    if(!m_bVisible)
+    {
+        return;
+        }
+    if(m_bDirty)
+    {
+        this->updateTexture();
+    }
+    CCSprite::visit();
 }
 
 // Helper
 bool CCLabelTTF::updateTexture()
 {
-    CCTexture2D *tex;
-    tex = new CCTexture2D();
+    m_bDirty = false;
+    ccFontDefinition texDef = _prepareTextDefinition(true);
+    std::string keyString = makeKeyString(texDef);
+    CCTexture2D *tex = (CCTexture2D*)_textCash.objectForKey(keyString);
+    if(tex)
+    {
+        tex->retain();
+    }
+    else
+    {
+        tex = new CCTexture2D();
     
-    if (!tex)
-        return false;
+        if (!tex)
+            return false;
     
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) || (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        
+            tex->initWithString( m_string.c_str(), &texDef );
     
-        ccFontDefinition texDef = _prepareTextDefinition(true);
-        tex->initWithString( m_string.c_str(), &texDef );
+        #else
     
-    #else
+            tex->initWithString( m_string.c_str(),
+                                m_pFontName->c_str(),
+                                m_fFontSize * CC_CONTENT_SCALE_FACTOR(),
+                                CC_SIZE_POINTS_TO_PIXELS(m_tDimensions),
+                                m_hAlignment,
+                                m_vAlignment);
     
-        tex->initWithString( m_string.c_str(),
-                            m_pFontName->c_str(),
-                            m_fFontSize * CC_CONTENT_SCALE_FACTOR(),
-                            CC_SIZE_POINTS_TO_PIXELS(m_tDimensions),
-                            m_hAlignment,
-                            m_vAlignment);
-    
-    #endif
+        #endif
+        _textCash.setObject(tex,keyString);
+    }
     
     // set the texture
     this->setTexture(tex);
@@ -323,6 +372,18 @@ bool CCLabelTTF::updateTexture()
     CCRect rect =CCRectZero;
     rect.size   = m_pobTexture->getContentSize();
     this->setTextureRect(rect);
+    
+    if(!m_oldKey.empty())
+    {
+        CCObject *obj=_textCash.objectForKey(m_oldKey);
+        if(obj)
+        {
+            if(obj->retainCount()==1)
+                _textCash.removeObjectForKey(m_oldKey);
+        }
+    }
+    
+    m_oldKey = keyString;
     
     //ok
     return true;
@@ -363,7 +424,8 @@ void CCLabelTTF::enableShadow(const CCSize &shadowOffset, float shadowOpacity, f
         
         if ( valueChanged && updateTexture )
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     
     #else
@@ -381,7 +443,8 @@ void CCLabelTTF::disableShadow(bool updateTexture)
             m_shadowEnabled = false;
     
             if (updateTexture)
-                this->updateTexture();
+                //this->updateTexture();
+                m_bDirty = true;
             
         }
     
@@ -416,7 +479,8 @@ void CCLabelTTF::enableStroke(const ccColor3B &strokeColor, float strokeSize, bo
         
         if ( valueChanged && updateTexture )
         {
-            this->updateTexture();
+            //this->updateTexture();
+            m_bDirty = true;
         }
     
     #else
@@ -434,7 +498,8 @@ void CCLabelTTF::disableStroke(bool updateTexture)
             m_strokeEnabled = false;
             
             if (updateTexture)
-                this->updateTexture();
+                //this->updateTexture();
+                m_bDirty = true;
         }
     
     #else
@@ -451,7 +516,8 @@ void CCLabelTTF::setFontFillColor(const ccColor3B &tintColor, bool updateTexture
             m_textFillColor = tintColor;
             
             if (updateTexture)
-                this->updateTexture();
+                //this->updateTexture();
+                m_bDirty = true;
         }
     #else
         CCLOGERROR("Currently only supported on iOS and Android!");
@@ -499,7 +565,8 @@ void CCLabelTTF::_updateWithTextDefinition(ccFontDefinition & textDefinition, bo
     setFontFillColor(textDefinition.m_fontFillColor, false);
     
     if (mustUpdateTexture)
-        updateTexture();
+        //updateTexture();
+        m_bDirty = true;
 }
 
 ccFontDefinition CCLabelTTF::_prepareTextDefinition(bool adjustForResolution)

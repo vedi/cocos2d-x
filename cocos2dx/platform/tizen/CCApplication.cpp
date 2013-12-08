@@ -78,6 +78,13 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    //to do
+    return "en";
+}
+
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
     result r = E_SUCCESS;
