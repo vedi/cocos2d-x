@@ -413,7 +413,7 @@ const CCSize& CCNode::getContentSize() const
 }
 
 const CCSize CCNode::getScaledContentSize() const {
-    return ccpCompMult(m_obContentSize, ccp(m_fScaleX, m_fScaleY));
+    return ccpCompMult(getContentSize(), ccp(m_fScaleX, m_fScaleY));
 }
 
 

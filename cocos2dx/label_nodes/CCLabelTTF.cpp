@@ -188,11 +188,8 @@ void CCLabelTTF::setString(const char *string)
 {
     CCAssert(string != NULL, "Invalid string");
     
-    if (m_string.compare(string))
-    {
+    if (m_string.compare(string)) {
         m_string = string;
-        
-        //this->updateTexture();
         m_bDirty = true;
     }
 }
@@ -219,9 +216,7 @@ void CCLabelTTF::setHorizontalAlignment(CCTextAlignment alignment)
         m_hAlignment = alignment;
         
         // Force update
-        if (m_string.size() > 0)
-        {
-            //this->updateTexture();
+        if (m_string.size() > 0) {
             m_bDirty = true;
         }
     }
@@ -239,9 +234,7 @@ void CCLabelTTF::setVerticalAlignment(CCVerticalTextAlignment verticalAlignment)
         m_vAlignment = verticalAlignment;
         
         // Force update
-        if (m_string.size() > 0)
-        {
-            //this->updateTexture();
+        if (m_string.size() > 0) {
             m_bDirty = true;
         }
     }
@@ -259,9 +252,7 @@ void CCLabelTTF::setDimensions(const CCSize &dim)
         m_tDimensions = dim;
         
         // Force update
-        if (m_string.size() > 0)
-        {
-            //this->updateTexture();
+        if (m_string.size() > 0) {
             m_bDirty = true;
         }
     }
@@ -279,9 +270,7 @@ void CCLabelTTF::setFontSize(float fontSize)
         m_fFontSize = fontSize;
         
         // Force update
-        if (m_string.size() > 0)
-        {
-            //this->updateTexture();
+        if (m_string.size() > 0) {
             m_bDirty = true;
         }
     }
@@ -300,9 +289,7 @@ void CCLabelTTF::setFontName(const char *fontName)
         m_pFontName = new std::string(fontName);
         
         // Force update
-        if (m_string.size() > 0)
-        {
-            //this->updateTexture();
+        if (m_string.size() > 0) {
             m_bDirty = true;
         }
     }
@@ -422,9 +409,7 @@ void CCLabelTTF::enableShadow(const CCSize &shadowOffset, float shadowOpacity, f
         }
         
         
-        if ( valueChanged && updateTexture )
-        {
-            //this->updateTexture();
+        if ( valueChanged && updateTexture ) {
             m_bDirty = true;
         }
     
@@ -442,9 +427,9 @@ void CCLabelTTF::disableShadow(bool updateTexture)
         {
             m_shadowEnabled = false;
     
-            if (updateTexture)
-                //this->updateTexture();
+            if (updateTexture) {
                 m_bDirty = true;
+            }
             
         }
     
@@ -477,9 +462,7 @@ void CCLabelTTF::enableStroke(const ccColor3B &strokeColor, float strokeSize, bo
             valueChanged = true;
         }
         
-        if ( valueChanged && updateTexture )
-        {
-            //this->updateTexture();
+        if ( valueChanged && updateTexture ) {
             m_bDirty = true;
         }
     
@@ -497,9 +480,9 @@ void CCLabelTTF::disableStroke(bool updateTexture)
         {
             m_strokeEnabled = false;
             
-            if (updateTexture)
-                //this->updateTexture();
+            if (updateTexture) {
                 m_bDirty = true;
+            }
         }
     
     #else
@@ -515,9 +498,9 @@ void CCLabelTTF::setFontFillColor(const ccColor3B &tintColor, bool updateTexture
         {
             m_textFillColor = tintColor;
             
-            if (updateTexture)
-                //this->updateTexture();
+            if (updateTexture) {
                 m_bDirty = true;
+            }
         }
     #else
         CCLOGERROR("Currently only supported on iOS and Android!");
@@ -564,9 +547,9 @@ void CCLabelTTF::_updateWithTextDefinition(ccFontDefinition & textDefinition, bo
     // fill color
     setFontFillColor(textDefinition.m_fontFillColor, false);
     
-    if (mustUpdateTexture)
-        //updateTexture();
+    if (mustUpdateTexture) {
         m_bDirty = true;
+    }
 }
 
 ccFontDefinition CCLabelTTF::_prepareTextDefinition(bool adjustForResolution)
@@ -630,5 +613,13 @@ ccFontDefinition CCLabelTTF::_prepareTextDefinition(bool adjustForResolution)
     
     return texDef;
 }
+
+const CCSize &CCLabelTTF::getContentSize() {
+    if (m_bDirty) {
+        this->updateTexture();
+    }
+    return CCNode::getContentSize();
+}
+
 
 NS_CC_END

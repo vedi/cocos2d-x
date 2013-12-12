@@ -165,7 +165,9 @@ public:
     virtual void visit();
     
     bool updateTexture();
-    
+
+    virtual const CCSize &getContentSize();
+
 private:
     static CCDictionary _textCash;
 protected:
