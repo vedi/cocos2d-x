@@ -251,6 +251,7 @@ bool VUtils::adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constr
     float size = initialSize;
     do {
         target->setFontSize(size);
+        target->updateTexture();
         if (target->getTextureRect().size.width <= constraint.width &&
                 target->getTextureRect().size.height <= constraint.height) {
             return true;
