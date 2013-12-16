@@ -27,6 +27,7 @@ class CCLabelTTFLoader : public CCNodeLoader {
         virtual void onHandlePropTypeFloatScale(CCNode * pNode, CCNode * pParent, const char * pPropertyName, float pFloatScale, CCBReader * pCCBReader);
         virtual void onHandlePropTypeIntegerLabeled(CCNode * pNode, CCNode * pParent, const char * pPropertyName, int pIntegerLabeled, CCBReader * pCCBReader);
         virtual void onHandlePropTypeSize(CCNode * pNode, CCNode * pParent, const char * pPropertyName, CCSize pSize, CCBReader * pCCBReader);
+        virtual void onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent);
 };
 
 NS_CC_EXT_END

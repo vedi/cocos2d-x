@@ -80,4 +80,9 @@ void CCLabelTTFLoader::onHandlePropTypeSize(CCNode * pNode, CCNode * pParent, co
     }
 }
 
+void CCLabelTTFLoader::onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent)
+{
+    ((CCLabelTTF *)pNode)->updateTexture();
+}
+
 NS_CC_EXT_END

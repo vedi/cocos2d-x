@@ -351,6 +351,7 @@ void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader *
                 break;
         }
     }
+    onHandleFinishPropertiesLoad(pNode,pParent);
 }
 
 CCPoint CCNodeLoader::parsePropTypePosition(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
@@ -1130,6 +1131,9 @@ void CCNodeLoader::onHandlePropTypeBlockCCControl(CCNode * pNode, CCNode * pPare
 
 void CCNodeLoader::onHandlePropTypeCCBFile(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCNode * pCCBFileNode, CCBReader * pCCBReader) {
     ASSERT_FAIL_UNEXPECTED_PROPERTY(pPropertyName);
+}
+
+void CCNodeLoader::onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent){
 }
 
 NS_CC_EXT_END

@@ -124,6 +124,8 @@ class CCNodeLoader : public CCObject {
         virtual void onHandlePropTypeBlock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, BlockData * pBlockData, CCBReader * pCCBReader);
         virtual void onHandlePropTypeBlockCCControl(CCNode * pNode, CCNode * pParent, const char* pPropertyName, BlockCCControlData * pBlockCCControlData, CCBReader * pCCBReader);
         virtual void onHandlePropTypeCCBFile(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCNode * pCCBFileNode, CCBReader * pCCBReader);
+    
+        virtual void onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent);
 
 protected:
         CCDictionary* m_pCustomProperties;
