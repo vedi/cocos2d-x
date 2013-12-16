@@ -165,18 +165,18 @@ public:
     virtual void visit();
     
     bool updateTexture();
-
-    virtual const CCSize &getContentSize();
-
+    
+    const CCSize& getContentSize() const;
+    
 private:
     static CCDictionary _textCash;
 protected:
     
     /** set the text definition for this label */
     void                _updateWithTextDefinition(ccFontDefinition & textDefinition, bool mustUpdateTexture = true);
-    ccFontDefinition    _prepareTextDefinition(bool adjustForResolution = false);
+    ccFontDefinition    _prepareTextDefinition(bool adjustForResolution = false) const;
     
-    std::string makeKeyString(const ccFontDefinition &textDef);
+    std::string makeKeyString(const ccFontDefinition &textDef) const;
     
     /** Dimensions of the label in Points */
     CCSize m_tDimensions;
@@ -190,7 +190,7 @@ protected:
     float m_fFontSize;
     /** label's string */
     std::string m_string;
-    std::string m_oldKey;
+    mutable std::string m_oldKey;
     
     /** font shadow */
     bool    m_shadowEnabled;
