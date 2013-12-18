@@ -932,7 +932,7 @@ CCNode * CCNodeLoader::parsePropTypeCCBFile(CCNode * pNode, CCNode * pParent, CC
     if (ccbFileNode && ccbReader->getAnimationManager()->getAutoPlaySequenceId() != -1)
     {
         // Auto play animations
-        ccbReader->getAnimationManager()->runAnimationsForSequenceIdTweenDuration(ccbReader->getAnimationManager()->getAutoPlaySequenceId(), 0, true);
+        ccbReader->getAnimationManager()->runAnimationsForSequenceIdTweenDuration(ccbReader->getAnimationManager()->getAutoPlaySequenceId(), 0, 0);
     }
     
     if (ccbReader->isJSControlled() && pCCBReader->isJSControlled() && NULL == ccbReader->mOwner)
