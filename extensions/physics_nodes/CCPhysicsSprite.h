@@ -63,7 +63,7 @@ protected:
 public:
     CCPhysicsSprite();
 
-                    ~CCPhysicsSprite();
+                    virtual ~CCPhysicsSprite();
 
     static CCPhysicsSprite* create();
     /** Creates an sprite with a texture.
@@ -129,7 +129,7 @@ public:
     void setPTMRatio(float fPTMRatio);
 #endif // CC_ENABLE_BOX2D_INTEGRATION
 
-protected:
+public:
     void updatePosFromPhysics();
 };
 
