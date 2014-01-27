@@ -35,8 +35,8 @@ static NSDictionary *idDict = nil;
     } withSuccess:^(NSArray *appIds) {
         bool exists = ([appIds indexOfObject:realId] != NSNotFound);
         NSDictionary *params = [NSDictionary
-                dictionaryWithObjects:[NSArray arrayWithObjects:@"hasApp", [NSNumber numberWithBool:exists] , nil]
-                        forKeys:[NSArray arrayWithObjects: @"method", @"result", nil]];
+                dictionaryWithObjects:[NSArray arrayWithObjects:@"hasApp", appId, [NSNumber numberWithBool:exists] , nil]
+                        forKeys:[NSArray arrayWithObjects: @"method", @"appId", @"result", nil]];
         [HasAppBridge dispatchNDKCallback:@"HasApp_callback" withParameters:params];
     } withFailure:^(NSError *error) {
         NSLog(@"Failure: %@", error.localizedDescription);
