@@ -37,6 +37,7 @@ public class HasAppManager {
         JSONObject resultParams = new JSONObject();
         try {
             resultParams.put("method", "hasApp");
+            resultParams.put("appId", appId);
             try {
                 pm.getPackageInfo(appId, PackageManager.GET_META_DATA);
                 resultParams.put("result", true);
