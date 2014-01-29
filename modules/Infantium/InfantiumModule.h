@@ -16,6 +16,9 @@ public:
     static void setFailures(int failures);
     static void sendGameRawData();
     static void closeGameplay();
+    static void setSubContentUUID(char const *subContentUuid);
+    static bool isActiveGamePlay();
+
 private:
     static cocos2d::CCObject *callNative(cocos2d::CCDictionary *pDictionary);
 };

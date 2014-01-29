@@ -11,10 +11,11 @@ import com.infantium.android.sdk.InfantiumAsyncResponseHandler;
 class InfantiumHandler extends InfantiumAsyncResponseHandler {
 
     private static final String TAG = "Infantium";
+    private static final boolean DEBUG = true;
 
-    boolean connected = false;
-    boolean hasPlayer = false;
-    boolean failed = false;
+    private boolean connected = false;
+    private boolean hasPlayer = false;
+    private boolean failed = false;
 
     @Override
     public void onSuccessContentApp() {
@@ -61,6 +62,6 @@ class InfantiumHandler extends InfantiumAsyncResponseHandler {
     }
 
     public boolean isReady() {
-        return !failed && connected && hasPlayer;
+        return DEBUG || (!failed && connected && hasPlayer);
     }
 }

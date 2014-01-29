@@ -35,6 +35,9 @@ public class InfantiumBridge {
                 InfantiumManager.sendGameRawData();
             } else if (methodName.equals("closeGameplay")) {
                 InfantiumManager.closeGameplay();
+            } else if (methodName.equals("setSubContentUUID")) {
+                String subContentUuid = params.getString("subContentUuid");
+                InfantiumManager.setSubContentUUID(subContentUuid);
             } else {
                 throw new UnsupportedOperationException();
             }

@@ -46,6 +46,7 @@ public class InfantiumManager {
         infantium.setDeviceInfo(width, height);
         infantium.setDeveloperHandler(infantiumHandler);
         infantium.setContentAppUUID(contentAppUuid);
+        infantium.getPlayerUUIDFromApp();
     }
 
     public static void createGameplay(String subContentUuid) {
@@ -91,6 +92,14 @@ public class InfantiumManager {
     public static void closeGameplay() {
         if (infantiumHandler.isReady()) {
             infantium.closeGameplay();
+        } else {
+            Log.w(TAG, "Infantium is not ready. The call is refused");
+        }
+    }
+
+    public static void setSubContentUUID(String subContentUuid) {
+        if (infantiumHandler.isReady()) {
+            infantium.setSubContentUUID(subContentUuid);
         } else {
             Log.w(TAG, "Infantium is not ready. The call is refused");
         }
