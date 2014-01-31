@@ -11,6 +11,7 @@ USING_NS_CC;
 #define EASY_NDK_METHOD "infantium_easyNDK"
 
 bool sActiveGamePlay = false;
+bool sHasRawData = false;
 
 void InfantiumModule::init(char const *apiUser, char const *apiKey, char const *contentAppUuid) {
     CCDictionary *params = CCDictionary::create();
@@ -28,6 +29,7 @@ void InfantiumModule::createGameplay(char const *subContentUuid) {
     callNative(params);
 
     sActiveGamePlay = true;
+    sHasRawData = false;
 }
 
 void InfantiumModule::startPlaying() {
@@ -41,6 +43,8 @@ void InfantiumModule::setSuccesses(int successes) {
     params->setObject(CCString::create("setSuccesses"), "method");
     params->setObject(CCInteger::create(successes), "successes");
     callNative(params);
+
+    sHasRawData = true;
 }
 
 void InfantiumModule::setFailures(int failures) {
@@ -48,6 +52,8 @@ void InfantiumModule::setFailures(int failures) {
     params->setObject(CCString::create("setFailures"), "method");
     params->setObject(CCInteger::create(failures), "failures");
     callNative(params);
+
+    sHasRawData = true;
 }
 
 void InfantiumModule::sendGameRawData() {
@@ -72,6 +78,10 @@ void InfantiumModule::setSubContentUUID(char const *subContentUuid) {
 
 bool InfantiumModule::isActiveGamePlay() {
     return sActiveGamePlay;
+}
+
+bool InfantiumModule::hasRawData() {
+    return sHasRawData;
 }
 
 CCObject *InfantiumModule::callNative(CCDictionary *pDictionary) {

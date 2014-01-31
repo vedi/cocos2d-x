@@ -18,6 +18,7 @@ public:
     static void closeGameplay();
     static void setSubContentUUID(char const *subContentUuid);
     static bool isActiveGamePlay();
+    static bool hasRawData();
 
 private:
     static cocos2d::CCObject *callNative(cocos2d::CCDictionary *pDictionary);
