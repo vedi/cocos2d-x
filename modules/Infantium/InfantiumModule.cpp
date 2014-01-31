@@ -76,6 +76,12 @@ void InfantiumModule::setSubContentUUID(char const *subContentUuid) {
     callNative(params);
 }
 
+void InfantiumModule::returnToInfantiumApp() {
+    CCDictionary *params = CCDictionary::create();
+    params->setObject(CCString::create("returnToInfantiumApp"), "method");
+    callNative(params);
+}
+
 bool InfantiumModule::isActiveGamePlay() {
     return sActiveGamePlay;
 }

@@ -38,6 +38,8 @@ public class InfantiumBridge {
             } else if (methodName.equals("setSubContentUUID")) {
                 String subContentUuid = params.getString("subContentUuid");
                 InfantiumManager.setSubContentUUID(subContentUuid);
+            } else if (methodName.equals("returnToInfantiumApp")) {
+                InfantiumManager.returnToInfantiumApp();
             } else {
                 throw new UnsupportedOperationException();
             }

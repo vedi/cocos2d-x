@@ -20,6 +20,8 @@ public:
     static bool isActiveGamePlay();
     static bool hasRawData();
 
+    static void returnToInfantiumApp();
+
 private:
     static cocos2d::CCObject *callNative(cocos2d::CCDictionary *pDictionary);
 };

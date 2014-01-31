@@ -105,6 +105,10 @@ public class InfantiumManager {
         }
     }
 
+    public static void returnToInfantiumApp() {
+        infantium.returnToInfantiumApp(ACTIVITY_WEAK_REFERENCE.get());
+    }
+
     public static void onPause() {
         infantium.onPauseInfantium();
     }
