@@ -262,3 +262,41 @@ bool VUtils::adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constr
     return false;
 }
 
+bool VUtils::isPixelTransparentAtLocation(CCSprite *sprite, CCPoint loc)
+{
+    //Convert the location to the node space
+    CCPoint location = sprite->convertToNodeSpace(loc);
+    
+    //This is the pixel we will read and test
+    ccColor4B pixel;
+    
+    //Prepare a render texture to draw the receiver on, so you are able to read the required pixel and test it
+    CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
+    CCRenderTexture* renderTexture = CCRenderTexture::create(screenSize.width, screenSize.height, kCCTexture2DPixelFormat_RGBA8888);
+    
+    renderTexture->begin();
+    
+    //Draw the layer
+    bool visible = sprite->isVisible();
+    sprite->setVisible(true);
+    CCPoint oldPos = sprite->getPosition();
+    CCPoint oldAnchor = sprite->getAnchorPoint();
+    sprite->setAnchorPoint(ccp(0, 0));
+    sprite->setPosition(ccp(-location.x, -location.y));
+    sprite->visit();
+    sprite->setAnchorPoint(oldAnchor);
+    sprite->setPosition(oldPos);
+    
+    //Read the pixel
+    glReadPixels(0,0, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &pixel);
+    
+    //Cleanup
+    renderTexture->end();
+    renderTexture->release();
+    
+    sprite->setVisible(visible);
+    //Test if the pixel's alpha byte is transparent
+    return (pixel.a != 0);
+}
+
+

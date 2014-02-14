@@ -578,9 +578,9 @@ void CCTableView::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
     if (m_pTouchedCell){
 		CCRect bb = this->boundingBox();
-		bb.origin = m_pParent->convertToWorldSpace(bb.origin);
-
-		if (bb.containsPoint(pTouch->getLocation()) && m_pTableViewDelegate != NULL)
+		//bb.origin = m_pParent->convertToWorldSpace(bb.origin);
+        
+		if (bb.containsPoint(m_pParent->convertTouchToNodeSpace(pTouch)) && m_pTableViewDelegate != NULL)
         {
             m_pTableViewDelegate->tableCellUnhighlight(this, m_pTouchedCell);
             m_pTableViewDelegate->tableCellTouched(this, m_pTouchedCell);
@@ -629,7 +629,7 @@ bool CCTableView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 
         m_pTouchedCell = NULL;
     }
-
+    
     return touchResult;
 }
 

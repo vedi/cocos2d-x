@@ -92,6 +92,8 @@ public:
     static void setStateForMenuItem(CCMenuItemImage *pMenuItemImage, bool bState);
 
     static bool adjustFontSize(CCLabelTTF *target, float initialSize, CCSize constraint);
+    
+    static bool isPixelTransparentAtLocation(CCSprite *sprite, CCPoint loc);
 
 };
 
