@@ -804,7 +804,7 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
                 CCDictElement* pElement2 = NULL;
                 CCDICT_FOREACH(nodeBaseValues, pElement2)
                 {
-                    if (seqNodePropNames.find(pElement2->getStrKey()) == seqNodePropNames.end())
+                    if (seqNodePropNames.find(pElement2->getStrKey()) != seqNodePropNames.end())
                     {
                         CCObject *value = pElement2->getObject();
 

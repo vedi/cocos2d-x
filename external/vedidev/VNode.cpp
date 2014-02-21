@@ -12,3 +12,6 @@ void VNode::cleanup() {
     CCNode::cleanup();
 }
 
+CCBAnimationManager *VNode::getAnimationManagerForNode(CCNode *pNode) {
+    return AnimationManagerAssigner::getAnimationManagerForNode(pNode);
+}

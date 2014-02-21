@@ -29,7 +29,7 @@ protected:
     CCDictionary *m_pAnimationManagers;
 
     CCBAnimationManager *getAnimationManager();
-    CCBAnimationManager *getAnimationManagerForNode(CCNode *pNode);
+    virtual CCBAnimationManager *getAnimationManagerForNode(CCNode *pNode);
 };
 
 #endif //__AnimationManagerAssigner_H_

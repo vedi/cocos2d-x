@@ -18,6 +18,7 @@ class VNode : public CCNodeRGBA
 , public AnimationManagerAssigner
 {
 public:
+    virtual CCBAnimationManager *getAnimationManagerForNode(CCNode *pNode);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
     virtual cocos2d::extension::SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, char const *pSelectorName) {return NULL;}
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {return false;};
