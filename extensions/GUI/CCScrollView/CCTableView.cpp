@@ -81,6 +81,7 @@ CCTableView::CCTableView()
 , m_pDataSource(NULL)
 , m_pTableViewDelegate(NULL)
 , m_eOldDirection(kCCScrollViewDirectionNone)
+, mStopScroll(false)
 {
     setCurrentTouch(CCPoint(0, 0));
 }
@@ -635,6 +636,9 @@ bool CCTableView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 
 void CCTableView::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 {
+    if (mStopScroll) {
+        return;
+    }
     CCScrollView::ccTouchMoved(pTouch, pEvent);
 
     setCurrentTouch(this->getContainer()->convertTouchToNodeSpace(pTouch));

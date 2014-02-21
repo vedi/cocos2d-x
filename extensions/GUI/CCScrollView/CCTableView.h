@@ -302,6 +302,8 @@ public:
         kNumberOfCellsInTableView,
     };
     void unregisterAllScriptHandler();
+    
+    bool mStopScroll;
 };
 
 
