@@ -371,6 +371,20 @@ typedef struct _ccColor4F {
     GLfloat a;
 } ccColor4F;
 
+//! A 2D grid size
+typedef struct _ccGridSize
+{
+    int    x;
+    int    y;
+} ccGridSize;
+
+//! helper function to create a ccGridSize
+static inline ccGridSize
+ccg(const int x, const int y)
+{
+    ccGridSize v = {x, y};
+    return v;
+}
 
 /** Returns a ccColor4F from a ccColor3B. Alpha will be 1.
  @since v0.99.1

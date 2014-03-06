@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2010-2013 cocos2d-x.org
+Copyright (c) 2013 cocos2d-x.org
 Copyright (c) Microsoft Open Technologies, Inc.
 
 http://www.cocos2d-x.org
@@ -22,15 +22,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "platform/CCDevice.h"
-#include "CCStdC.h"
 
-NS_CC_BEGIN
+//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+//// PARTICULAR PURPOSE.
+////
+//// Copyright (c) Microsoft Corporation. All rights reserved
 
-int CCDevice::getDPI()
+#pragma once
+
+
+// This header defines helper utilities to make DirectX APIs work with exceptions.
+namespace DX
 {
-	static const float dipsPerInch = 96.0f;
-	return floor(Windows::Graphics::Display::DisplayProperties::LogicalDpi / dipsPerInch + 0.5f); // Round to nearest integer.
+    inline void ThrowIfFailed(HRESULT hr)
+    {
+        if (FAILED(hr))
+        {
+            // Set a breakpoint on this line to catch DX API errors.
+            throw Platform::Exception::CreateException(hr);
+        }
+    }
 }
-
-NS_CC_END

@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2010-2013 cocos2d-x.org
+Copyright (c) 2013 cocos2d-x.org
 Copyright (c) Microsoft Open Technologies, Inc.
 
 http://www.cocos2d-x.org
@@ -22,15 +22,59 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
-#include "platform/CCDevice.h"
-#include "CCStdC.h"
 
-NS_CC_BEGIN
+#include "InputEvent.h"
+#include "Cocos2dRenderer.h"
 
-int CCDevice::getDPI()
+namespace PhoneDirect3DXamlAppComponent
 {
-	static const float dipsPerInch = 96.0f;
-	return floor(Windows::Graphics::Display::DisplayProperties::LogicalDpi / dipsPerInch + 0.5f); // Round to nearest integer.
+
+PointerEvent::PointerEvent(PointerEventType type, Windows::UI::Core::PointerEventArgs^ args)
+    : m_type(type), m_args(args)
+{
+
 }
 
-NS_CC_END
+void PointerEvent::execute(Cocos2dRenderer ^ renderer)
+{
+    switch(m_type)
+    {
+    case PointerEventType::PointerPressed:
+        renderer->OnPointerPressed(m_args.Get());
+        break;
+    case PointerEventType::PointerMoved:
+        renderer->OnPointerMoved(m_args.Get());
+        break;           
+    case PointerEventType::PointerReleased:
+        renderer->OnPointerReleased(m_args.Get());
+        break;
+    }
+}
+
+KeyboardEvent::KeyboardEvent(Cocos2dKeyEvent type)
+    : m_type(type), m_text(nullptr)
+{
+
+}
+
+KeyboardEvent::KeyboardEvent(Cocos2dKeyEvent type, Platform::String^ text)
+    : m_type(type), m_text(text)
+{
+
+}
+
+void KeyboardEvent::execute(Cocos2dRenderer ^ renderer)
+{
+    switch(m_type)
+    {
+    case Cocos2dKeyEvent::Text:
+        renderer->OnKeyPressed(m_text.Get());
+        break;
+    default:
+        renderer->OnCocos2dKeyEvent(m_type);
+        break;      
+    }
+}
+
+}
+

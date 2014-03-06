@@ -227,6 +227,14 @@ public:
      */
     CCObject* objectForKey(const std::string& key);
     
+    bool getBoolFromDictionary(const std::string& key);
+    int getIntFromDictionary(const std::string& key);
+    float getFloatFromDictionary(const std::string& key);
+    
+    bool getBoolFromDictionary(const std::string& key, bool defaultValue);
+    int getIntFromDictionary(const std::string& key, int defaultValue);
+    float getFloatFromDictionary(const std::string& key, float defaultValue);
+    
     /**
      *  Get the object according to the specified integer key.
      *

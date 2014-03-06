@@ -102,4 +102,22 @@ CLASS *CLASS::shared##CLASS() { \
     return sShared##CLASS; \
 }
 
+// for the subclass of CCLayer, each has to implement the static "create" method
+#define LAYER_CREATE_FUNC(layer) \
+static layer* create() \
+{ \
+layer *pRet = new layer(); \
+if (pRet && pRet->init()) \
+{ \
+pRet->autorelease(); \
+return pRet; \
+} \
+else \
+{ \
+delete pRet; \
+pRet = NULL; \
+return NULL; \
+} \
+}
+
 #endif //__common_H_

@@ -233,6 +233,48 @@ void CCDictionary::setObject(CCObject* pObject, const std::string& key)
     }
 }
 
+
+bool CCDictionary::getBoolFromDictionary(const std::string& key) {
+    
+    return getBoolFromDictionary(key, false);
+}
+
+int CCDictionary::getIntFromDictionary(const std::string& key) {
+    return getIntFromDictionary(key, 0);
+}
+
+float CCDictionary::getFloatFromDictionary(const std::string& key) {
+    return getFloatFromDictionary(key, 0.0f);
+}
+
+bool CCDictionary::getBoolFromDictionary(const std::string& key, bool defaultValue) {
+    CCString* pStr = (CCString*)objectForKey(key);
+    if (pStr !=  NULL) {
+        return pStr->boolValue();
+    }
+    
+    return defaultValue;
+}
+
+int CCDictionary::getIntFromDictionary(const std::string& key, int defaultValue) {
+    CCString* pStr = (CCString*)objectForKey(key);
+    if (pStr !=  NULL) {
+        return pStr->intValue();
+    }
+    
+    return defaultValue;
+}
+
+float CCDictionary::getFloatFromDictionary(const std::string& key, float defaultValue) {
+    CCString* pStr = (CCString*)objectForKey(key);
+    if (pStr !=  NULL) {
+        return pStr->floatValue();
+    }
+    
+    return defaultValue;
+}
+
+
 void CCDictionary::setObject(CCObject* pObject, intptr_t key)
 {
     CCAssert(pObject != NULL, "Invalid Argument!");

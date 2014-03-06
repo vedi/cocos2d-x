@@ -79,6 +79,16 @@ public:
         return m_startupScriptFilename;
     }
 
+	/**
+     @brief Get current language iso 639-1 code
+     @return Current language iso 639-1 code
+     */
+	virtual const char * getCurrentLanguageCode(){return "";}
+    
+    virtual std::string getAppID(){ return "";}
+
+    virtual void openURL(char const* url){}
+
 protected:
     LARGE_INTEGER       m_nAnimationInterval;
     std::string         m_resourceRootPath;

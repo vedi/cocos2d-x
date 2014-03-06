@@ -186,4 +186,13 @@ void SimpleAudioEngine::setEffectsVolume(float volume)
     sharedAudioController()->SetSoundEffectVolume((volume<=0.0f)? 0.0f : volume);
 }
 
+void SimpleAudioEngine::playSound(const char* pszFilePath, bool bLoop, unsigned int channelNum) {
+	// Changing file path to full path
+	
+}
+
+void SimpleAudioEngine::stopSound(bool bReleaseData, unsigned int channelNum) {
+	
+}
+
 } // end of namespace CocosDenshion
