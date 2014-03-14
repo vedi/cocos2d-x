@@ -25,13 +25,13 @@ public class InfantiumBridge {
                 InfantiumManager.createGameplay(subContentUuid);
             } else if (methodName.equals("startPlaying")) {
                 InfantiumManager.startPlaying();
-            } else if (methodName.equals("setSuccesses")) {
+            } /*else if (methodName.equals("setSuccesses")) {
                 int successes = params.getInt("successes");
                 InfantiumManager.setSuccesses(successes);
             } else if (methodName.equals("setFailures")) {
                 int failures = params.getInt("failures");
                 InfantiumManager.setFailures(failures);
-            } else if (methodName.equals("sendGameRawData")) {
+            }*/ else if (methodName.equals("sendGameRawData")) {
                 InfantiumManager.sendGameRawData();
             } else if (methodName.equals("closeGameplay")) {
                 InfantiumManager.closeGameplay();
@@ -40,6 +40,40 @@ public class InfantiumBridge {
                 InfantiumManager.setSubContentUUID(subContentUuid);
             } else if (methodName.equals("returnToInfantiumApp")) {
                 InfantiumManager.returnToInfantiumApp();
+            } else if (methodName.equals("addElement")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addElement(ID);
+            } else if (methodName.equals("addPaintedElement")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addPaintedElement(ID);
+            } else if (methodName.equals("addPictureElement")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addPictureElement(ID);
+            } else if (methodName.equals("addShapeElement")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addShapeElement(ID);
+            } else if (methodName.equals("addNumberElement")) {
+                String ID = params.getString("ID");
+                Integer value = params.getInt("value");
+                InfantiumManager.addNumberElement(ID, value);
+            } else if (methodName.equals("addGoal")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addGoal(ID);
+            } else if (methodName.equals("addSelectionGoal")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addSelectionGoal(ID);
+            } else if (methodName.equals("addMatchingGoal")) {
+                String ID = params.getString("ID");
+                String matching_element = params.getString("matching_element");
+                InfantiumManager.addMatchingGoal(ID, matching_element);
+            } else if (methodName.equals("addTappingGoal")) {
+                String ID = params.getString("ID");
+                InfantiumManager.addTappingGoal(ID);
+            } else if (methodName.equals("newBasicInteraction")) {
+                String ID = params.getString("ID");
+                String object_type = params.getString("object_type");
+                String goal_type = params.getString("goal_type");
+                InfantiumManager.newBasicInteraction(ID, object_type, goal_type);
             } else {
                 throw new UnsupportedOperationException();
             }
