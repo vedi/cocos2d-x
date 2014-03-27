@@ -32,10 +32,10 @@ public class InfantiumManager {
     private static InfantiumSDK infantium = null;
     private static InfantiumHandler infantiumHandler;
 
-    public static void initModule(Activity activity) {
+    public static void initModule(Activity activity, String api, Boolean debug) {
         ACTIVITY_WEAK_REFERENCE = new WeakReference<Activity>(activity);
         //infantium = Infantium_SDK.getInfantium_SDK(activity.getBaseContext());
-        infantium = InfantiumSDK.getInfantiumSDK(activity.getBaseContext(), "api", false);
+        infantium = InfantiumSDK.getInfantiumSDK(activity.getBaseContext(), api, debug);
         infantiumHandler = new InfantiumHandler();
     }
 
