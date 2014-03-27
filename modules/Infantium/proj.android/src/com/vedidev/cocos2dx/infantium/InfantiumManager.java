@@ -35,7 +35,7 @@ public class InfantiumManager {
     public static void initModule(Activity activity) {
         ACTIVITY_WEAK_REFERENCE = new WeakReference<Activity>(activity);
         //infantium = Infantium_SDK.getInfantium_SDK(activity.getBaseContext());
-        infantium = InfantiumSDK.getInfantiumSDK(activity.getBaseContext());
+        infantium = InfantiumSDK.getInfantiumSDK(activity.getBaseContext(), "api", false);
         infantiumHandler = new InfantiumHandler();
     }
 
@@ -126,7 +126,8 @@ public class InfantiumManager {
     }
     
     public static void addElement(String ID){
-    	com.infantium.android.sdk.elements.Element element = new com.infantium.android.sdk.elements.Element(ID, null);
+    	String t = "ID";
+    	com.infantium.android.sdk.elements.Element element = new com.infantium.android.sdk.elements.Element(ID, t);
     	infantium.addElement(element);
     }
     
