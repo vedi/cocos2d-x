@@ -27,7 +27,7 @@ CCBAnimationManager::CCBAnimationManager()
 , mRunningSequence(NULL)
 , jsControlled(false)
 , mOwner(NULL)
-, mRestore(true)
+, mRestore(false)
 {
     init();
 }
@@ -324,7 +324,7 @@ CCActionInterval* CCBAnimationManager::getAction(CCBKeyframe *pKeyframe0, CCBKey
     else if (strcmp(pPropName, "rotation") == 0)
     {
         CCBValue *value = (CCBValue*)pKeyframe1->getValue();
-        return CCBRotateTo::create(duration, value->getFloatValue());
+        return CCRotateBy::create(duration, value->getFloatValue());  //TODO maybe should replate to CCRotateTo again?
     }
     else if (strcmp(pPropName, "opacity") == 0)
     {
@@ -804,7 +804,7 @@ void CCBAnimationManager::runAnimationsForSequenceIdTweenDuration(int nSeqId, fl
                 CCDictElement* pElement2 = NULL;
                 CCDICT_FOREACH(nodeBaseValues, pElement2)
                 {
-                    if (seqNodePropNames.find(pElement2->getStrKey()) != seqNodePropNames.end())
+                    if (seqNodePropNames.find(pElement2->getStrKey()) == seqNodePropNames.end())
                     {
                         CCObject *value = pElement2->getObject();
 
