@@ -18,6 +18,20 @@ class InfantiumHandler extends InfantiumAsyncResponseHandler {
     private boolean failed = false;
 
     @Override
+    public void	onSuccessCreateGameplay(){
+        super.onSuccessCreateGameplay();
+    }
+    @Override
+    public void	onSuccessGameRawData(){
+        super.onSuccessGameRawData();
+    }
+    
+    @Override
+    public void onSuccessCloseGameplay(){
+        super.onSuccessCloseGameplay();
+    }
+    
+    @Override
     public void onSuccessContentApp() {
         super.onSuccessContentApp();
         connected = true;
