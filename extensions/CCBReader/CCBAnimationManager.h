@@ -70,6 +70,7 @@ public:
 
     int getAutoPlaySequenceId();
     void setAutoPlaySequenceId(int autoPlaySequenceId);
+    void setRotationByAnAngle(bool enable) {mRotationByAnAngle = enable; };
 
     CCNode* getRootNode();
     void setRootNode(CCNode* pRootNode); // weak reference
@@ -152,6 +153,8 @@ private:
     CCActionInterval* getEaseAction(CCActionInterval *pAction, int nEasingType, float fEasingOpt);
     void runAction(CCNode *pNode, CCBSequenceProperty *pSeqProp, float fTweenDuration, float fTimeRatio);
     void sequenceCompleted(CCObject *pDuration);
+
+    bool mRotationByAnAngle;
 };
 /**
  *  @js NA

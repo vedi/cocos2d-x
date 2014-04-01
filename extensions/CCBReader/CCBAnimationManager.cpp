@@ -27,7 +27,8 @@ CCBAnimationManager::CCBAnimationManager()
 , mRunningSequence(NULL)
 , jsControlled(false)
 , mOwner(NULL)
-, mRestore(false)
+, mRestore(true)
+, mRotationByAnAngle(false)
 {
     init();
 }
@@ -324,7 +325,12 @@ CCActionInterval* CCBAnimationManager::getAction(CCBKeyframe *pKeyframe0, CCBKey
     else if (strcmp(pPropName, "rotation") == 0)
     {
         CCBValue *value = (CCBValue*)pKeyframe1->getValue();
-        return CCRotateBy::create(duration, value->getFloatValue());  //TODO maybe should replate to CCRotateTo again?
+        if(mRotationByAnAngle) {
+            return CCRotateBy::create(duration, value->getFloatValue());
+        }
+        else {
+            return CCBRotateTo::create(duration, value->getFloatValue());
+        }
     }
     else if (strcmp(pPropName, "opacity") == 0)
     {
