@@ -25,10 +25,19 @@ namespace revmob {
         virtual void PrintEnvironmentInformation(){};
 
         virtual void ShowFullscreen(){};
+        virtual void LoadFullscreen(){};
+        virtual void ShowLoadedFullscreen(){};
         virtual void ShowPopup(){};
+        virtual void LoadPopup(){};
+        virtual void ShowLoadedPopup(){};
         virtual void ShowBanner(){};
         virtual void HideBanner(){};
+        virtual void LoadBanner(){};
+        virtual void ShowLoadedBanner(){};
+        virtual void HideLoadedBanner(){};
         virtual void OpenLink(){};
+        virtual void LoadLink(){};
+        virtual void OpenLoadedLink(){};
 
     private:
         RevMob(RevMob const&);
