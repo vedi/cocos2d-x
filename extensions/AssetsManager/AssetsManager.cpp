@@ -114,6 +114,8 @@ static size_t getVersionCode(void *ptr, size_t size, size_t nmemb, void *userdat
 
 bool AssetsManager::checkUpdate()
 {
+    CCLOG("Check update");
+
     if (_versionFileUrl.size() == 0) return false;
     
     _curl = curl_easy_init();
@@ -133,7 +135,9 @@ bool AssetsManager::checkUpdate()
     curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     res = curl_easy_perform(_curl);
-    
+
+    CCLOG("end check update");
+
     if (res != 0)
     {
         sendErrorMessage(kNetwork);
@@ -141,7 +145,7 @@ bool AssetsManager::checkUpdate()
         curl_easy_cleanup(_curl);
         return false;
     }
-    
+
     string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
     if (recordedVersion == _version)
     {
@@ -153,7 +157,7 @@ bool AssetsManager::checkUpdate()
     }
     
     CCLOG("there is a new version: %s", _version.c_str());
-    
+
     return true;
 }
 
@@ -163,6 +167,12 @@ void* assetsManagerDownloadAndUncompress(void *data)
     
     do
     {
+        // Check if there is a new version.
+        if (! self->checkUpdate()) break;
+
+        // Is package already downloaded?
+        self->_downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
+
         if (self->_downloadedVersion != self->_version)
         {
             if (! self->downLoad()) break;
@@ -211,11 +221,11 @@ void AssetsManager::update()
         return;
     }
     
-    // Check if there is a new version.
-    if (! checkUpdate()) return;
-    
-    // Is package already downloaded?
-    _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
+//    // Check if there is a new version.
+//    if (! checkUpdate()) return;
+//
+//    // Is package already downloaded?
+//    _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
     
     _tid = new pthread_t();
     pthread_create(&(*_tid), NULL, assetsManagerDownloadAndUncompress, this);
@@ -432,7 +442,7 @@ bool AssetsManager::downLoad()
     }
     
     CCLOG("succeed downloading package %s", _packageUrl.c_str());
-    
+
     fclose(fp);
     return true;
 }
