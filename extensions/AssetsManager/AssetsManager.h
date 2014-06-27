@@ -70,7 +70,7 @@ public:
          */
         kUncompress,
     };
-    
+
     /* @brief Creates a AssetsManager with new package url, version code url and storage path.
      *
      * @param packageUrl URL of new package, the package should be a zip file.
@@ -143,7 +143,9 @@ public:
      */
     friend void* assetsManagerDownloadAndUncompress(void*);
     friend int assetsManagerProgressFunc(void *, double, double, double, double);
-    
+
+    void setCustomVersionAndDownloadKeyPrefix(std::string customPrefix);
+
 protected:
     bool downLoad();
     void checkStoragePath();
@@ -180,15 +182,15 @@ private:
 private:
     //! The path to store downloaded resources.
     std::string _storagePath;
-    
+
     //! The version of downloaded resources.
     std::string _version;
-    
+
     std::string _packageUrl;
     std::string _versionFileUrl;
     
     std::string _downloadedVersion;
-    
+
     CURL *_curl;
     Helper *_schedule;
     pthread_t *_tid;
