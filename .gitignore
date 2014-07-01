@@ -116,3 +116,7 @@ tools/jenkins_scripts/mac/android/userconf.ini
 
 # CTags
 tags
+*.orig
+.classpath
+.project
+proguard-project.txt
