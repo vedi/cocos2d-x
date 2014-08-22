@@ -1,5 +1,3 @@
-#include <bits/stringfwd.h>
-
 /****************************************************************************
  Copyright (c) 2013 cocos2d-x.org
 
@@ -435,6 +433,8 @@ bool AssetsManager::checkUpdate()
         curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, false);
         curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerProgressFunc);
         curl_easy_setopt(_curl, CURLOPT_PROGRESSDATA, this);
+        curl_easy_setopt(_curl, CURLOPT_LOW_SPEED_LIMIT, 10);
+        curl_easy_setopt(_curl, CURLOPT_LOW_SPEED_TIME, 30);
         res = curl_easy_perform(_curl);
         curl_easy_cleanup(_curl);
         if (res != 0)

@@ -22,7 +22,7 @@ class VLayer : public CCLayer
 public:
     virtual ~VLayer();
 
-	virtual void onBack(CCObject* pSender) = 0;
+	virtual void onBack(CCObject* pSender) {return; };
 
 	virtual void keyBackClicked();
 	virtual void onEnter();
