@@ -25,3 +25,7 @@ url=https://github.com/soomla/cocos2dx-store.git
 [submodule "cocos2dx/platform/third_party/winrt/angleproject"]
 	path = cocos2dx/platform/third_party/winrt/angleproject
 	url = https://github.com/stammen/angleproject
+[submodule "extensions/soomla-cocos2dx-core"]
+	path = extensions/soomla-cocos2dx-core
+	url = git@github.com:soomla/soomla-cocos2dx-core.git
+	branch = cocos2dx-v2
