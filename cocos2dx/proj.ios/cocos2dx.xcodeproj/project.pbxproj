@@ -1831,7 +1831,7 @@
 				PROVISIONING_PROFILE = "853A7C9C-23A9-474F-9E38-82EE56BF8E09";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../../plugin/plugins/flurry/proj.ios\"/** \"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1867,7 +1867,7 @@
 				PROVISIONING_PROFILE = "853A7C9C-23A9-474F-9E38-82EE56BF8E09";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../../plugin/plugins/flurry/proj.ios\"/** \"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
