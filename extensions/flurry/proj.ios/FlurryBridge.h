@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface FlurryBridge : NSObject
 
 + (NSObject *)dispatchNDKCall:(NSDictionary *)parameters;
