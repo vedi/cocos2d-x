@@ -5,11 +5,12 @@
 
 #include "FlurryModule.h"
 #include "NDKHelper.h"
+#include "ndk_const.h"
+
+static const char* EASY_NDK_METHOD = "flurry_easyNDK";
+
 
 USING_NS_CC;
-
-#define EASY_NDK_METHOD "flurry_easyNDK"
-
 
 void FlurryManager::setUserId(char const *userId) {
     CCDictionary *params = CCDictionary::create();
@@ -42,6 +43,13 @@ void FlurryManager::logEvent(char const *eventId, cocos2d::CCDictionary *paramMa
     params->setObject(CCString::create("logEvent"), "method");
     params->setObject(CCString::create(eventId), "eventId");
     params->setObject(paramMap, "paramMap");
+    callNative(params);
+}
+
+void FlurryManager::simpleLogEvent(char const *eventId) {
+    CCDictionary *params = CCDictionary::create();
+    params->setObject(CCString::create("simpleLogEvent"), "method");
+    params->setObject(CCString::create(eventId), "eventId");
     callNative(params);
 }
 

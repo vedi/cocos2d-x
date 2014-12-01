@@ -13,8 +13,10 @@ public:
     static void setAppVersion(char const *appVersion);
     static bool init(const char * apiKey);
     static void logEvent(const char* eventId, cocos2d::CCDictionary* paramMap = NULL);
+    static void simpleLogEvent(const char* eventId);
     static void logTimedEventBegin(const char* eventId, cocos2d::CCDictionary* paramMap = NULL);
     static void logTimedEventEnd(const char* eventId, cocos2d::CCDictionary* paramMap = NULL);
+
 private:
     static cocos2d::CCObject *callNative(cocos2d::CCDictionary *pDictionary);
 };
