@@ -149,6 +149,8 @@ public:
      */
     virtual ~CCTableView();
 
+    static CCTableView* create();
+
     /**
      * An intialized table view object
      *
@@ -235,7 +237,9 @@ public:
     virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
 
 protected:
-
+    
+    CC_SYNTHESIZE(CCPoint, mCurrentTouch, CurrentTouch);
+    
     CCTableViewCell *m_pTouchedCell;
     /**
      * vertical direction of cell filling
@@ -272,7 +276,7 @@ protected:
 	CCScrollViewDirection m_eOldDirection;
 
     int __indexFromOffset(CCPoint offset);
-    unsigned int _indexFromOffset(CCPoint offset);
+    
     CCPoint __offsetFromIndex(unsigned int index);
     CCPoint _offsetFromIndex(unsigned int index);
 
@@ -282,8 +286,9 @@ protected:
 
     void _updateCellPositions();
 public:
+    unsigned int _indexFromOffset(CCPoint offset);
     void _updateContentSize();
-    
+
     enum TableViewScriptEventType
     {
         kTableViewScroll   = 0,
@@ -297,6 +302,8 @@ public:
         kNumberOfCellsInTableView,
     };
     void unregisterAllScriptHandler();
+    
+    bool mStopScroll;
 };
 
 

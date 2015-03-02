@@ -162,13 +162,21 @@ public:
     const char* getFontName();
     void setFontName(const char *fontName);
     
-private:
+    virtual void visit();
+    
     bool updateTexture();
+    
+    const CCSize& getContentSize() const;
+    
+private:
+    static CCDictionary _textCash;
 protected:
     
     /** set the text definition for this label */
     void                _updateWithTextDefinition(ccFontDefinition & textDefinition, bool mustUpdateTexture = true);
-    ccFontDefinition    _prepareTextDefinition(bool adjustForResolution = false);
+    ccFontDefinition    _prepareTextDefinition(bool adjustForResolution = false) const;
+    
+    std::string makeKeyString(const ccFontDefinition &textDef) const;
     
     /** Dimensions of the label in Points */
     CCSize m_tDimensions;
@@ -182,6 +190,7 @@ protected:
     float m_fFontSize;
     /** label's string */
     std::string m_string;
+    mutable std::string m_oldKey;
     
     /** font shadow */
     bool    m_shadowEnabled;
@@ -197,6 +206,8 @@ protected:
         
     /** font tint */
     ccColor3B   m_textFillColor;
+
+    bool m_bDirty;
 
     
 };

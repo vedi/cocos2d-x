@@ -98,6 +98,20 @@ CCApplication* CCApplication::sharedApplication()
 	return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    char *pLanguageName = getenv("LANG");
+    if (!pLanguageName)
+        return "en";
+    strtok(pLanguageName, "_");
+    if (!pLanguageName)
+        return "en";
+    strncpy(code,pLanguageName,2);
+    code[2]='\0';
+    return code;
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
 	char *pLanguageName = getenv("LANG");

@@ -39,8 +39,6 @@ public class Cocos2dxSound {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int MAX_SIMULTANEOUS_STREAMS_DEFAULT = 5;
-	public static final int MAX_SIMULTANEOUS_STREAMS_I9100 = 3;
 
 	private static final String TAG = "Cocos2dxSound";
 
@@ -64,8 +62,8 @@ public class Cocos2dxSound {
 	
 	private int mStreamIdSyn;
 	private Semaphore mSemaphore;
-	private int simultaneousStreams;
 
+	private static final int MAX_SIMULTANEOUS_STREAMS_DEFAULT = 5;
 	private static final float SOUND_RATE = 1.0f;
 	private static final int SOUND_PRIORITY = 1;
 	private static final int SOUND_QUALITY = 5;
@@ -77,17 +75,17 @@ public class Cocos2dxSound {
 	// Constructors
 	// ===========================================================
 
-	public Cocos2dxSound(final Context pContext, final int simultaneousStreams) {
+	public Cocos2dxSound(final Context pContext) {
 		this.mContext = pContext;
-		this.initData(simultaneousStreams);
+
+		this.initData();
 	}
 
-	private void initData(final int simultaneousStreams) {
-		this.mSoundPool = new SoundPool(simultaneousStreams, AudioManager.STREAM_MUSIC, Cocos2dxSound.SOUND_QUALITY);
+	private void initData() {
+		this.mSoundPool = new SoundPool(Cocos2dxSound.MAX_SIMULTANEOUS_STREAMS_DEFAULT, AudioManager.STREAM_MUSIC, Cocos2dxSound.SOUND_QUALITY);
         this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompletedListener());
 		
 		this.mLeftVolume = 0.5f;
-		this.simultaneousStreams = simultaneousStreams;
 		this.mRightVolume = 0.5f;
 		
 		this.mSemaphore = new Semaphore(0, true);
@@ -262,7 +260,7 @@ public class Cocos2dxSound {
 		this.mLeftVolume = 0.5f;
 		this.mRightVolume = 0.5f;
 		
-		this.initData(this.simultaneousStreams);
+		this.initData();
 	}
 
 	public int createSoundIDFromAsset(final String pPath) {

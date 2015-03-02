@@ -5,7 +5,6 @@
 #include "cocos2d.h"
 #include "CCBReader.h"
 #include "CCBValue.h"
-#include "ExtensionMacros.h"
 
 NS_CC_EXT_BEGIN
 
@@ -41,6 +40,12 @@ struct BlockCCControlData {
     int mControlEvents;
 };
 
+struct ScaleLock {
+    float xScale;
+    float yScale;
+    bool lock;
+};
+
 /* Forward declaration. */
 class CCBReader;
 /**
@@ -64,7 +69,7 @@ class CC_EX_DLL CCNodeLoader : public CCObject {
         virtual CCPoint parsePropTypePoint(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader);
         virtual CCPoint parsePropTypePointLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader);
         virtual CCSize parsePropTypeSize(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader);
-        virtual float * parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName);
+        virtual ScaleLock parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName);
         virtual float parsePropTypeFloat(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader);
         virtual float parsePropTypeDegrees(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName);
         virtual float parsePropTypeFloatScale(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader);
@@ -94,7 +99,7 @@ class CC_EX_DLL CCNodeLoader : public CCObject {
         virtual void onHandlePropTypePoint(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCPoint pPoint, CCBReader * pCCBReader);
         virtual void onHandlePropTypePointLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCPoint pPointLock, CCBReader * pCCBReader);
         virtual void onHandlePropTypeSize(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCSize pSize, CCBReader * pCCBReader);
-        virtual void onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float * pScaleLock, CCBReader * pCCBReader);
+        virtual void onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, ScaleLock pScaleLock, CCBReader * pCCBReader);
         virtual void onHandlePropTypeFloat(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float pFloat, CCBReader * pCCBReader);
         virtual void onHandlePropTypeDegrees(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float pDegrees, CCBReader * pCCBReader);
         virtual void onHandlePropTypeFloatScale(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float pFloatScale, CCBReader * pCCBReader);
@@ -119,6 +124,8 @@ class CC_EX_DLL CCNodeLoader : public CCObject {
         virtual void onHandlePropTypeBlock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, BlockData * pBlockData, CCBReader * pCCBReader);
         virtual void onHandlePropTypeBlockCCControl(CCNode * pNode, CCNode * pParent, const char* pPropertyName, BlockCCControlData * pBlockCCControlData, CCBReader * pCCBReader);
         virtual void onHandlePropTypeCCBFile(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCNode * pCCBFileNode, CCBReader * pCCBReader);
+    
+        virtual void onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent);
 
 protected:
         CCDictionary* m_pCustomProperties;

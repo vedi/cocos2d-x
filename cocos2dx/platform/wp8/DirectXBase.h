@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿﻿#pragma once
 
 #include "DirectXHelper.h"
 #include <wrl/client.h>

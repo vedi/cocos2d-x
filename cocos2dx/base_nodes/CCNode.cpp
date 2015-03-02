@@ -412,6 +412,10 @@ const CCSize& CCNode::getContentSize() const
     return m_obContentSize;
 }
 
+const CCSize CCNode::getScaledContentSize() const {
+    return ccpCompMult(getContentSize(), ccp(m_fScaleX, m_fScaleY));
+}
+
 void CCNode::setContentSize(const CCSize & size)
 {
     if ( ! size.equals(m_obContentSize))
@@ -527,6 +531,12 @@ CCRect CCNode::boundingBox()
 {
     CCRect rect = CCRectMake(0, 0, m_obContentSize.width, m_obContentSize.height);
     return CCRectApplyAffineTransform(rect, nodeToParentTransform());
+}
+
+CCRect CCNode::globalBoundingBox()
+{
+    CCRect rect = CCRectMake(0, 0, m_obContentSize.width, m_obContentSize.height);
+    return CCRectApplyAffineTransform(rect, nodeToWorldTransform());
 }
 
 CCNode * CCNode::create(void)
@@ -1012,6 +1022,11 @@ CCAction * CCNode::runAction(CCAction* action)
 void CCNode::stopAllActions()
 {
     m_pActionManager->removeAllActionsFromTarget(this);
+}
+
+void CCNode::stopAllActionsRecursive() {
+    stopAllActions();
+    arrayMakeObjectsPerformSelector(m_pChildren, stopAllActionsRecursive, CCNode *);
 }
 
 void CCNode::stopAction(CCAction* action)

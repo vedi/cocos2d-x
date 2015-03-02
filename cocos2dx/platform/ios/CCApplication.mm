@@ -69,6 +69,21 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    // get the current language code.(such as English is "en", Chinese is "zh" and so on)
+    NSDictionary* temp = [NSLocale componentsFromLocaleIdentifier:currentLanguage];
+    NSString * languageCode = [temp objectForKey:NSLocaleLanguageCode];
+    [languageCode getCString:code maxLength:2 encoding:NSASCIIStringEncoding];
+    code[2]='\0';
+    return code;
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
     // get the current language and country config
@@ -138,4 +153,26 @@ TargetPlatform CCApplication::getTargetPlatform()
     }
 }
 
+std::string CCApplication::getAppID() {
+    return [[[NSBundle mainBundle] bundleIdentifier] UTF8String];
+}
+
+bool CCApplication::canOpenURL(char const *url) {
+    NSString *urlAddress = [[NSString stringWithUTF8String:url]
+            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *nsUrl = [NSURL URLWithString:urlAddress];
+    return [[UIApplication sharedApplication] canOpenURL:nsUrl];
+}
+
+void CCApplication::openURL(char const* url) {
+    NSString *urlAddress = [[NSString stringWithUTF8String:url]
+            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *nsUrl = [NSURL URLWithString:urlAddress];
+    [[UIApplication sharedApplication] openURL:nsUrl];
+}
+
+
 NS_CC_END
+
+
+

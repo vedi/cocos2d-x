@@ -34,6 +34,7 @@ extern void showEditTextDialogJNI(const char* pszTitle, const char* pszContent, 
 extern void terminateProcessJNI();
 extern std::string getCurrentLanguageJNI();
 extern std::string getPackageNameJNI();
+extern void openURLJNI(const char * url);
 extern std::string getFileDirectoryJNI();
 extern void enableAccelerometerJNI();
 extern void disableAccelerometerJNI();
@@ -49,5 +50,6 @@ extern void setIntegerForKeyJNI(const char* pKey, int value);
 extern void setFloatForKeyJNI(const char* pKey, float value);
 extern void setDoubleForKeyJNI(const char* pKey, double value);
 extern void setStringForKeyJNI(const char* pKey, const char* value);
+extern std::string getDeviceIdJNI();
 
 #endif /* __Java_org_cocos2dx_lib_Cocos2dxHelper_H__ */

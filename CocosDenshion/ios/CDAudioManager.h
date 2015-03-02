@@ -147,14 +147,15 @@ typedef enum {
  */
 @interface CDAudioManager : NSObject <CDLongAudioSourceDelegate, CDAudioInterruptProtocol, AVAudioSessionDelegate> {
     CDSoundEngine        *soundEngine;
-    CDLongAudioSource    *backgroundMusic;
+    CDLongAudioSource    *backgroundMusicChannel;
+    CDLongAudioSource    *anotherSoundChannel;
     NSMutableArray        *audioSourceChannels;
     NSString*            _audioSessionCategory;
     BOOL                _audioWasPlayingAtStartup;
     tAudioManagerMode    _mode;
     SEL backgroundMusicCompletionSelector;
     id backgroundMusicCompletionListener;
-    BOOL willPlayBackgroundMusic;
+    BOOL willPlaySound;
     BOOL _mute;
     BOOL _resigned;
     BOOL _interrupted;
@@ -167,8 +168,7 @@ typedef enum {
 }
 
 @property (readonly) CDSoundEngine *soundEngine;
-@property (readonly) CDLongAudioSource *backgroundMusic;
-@property (readonly) BOOL willPlayBackgroundMusic;
+@property (readonly) BOOL willPlaySound;
 
 /** Returns the shared singleton */
 + (CDAudioManager *) sharedManager;
@@ -206,22 +206,29 @@ typedef enum {
 /** Plays music in background. The music can be looped or not
  It is recommended to use .aac files as background music since they are decoded by the device (hardware).
  */
--(void) playBackgroundMusic:(NSString*) filePath loop:(BOOL) loop;
+- (void)playSound:(NSString *)filePath loop:(BOOL)loop atChannelNum:(unsigned int)channelNum;
+
 /** Preloads a background music */
--(void) preloadBackgroundMusic:(NSString*) filePath;
+- (void)preloadSound:(NSString *)filePath atChannelNum:(unsigned int)channelNum;
+
 /** Stops playing the background music */
--(void) stopBackgroundMusic;
+- (void)stopSound:(unsigned int)channelNum;
+
 /** Pauses the background music */
--(void) pauseBackgroundMusic;
+- (void)pauseSound:(unsigned int)channelNum;
+
 /** Rewinds the background music */
--(void) rewindBackgroundMusic;
+- (void)rewindSound:(unsigned int)channelNum;
+
 /** Resumes playing the background music */
--(void) resumeBackgroundMusic;
+- (void)resumeSound:(unsigned int)channelNum;
+
 /** Returns whether or not the background music is playing */
--(BOOL) isBackgroundMusicPlaying;
+- (BOOL)isSoundPlaying:(unsigned int)channelNum;
 
 -(void) setBackgroundMusicCompletionListener:(id) listener selector:(SEL) selector;
 
+- (CDLongAudioSource *)getSoundForChanel:(unsigned int)channelNum;
 @end
 
 /** Fader for long audio source objects */

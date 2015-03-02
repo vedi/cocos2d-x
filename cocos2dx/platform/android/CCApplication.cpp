@@ -61,6 +61,14 @@ CCApplication* CCApplication::sharedApplication()
     return sm_pSharedApplication;
 }
 
+const char * CCApplication::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    strncpy(code,getCurrentLanguageJNI().c_str(),2);
+    code[2]='\0';
+    return code;
+}
+
 ccLanguageType CCApplication::getCurrentLanguage()
 {
     std::string languageName = getCurrentLanguageJNI();
@@ -126,6 +134,14 @@ ccLanguageType CCApplication::getCurrentLanguage()
 TargetPlatform CCApplication::getTargetPlatform()
 {
     return kTargetAndroid;
+}
+
+std::string CCApplication::getAppID() {
+    return getPackageNameJNI();
+}
+
+void CCApplication::openURL(char const* url) {
+	openURLJNI(url);
 }
 
 NS_CC_END

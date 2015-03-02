@@ -258,6 +258,7 @@ void CCMenu::ccTouchEnded(CCTouch *touch, CCEvent* event)
     {
         m_pSelectedItem->unselected();
         m_pSelectedItem->activate();
+        touch->setProceeded(true);
     }
     m_eState = kCCMenuStateWaiting;
 }
@@ -604,6 +605,8 @@ CCMenuItem* CCMenu::itemForTouch(CCTouch *touch)
 {
     CCPoint touchLocation = touch->getLocation();
 
+    CCMenuItem *ret = NULL;
+
     if (m_pChildren && m_pChildren->count() > 0)
     {
         CCObject* pObject = NULL;
@@ -618,13 +621,14 @@ CCMenuItem* CCMenu::itemForTouch(CCTouch *touch)
 
                 if (r.containsPoint(local))
                 {
-                    return pChild;
+                    if((!ret)||(pChild->getZOrder()>ret->getZOrder()))
+                        ret=pChild;
                 }
             }
         }
     }
 
-    return NULL;
+    return ret;
 }
 
 NS_CC_END

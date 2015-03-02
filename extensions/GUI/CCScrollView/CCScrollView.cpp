@@ -697,6 +697,9 @@ void CCScrollView::ccTouchMoved(CCTouch* touch, CCEvent* event)
                     case kCCScrollViewDirectionHorizontal:
                         moveDistance = ccp(moveDistance.x, 0.0f);
                         break;
+                    case kCCScrollViewDirectionNone:
+                        moveDistance = ccp(0.0f, 0.0f);
+                        break;
                     default:
                         break;
                 }

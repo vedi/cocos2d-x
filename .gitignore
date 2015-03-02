@@ -38,13 +38,18 @@ SubmissionInfo
 
 # Ignore files build by ndk and eclipse
 libs/
+armeabi/
 bin/
 obj/
 gen/
 assets/
 local.properties
 
-# Ignore specific winrt files
+projects
+.idea
+*.iml
+
+# Ignore specific winrt files 
 cocos2dx/platform/third_party/winrt/freetype/src
 cocos2dx/platform/third_party/winrt/libpng/lpng142
 cocos2dx/platform/third_party/winrt/libjpeg/jpeg-8b
@@ -79,6 +84,7 @@ build_*_vc10/
 *.mode*v*
 *.pbxuser
 *.xcbkptlist
+*.xcscheme
 *.xcworkspacedata
 *.xcuserstate
 xcschememanagement.plist
@@ -125,3 +131,7 @@ tags
 /tools/tolua++/tolua++.rar
 /v*-deps-*.zip
 /external/version.json
+*.orig
+.classpath
+.project
+proguard-project.txt

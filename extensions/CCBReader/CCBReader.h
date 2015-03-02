@@ -171,6 +171,8 @@ class CCBKeyframe;
  */
 class CC_EX_DLL CCBReader : public CCObject 
 {
+    CC_SYNTHESIZE(std::string, m_sCCBResourcePrefix, CCBResourcePrefix);
+    CC_SYNTHESIZE(std::string, m_sCCBResourcePostfix, CCBResourcePostfix);
 private:
     
     CCData *mData;
@@ -415,6 +417,7 @@ public:
     void addOwnerOutletName(std::string name);
     void addOwnerOutletNode(CCNode *node);
 
+    bool resolveFile(std::string & fileName);
 private:
     void cleanUpNodeGraph(CCNode *pNode);
     bool readSequences();

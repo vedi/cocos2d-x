@@ -1,5 +1,7 @@
 #include "CCDevice.h"
 #import <UIKit/UIKit.h>
+#import <UIKit/UIDevice.h>
+#import "UIDevice-IdentifierAddition.h"
 
 NS_CC_BEGIN
 
@@ -24,6 +26,24 @@ int CCDevice::getDPI()
         }
     }
     return dpi;
+}
+
+
+float CCDevice::getStatusBarHeight() {
+    return 20 * getScreenScale();
+}
+
+std::string CCDevice::getDeviceId() {
+    return [[[UIDevice currentDevice] uniqueDeviceIdentifier] UTF8String];
+}
+
+float CCDevice::getScreenScale() {
+    float scale = 1.0f;
+
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        scale = [[UIScreen mainScreen] scale];
+    }
+    return scale;
 }
 
 NS_CC_END

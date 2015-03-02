@@ -28,10 +28,13 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -72,11 +75,7 @@ public class Cocos2dxHelper {
 
 		Cocos2dxHelper.sCocos2dxAccelerometer = new Cocos2dxAccelerometer(pContext);
 		Cocos2dxHelper.sCocos2dMusic = new Cocos2dxMusic(pContext);
-		int simultaneousStreams = Cocos2dxSound.MAX_SIMULTANEOUS_STREAMS_DEFAULT;
-        if (Cocos2dxHelper.getDeviceModel().indexOf("GT-I9100") != -1) {
-            simultaneousStreams = Cocos2dxSound.MAX_SIMULTANEOUS_STREAMS_I9100;
-        }
-        Cocos2dxHelper.sCocos2dSound = new Cocos2dxSound(pContext, simultaneousStreams);
+		Cocos2dxHelper.sCocos2dSound = new Cocos2dxSound(pContext);
 		Cocos2dxHelper.sAssetManager = pContext.getAssets();
 		Cocos2dxBitmap.setContext(pContext);
 		Cocos2dxETCLoader.setContext(pContext);
@@ -102,6 +101,12 @@ public class Cocos2dxHelper {
 		return Cocos2dxHelper.sPackageName;
 	}
 
+    public static void openURL(String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        sContext.startActivity(i);
+   }
+
 	public static String getCocos2dxWritablePath() {
 		return Cocos2dxHelper.sFileDirectory;
 	}
@@ -114,7 +119,11 @@ public class Cocos2dxHelper {
 		return Build.MODEL;
     }
 
-	public static AssetManager getAssetManager() {
+    public static String getDeviceId() {
+        return Settings.Secure.getString(sContext.getContentResolver(),Settings.Secure.ANDROID_ID);
+    }
+
+    public static AssetManager getAssetManager() {
 		return Cocos2dxHelper.sAssetManager;
 	}
 
@@ -133,43 +142,47 @@ public class Cocos2dxHelper {
 		Cocos2dxHelper.sCocos2dxAccelerometer.disable();
 	}
 
-	public static void preloadBackgroundMusic(final String pPath) {
-		Cocos2dxHelper.sCocos2dMusic.preloadBackgroundMusic(pPath);
+	public static void preloadSound(final String pPath, int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.preloadSound(pPath, channelNum);
 	}
 
-	public static void playBackgroundMusic(final String pPath, final boolean isLoop) {
-		Cocos2dxHelper.sCocos2dMusic.playBackgroundMusic(pPath, isLoop);
+	public static void playSound(final String pPath, final boolean isLoop, int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.playSound(pPath, isLoop, channelNum);
 	}
 
-	public static void resumeBackgroundMusic() {
-		Cocos2dxHelper.sCocos2dMusic.resumeBackgroundMusic();
+	public static void resumeSound(int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.resumeSound(channelNum);
 	}
 
-	public static void pauseBackgroundMusic() {
-		Cocos2dxHelper.sCocos2dMusic.pauseBackgroundMusic();
+	public static void pauseSound(int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.pauseSound(channelNum);
 	}
 
-	public static void stopBackgroundMusic() {
-		Cocos2dxHelper.sCocos2dMusic.stopBackgroundMusic();
+	public static void stopSound(int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.stopSound(channelNum);
 	}
 
-	public static void rewindBackgroundMusic() {
-		Cocos2dxHelper.sCocos2dMusic.rewindBackgroundMusic();
+	public static void rewindSound(int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.rewindSound(channelNum);
 	}
 
-	public static boolean isBackgroundMusicPlaying() {
-		return Cocos2dxHelper.sCocos2dMusic.isBackgroundMusicPlaying();
+	public static boolean isSoundPlaying(int channelNum) {
+		return Cocos2dxHelper.sCocos2dMusic.isSoundPlaying(channelNum);
 	}
 
-	public static float getBackgroundMusicVolume() {
-		return Cocos2dxHelper.sCocos2dMusic.getBackgroundVolume();
+	public static float getSoundVolume(int channelNum) {
+		return Cocos2dxHelper.sCocos2dMusic.getSoundVolume(channelNum);
 	}
 
-	public static void setBackgroundMusicVolume(final float volume) {
-		Cocos2dxHelper.sCocos2dMusic.setBackgroundVolume(volume);
+	public static void setSoundVolume(final float volume, int channelNum) {
+		Cocos2dxHelper.sCocos2dMusic.setSoundVolume(volume, channelNum);
 	}
 
-	public static void preloadEffect(final String path) {
+    public static float getSoundDuration(final String pPath, int channelNum) {
+        return Cocos2dxHelper.sCocos2dMusic.getSoundDuration(pPath, channelNum);
+    }
+
+    public static void preloadEffect(final String path) {
 		Cocos2dxHelper.sCocos2dSound.preloadEffect(path);
 	}
 

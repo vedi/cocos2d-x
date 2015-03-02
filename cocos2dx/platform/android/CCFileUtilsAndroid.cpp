@@ -194,4 +194,9 @@ string CCFileUtilsAndroid::getWritablePath()
     }
 }
 
+string CCFileUtilsAndroid::getCachePath() {
+  return this->getWritablePath();
+}
+
+
 NS_CC_END

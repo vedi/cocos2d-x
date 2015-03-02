@@ -16,3 +16,20 @@
 [submodule "samples/Cpp/TestCpp/Resources/ccs-res"]
 	path = samples/Cpp/TestCpp/Resources/ccs-res
 	url = https://github.com/dumganhar/ccs-res
+[submodule "external/jansson"]
+	path = external/jansson
+	url = https://github.com/vedi/jansson.git
+[submodule "extensions/EasyNDK"]
+	path = extensions/EasyNDK
+	url = https://github.com/vedi/EasyNDK.git
+[submodule "cocos2dx/platform/third_party/winrt/angleproject"]
+	path = cocos2dx/platform/third_party/winrt/angleproject
+	url = https://github.com/stammen/angleproject
+[submodule "extensions/soomla-cocos2dx-core"]
+	path = extensions/soomla-cocos2dx-core
+	url = git@github.com:soomla/soomla-cocos2dx-core.git
+	branch = cocos2dx-v2
+[submodule "extensions/cocos2dx-store"]
+	path = extensions/cocos2dx-store
+	url = git@github.com:soomla/cocos2dx-store.git
+	branch = cocos2dx-v2

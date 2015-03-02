@@ -434,6 +434,8 @@ public:
      */
     virtual const CCSize& getContentSize() const;
 
+    virtual const CCSize getScaledContentSize() const;
+
     
     /**
      * Sets whether the node is visible
@@ -1009,6 +1011,8 @@ public:
      */
     virtual CCRect boundingBox(void);
 
+    CCRect globalBoundingBox(void);
+
     /// @{
     /// @name Actions
 
@@ -1042,7 +1046,9 @@ public:
      */
     void stopAllActions(void);
 
-    /** 
+    void stopAllActionsRecursive(void);
+
+    /**
      * Stops and removes an action from the running action list.
      *
      * @param An action object to be removed.

@@ -203,7 +203,7 @@ void CCAnimationCache::parseVersion2(CCDictionary* animations)
     }
 }
 
-void CCAnimationCache::addAnimationsWithDictionary(CCDictionary* dictionary,const char* plist)
+void CCAnimationCache::addAnimationsWithDictionary(CCDictionary* dictionary)
 {
     CCDictionary* animations = (CCDictionary*)dictionary->objectForKey("animations");
 
@@ -223,15 +223,7 @@ void CCAnimationCache::addAnimationsWithDictionary(CCDictionary* dictionary,cons
         CCARRAY_FOREACH(spritesheets, pObj)
         {
             CCString* name = (CCString*)(pObj);
-            if (plist)
-            {
-                const char* path = CCFileUtils::sharedFileUtils()->fullPathFromRelativeFile(name->getCString(),plist);
-                CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(path);
-            } 
-            else
-            {
-                CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(name->getCString());
-            }            
+            CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(name->getCString());
         }
     }
 
@@ -257,7 +249,7 @@ void CCAnimationCache::addAnimationsWithFile(const char* plist)
 
     CCAssert( dict, "CCAnimationCache: File could not be found");
 
-    addAnimationsWithDictionary(dict,plist);
+    addAnimationsWithDictionary(dict);
 }
 
 

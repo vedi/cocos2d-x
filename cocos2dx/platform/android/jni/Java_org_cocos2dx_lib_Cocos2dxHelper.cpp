@@ -125,6 +125,23 @@ std::string getPackageNameJNI() {
     return ret;
 }
 
+void openURLJNI(const char * url) {
+    if (!url) {
+        return;
+    }
+
+    JniMethodInfo t;
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "openURL", "(Ljava/lang/String;)V")) {
+        jstring stringArg1;
+
+		stringArg1 = t.env->NewStringUTF(url);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1);
+
+        t.env->DeleteLocalRef(stringArg1);
+        t.env->DeleteLocalRef(t.classID);
+    }
+}
+
 std::string getFileDirectoryJNI() {
     JniMethodInfo t;
     std::string ret("");
@@ -337,3 +354,18 @@ void setStringForKeyJNI(const char* pKey, const char* value)
         t.env->DeleteLocalRef(stringArg2);
     }
 }
+
+std::string getDeviceIdJNI() {
+    JniMethodInfo t;
+    std::string ret("");
+
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getDeviceId", "()Ljava/lang/String;")) {
+        jstring str = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
+        t.env->DeleteLocalRef(t.classID);
+        ret = JniHelper::jstring2string(str);
+        t.env->DeleteLocalRef(str);
+    }
+    return ret;
+}
+
+

@@ -300,7 +300,9 @@ public:
      *  @lua NA
      */
     virtual std::string getWritablePath() = 0;
-    
+
+    virtual std::string getCachePath() = 0;
+
     /**
      *  Checks whether a file exists.
      *
@@ -434,7 +436,6 @@ protected:
      *  The singleton pointer of CCFileUtils.
      */
     static CCFileUtils* s_sharedFileUtils;
-    
 };
 
 // end of platform group

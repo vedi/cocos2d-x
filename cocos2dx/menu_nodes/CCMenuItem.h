@@ -307,6 +307,7 @@ public:
     virtual void unselected();
     virtual void setEnabled(bool bEnabled);
     
+    virtual void setAnchorPoint(const CCPoint& anchorPoint);
 protected:
     virtual void updateImagesVisibility();
 };

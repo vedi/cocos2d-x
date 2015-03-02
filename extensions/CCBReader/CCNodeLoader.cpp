@@ -28,13 +28,13 @@ CCNode * CCNodeLoader::loadCCNode(CCNode * pParent, CCBReader * pCCBReader) {
     CCNode * ccNode = this->createCCNode(pParent, pCCBReader);
 
     //this->parseProperties(ccNode, pParent, pCCBReader);
-    if(m_pCustomProperties)
-        m_pCustomProperties->removeAllObjects();
 
     return ccNode;
 }
 
 void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader) {
+    m_pCustomProperties->removeAllObjects();
+
     int numRegularProps = pCCBReader->readInt(false);
     int numExturaProps = pCCBReader->readInt(false);
     int propertyCount = numRegularProps + numExturaProps;
@@ -141,12 +141,11 @@ void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader *
             }
             case kCCBPropTypeScaleLock: 
             {
-                float * scaleLock = this->parsePropTypeScaleLock(pNode, pParent, pCCBReader, propertyName.c_str());
+                ScaleLock scaleLock = this->parsePropTypeScaleLock(pNode, pParent, pCCBReader, propertyName.c_str());
                 if(setProp) 
                 {
                     this->onHandlePropTypeScaleLock(pNode, pParent, propertyName.c_str(), scaleLock, pCCBReader);
                 }
-                CC_SAFE_DELETE_ARRAY(scaleLock);
                 break;
             }
             case kCCBPropTypeFloat: 
@@ -298,7 +297,8 @@ void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader *
             case kCCBPropTypeFntFile: 
             {
                 std::string fntFile = pCCBReader->getCCBRootPath() + this->parsePropTypeFntFile(pNode, pParent, pCCBReader);
-                if(setProp) 
+                fntFile = CCFileUtils::sharedFileUtils()->fullPathForFilename(fntFile.c_str());
+                if(setProp)
                 {
                     this->onHandlePropTypeFntFile(pNode, pParent, propertyName.c_str(), fntFile.c_str(), pCCBReader);
                 }
@@ -353,6 +353,7 @@ void CCNodeLoader::parseProperties(CCNode * pNode, CCNode * pParent, CCBReader *
                 break;
         }
     }
+    onHandleFinishPropertiesLoad(pNode,pParent);
 }
 
 CCPoint CCNodeLoader::parsePropTypePosition(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
@@ -461,7 +462,7 @@ float * CCNodeLoader::parsePropTypeFloatXY(CCNode * pNode, CCNode * pParent, CCB
     return floatXY;
 }
 
-float * CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
+ScaleLock CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader, const char *pPropertyName) {
     float x = pCCBReader->readFloat();
     float y = pCCBReader->readFloat();
     
@@ -484,9 +485,10 @@ float * CCNodeLoader::parsePropTypeScaleLock(CCNode * pNode, CCNode * pParent, C
         y *= pCCBReader->getResolutionScale();
     }
     
-    float * scaleLock = new float[2];
-    scaleLock[0] = x;
-    scaleLock[1] = y;
+    ScaleLock scaleLock;
+    scaleLock.xScale = x;
+    scaleLock.yScale = y;
+    scaleLock.lock = type;
 
     return scaleLock;
 }
@@ -567,16 +569,20 @@ CCSpriteFrame * CCNodeLoader::parsePropTypeSpriteFrame(CCNode * pNode, CCNode * 
         if (spriteSheet.length() == 0)
         {
             spriteFile = pCCBReader->getCCBRootPath() + spriteFile;
+            bool exists = pCCBReader->resolveFile(spriteFile);
+            CC_ASSERT(exists);
             CCTexture2D * texture = CCTextureCache::sharedTextureCache()->addImage(spriteFile.c_str());
-            if(texture != NULL) {
-                CCRect bounds = CCRectMake(0, 0, texture->getContentSize().width, texture->getContentSize().height);
-                spriteFrame = CCSpriteFrame::createWithTexture(texture, bounds);
-            }
+            CC_ASSERT(texture);
+            CCRect bounds = CCRectMake(0, 0, texture->getContentSize().width, texture->getContentSize().height);
+            spriteFrame = CCSpriteFrame::createWithTexture(texture, bounds);
+            CC_ASSERT(spriteFrame);
         }
         else 
         {
             CCSpriteFrameCache * frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
             spriteSheet = pCCBReader->getCCBRootPath() + spriteSheet;   
+            bool exists = pCCBReader->resolveFile(spriteSheet);
+            CC_ASSERT(exists);
             // Load the sprite sheet only if it is not loaded
             if (pCCBReader->getLoadedSpriteSheet().find(spriteSheet) == pCCBReader->getLoadedSpriteSheet().end())
             {
@@ -584,9 +590,16 @@ CCSpriteFrame * CCNodeLoader::parsePropTypeSpriteFrame(CCNode * pNode, CCNode * 
                 pCCBReader->getLoadedSpriteSheet().insert(spriteSheet);
             }
             
-            spriteFrame = frameCache->spriteFrameByName(spriteFile.c_str());
+            // try apply postfix
+            std::string fullResourceName = std::string(spriteFile).append(pCCBReader->getCCBResourcePostfix());
+            spriteFrame = frameCache->spriteFrameByName(fullResourceName.c_str());
+            if (spriteFrame == NULL) {
+                fullResourceName = spriteFile.c_str();
+                spriteFrame = frameCache->spriteFrameByName(fullResourceName.c_str());
         }
-        
+            CC_ASSERT(spriteFrame);
+        }
+
         if (pCCBReader->getAnimatedProperties()->find(pPropertyName) != pCCBReader->getAnimatedProperties()->end())
         {
             pCCBReader->getAnimationManager()->setBaseValue(spriteFrame, pNode, pPropertyName);
@@ -598,6 +611,7 @@ CCSpriteFrame * CCNodeLoader::parsePropTypeSpriteFrame(CCNode * pNode, CCNode * 
 
 CCAnimation * CCNodeLoader::parsePropTypeAnimation(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader) {
     std::string animationFile = pCCBReader->getCCBRootPath() + pCCBReader->readCachedString();
+    animationFile = CCFileUtils::sharedFileUtils()->fullPathForFilename(animationFile.c_str());
     std::string animation = pCCBReader->readCachedString();
     
     CCAnimation * ccAnimation = NULL;
@@ -622,7 +636,8 @@ CCAnimation * CCNodeLoader::parsePropTypeAnimation(CCNode * pNode, CCNode * pPar
 
 CCTexture2D * CCNodeLoader::parsePropTypeTexture(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader) {
     std::string spriteFile = pCCBReader->getCCBRootPath() + pCCBReader->readCachedString();
-    
+    spriteFile = CCFileUtils::sharedFileUtils()->fullPathForFilename(spriteFile.c_str());
+
     if (spriteFile.length() > 0)
     {
         return CCTextureCache::sharedTextureCache()->addImage(spriteFile.c_str());
@@ -722,6 +737,10 @@ std::string CCNodeLoader::parsePropTypeText(CCNode * pNode, CCNode * pParent, CC
 std::string CCNodeLoader::parsePropTypeFontTTF(CCNode * pNode, CCNode * pParent, CCBReader * pCCBReader) {
     std::string fontTTF = pCCBReader->readCachedString();
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    fontTTF = CCBReader::deletePathExtension((CCBReader::lastPathComponent(fontTTF.c_str()).c_str()));
+#endif
+
     // CCString * ttfEnding = CCString::create(".ttf");
 
     // TODO Fix me if it is wrong
@@ -757,12 +776,12 @@ BlockData * CCNodeLoader::parsePropTypeBlock(CCNode * pNode, CCNode * pParent, C
                     CCBSelectorResolver * targetAsCCBSelectorResolver = dynamic_cast<CCBSelectorResolver *>(target);
                     
                     if(targetAsCCBSelectorResolver != NULL) {
-                        selMenuHandler = targetAsCCBSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str());
+                        selMenuHandler = targetAsCCBSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str(),pNode);
                     }
                     if(selMenuHandler == 0) {
                         CCBSelectorResolver * ccbSelectorResolver = pCCBReader->getCCBSelectorResolver();
                         if(ccbSelectorResolver != NULL) {
-                            selMenuHandler = ccbSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str());
+                            selMenuHandler = ccbSelectorResolver->onResolveCCBCCMenuItemSelector(target, selectorName.c_str(),pNode);
                         }
                     }
                     
@@ -822,12 +841,12 @@ BlockCCControlData * CCNodeLoader::parsePropTypeBlockCCControl(CCNode * pNode, C
                     CCBSelectorResolver * targetAsCCBSelectorResolver = dynamic_cast<CCBSelectorResolver *>(target);
                     
                     if(targetAsCCBSelectorResolver != NULL) {
-                        selCCControlHandler = targetAsCCBSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str());
+                        selCCControlHandler = targetAsCCBSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str(), pNode);
                     }
                     if(selCCControlHandler == 0) {
                         CCBSelectorResolver * ccbSelectorResolver = pCCBReader->getCCBSelectorResolver();
                         if(ccbSelectorResolver != NULL) {
-                            selCCControlHandler = ccbSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str());
+                            selCCControlHandler = ccbSelectorResolver->onResolveCCBCCControlSelector(target, selectorName.c_str(), pNode);
                         }
                     }
                     
@@ -872,9 +891,12 @@ CCNode * CCNodeLoader::parsePropTypeCCBFile(CCNode * pNode, CCNode * pParent, CC
     ccbFileName = ccbFileWithoutPathExtension + ".ccbi";
     
     // Load sub file
-    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename(ccbFileName.c_str());
+    std::string fullPath = ccbFileName;
+    bool exists = pCCBReader->resolveFile(fullPath);
+    CC_ASSERT(exists);
+
     unsigned long size = 0;
-    unsigned char * pBytes = CCFileUtils::sharedFileUtils()->getFileData(path.c_str(), "rb", &size);
+    unsigned char * pBytes = CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "rb", &size);
 
     CCBReader * ccbReader = new CCBReader(pCCBReader);
     ccbReader->autorelease();
@@ -888,9 +910,13 @@ CCNode * CCNodeLoader::parsePropTypeCCBFile(CCNode * pNode, CCNode * pParent, CC
     ccbReader->mBytes = data->getBytes();
     ccbReader->mCurrentByte = 0;
     ccbReader->mCurrentBit = 0;
-    CC_SAFE_RETAIN(pCCBReader->mOwner);
-    ccbReader->mOwner = pCCBReader->mOwner;
-    
+    if (pCCBReader->mOwner != NULL) {
+        ccbReader->mOwner = pCCBReader->mOwner;
+    } else {
+        ccbReader->mOwner = pCCBReader->getAnimationManager()->getRootNode();
+    }
+    CC_SAFE_RETAIN(ccbReader->mOwner);
+
     ccbReader->getAnimationManager()->mOwner = ccbReader->mOwner;
 
     // The assignments below are done in the CCBReader constructor.
@@ -908,7 +934,7 @@ CCNode * CCNodeLoader::parsePropTypeCCBFile(CCNode * pNode, CCNode * pParent, CC
     if (ccbFileNode && ccbReader->getAnimationManager()->getAutoPlaySequenceId() != -1)
     {
         // Auto play animations
-        ccbReader->getAnimationManager()->runAnimationsForSequenceIdTweenDuration(ccbReader->getAnimationManager()->getAutoPlaySequenceId(), 0);
+        ccbReader->getAnimationManager()->runAnimationsForSequenceIdTweenDuration(ccbReader->getAnimationManager()->getAutoPlaySequenceId(), 0, 0);
     }
     
     if (ccbReader->isJSControlled() && pCCBReader->isJSControlled() && NULL == ccbReader->mOwner)
@@ -984,10 +1010,10 @@ void CCNodeLoader::onHandlePropTypeFloatXY(CCNode * pNode, CCNode * pParent, con
 }
 
 
-void CCNodeLoader::onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, float * pScaleLock, CCBReader * pCCBReader) {
+void CCNodeLoader::onHandlePropTypeScaleLock(CCNode * pNode, CCNode * pParent, const char* pPropertyName, ScaleLock pScaleLock, CCBReader * pCCBReader) {
     if(strcmp(pPropertyName, PROPERTY_SCALE) == 0) {
-        pNode->setScaleX(pScaleLock[0]);
-        pNode->setScaleY(pScaleLock[1]);
+        pNode->setScaleX(pScaleLock.xScale);
+        pNode->setScaleY(pScaleLock.yScale);
     } else {
         ASSERT_FAIL_UNEXPECTED_PROPERTY(pPropertyName);
     }
@@ -1107,6 +1133,9 @@ void CCNodeLoader::onHandlePropTypeBlockCCControl(CCNode * pNode, CCNode * pPare
 
 void CCNodeLoader::onHandlePropTypeCCBFile(CCNode * pNode, CCNode * pParent, const char* pPropertyName, CCNode * pCCBFileNode, CCBReader * pCCBReader) {
     ASSERT_FAIL_UNEXPECTED_PROPERTY(pPropertyName);
+}
+
+void CCNodeLoader::onHandleFinishPropertiesLoad(CCNode * pNode, CCNode * pParent){
 }
 
 NS_CC_EXT_END

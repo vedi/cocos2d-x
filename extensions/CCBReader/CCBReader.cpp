@@ -70,6 +70,9 @@ CCBReader::CCBReader(CCNodeLoaderLibrary * pCCNodeLoaderLibrary, CCBMemberVariab
 , mNodesWithAnimationManagers(NULL)
 , mAnimationManagersForNodes(NULL)
 , mOwnerCallbackNodes(NULL)
+, m_sCCBResourcePrefix("")
+, m_sCCBResourcePostfix("")
+, mCCBRootPath("")
 {
     this->mCCNodeLoaderLibrary = pCCNodeLoaderLibrary;
     this->mCCNodeLoaderLibrary->retain();
@@ -92,6 +95,9 @@ CCBReader::CCBReader(CCBReader * pCCBReader)
 , mNodesWithAnimationManagers(NULL)
 , mAnimationManagersForNodes(NULL)
 , mOwnerCallbackNodes(NULL)
+, m_sCCBResourcePrefix("")
+, m_sCCBResourcePostfix("")
+, mCCBRootPath("")
 {
     this->mLoadedSpriteSheets = pCCBReader->mLoadedSpriteSheets;
     this->mCCNodeLoaderLibrary = pCCBReader->mCCNodeLoaderLibrary;
@@ -100,8 +106,12 @@ CCBReader::CCBReader(CCBReader * pCCBReader)
     this->mCCBMemberVariableAssigner = pCCBReader->mCCBMemberVariableAssigner;
     this->mCCBSelectorResolver = pCCBReader->mCCBSelectorResolver;
     this->mCCNodeLoaderListener = pCCBReader->mCCNodeLoaderListener;
-    
+
+    this->m_sCCBResourcePrefix = pCCBReader->m_sCCBResourcePrefix;
+    this->m_sCCBResourcePostfix = pCCBReader->m_sCCBResourcePostfix;
+
     this->mCCBRootPath = pCCBReader->getCCBRootPath();
+
     init();
 }
 
@@ -240,10 +250,15 @@ CCNode* CCBReader::readNodeGraphFromFile(const char *pCCBFileName, CCObject *pOw
         strCCBFileName += strSuffix;
     }
 
-    std::string strPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(strCCBFileName.c_str());
+            std::string fullPath = strCCBFileName;
+
+            bool exists = resolveFile(fullPath);
+
+            CC_ASSERT(exists);
+
     unsigned long size = 0;
 
-    unsigned char * pBytes = CCFileUtils::sharedFileUtils()->getFileData(strPath.c_str(), "rb", &size);
+    unsigned char * pBytes = CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "rb", &size);
     CCData *data = new CCData(pBytes, size);
     CC_SAFE_DELETE_ARRAY(pBytes);
 
@@ -273,7 +288,7 @@ CCNode* CCBReader::readNodeGraphFromData(CCData *pData, CCObject *pOwner, const 
     if (pNodeGraph && mActionManager->getAutoPlaySequenceId() != -1 && !jsControlled)
     {
         // Auto play animations
-        mActionManager->runAnimationsForSequenceIdTweenDuration(mActionManager->getAutoPlaySequenceId(), 0);
+        mActionManager->runAnimationsForSequenceIdTweenDuration(mActionManager->getAutoPlaySequenceId(), 0, 0);
     }
     // Assign actionManagers to userObject
     if(jsControlled) {
@@ -521,7 +536,7 @@ float CCBReader::readFloat() {
                 // For more about this compiler behavior, see:
                 // http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.faqs/ka3934.html
                 memcpy((void*) &f, (const void*) pF, sizeof(float));
-                
+
                 this->mCurrentByte += sizeof(float);
                 return f;
             }
@@ -726,7 +741,7 @@ CCNode * CCBReader::readNodeGraph(CCNode * pParent) {
     int numChildren = this->readInt(false);
     for(int i = 0; i < numChildren; i++) {
         CCNode * child = this->readNodeGraph(node);
-        node->addChild(child);
+        node->addChild(child, i);
     }
 
     // FIX ISSUE #1860: "onNodeLoaded will be called twice if ccb was added as a CCBFile".
@@ -808,6 +823,7 @@ CCBKeyframe* CCBReader::readKeyframe(int type)
         if (spriteSheet.length() == 0)
         {
             spriteFile = mCCBRootPath + spriteFile;
+            spriteFile = CCFileUtils::sharedFileUtils()->fullPathForFilename(spriteFile.c_str());
             CCTexture2D *texture = CCTextureCache::sharedTextureCache()->addImage(spriteFile.c_str());
             CCRect bounds = CCRectMake(0, 0, texture->getContentSize().width, texture->getContentSize().height);
             spriteFrame = CCSpriteFrame::createWithTexture(texture, bounds);
@@ -815,6 +831,7 @@ CCBKeyframe* CCBReader::readKeyframe(int type)
         else
         {
             spriteSheet = mCCBRootPath + spriteSheet;
+            spriteSheet = CCFileUtils::sharedFileUtils()->fullPathForFilename(spriteSheet.c_str());
             CCSpriteFrameCache* frameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
             
             // Load the sprite sheet only if it is not loaded            
@@ -1041,6 +1058,48 @@ CCArray* CCBReader::getNodesWithAnimationManagers() {
 
 CCArray* CCBReader::getAnimationManagersForNodes() {
     return mAnimationManagersForNodes;
+}
+
+bool cocos2d::extension::CCBReader::resolveFile(string & fileName) {
+    bool exists = false;
+    std::string sPath;
+    string fullPath;
+    if (!getCCBResourcePrefix().empty()) {
+        // check prefix_resource_postfix
+        if (!getCCBResourcePostfix().empty()) {
+            sPath = "";
+            sPath = sPath.append(getCCBResourcePrefix()).append("/").append(fileName);
+            sPath.append(getCCBResourcePostfix());
+            fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(sPath.c_str());
+            exists = sPath.compare(fullPath.c_str()) != 0;
+        }
+        // check prefix_resource
+        if (!exists) {
+            sPath = sPath.append(getCCBResourcePrefix()).append("/").append(fileName);
+            fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(sPath.c_str());
+            exists = sPath.compare(fullPath.c_str()) != 0;
+        }
+    }
+
+    if (!exists) {
+        // check resource_postfix
+        if (!getCCBResourcePostfix().empty()) {
+            sPath = fileName;
+            sPath.append(getCCBResourcePostfix());
+            fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(sPath.c_str());
+            exists = sPath.compare(fullPath.c_str()) != 0;
+        }
+        // check resource
+        if (!exists) {
+            sPath = fileName;
+            fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(sPath.c_str());
+            exists = sPath.compare(fullPath.c_str()) != 0;
+        }
+    }
+
+    fileName.assign(fullPath);
+
+    return exists;
 }
 
 void CCBReader::addOwnerOutletName(std::string name)

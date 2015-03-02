@@ -44,6 +44,7 @@ class CC_DLL CCFileUtilsIOS : public CCFileUtils
 public:
     /* override funtions */
     virtual std::string getWritablePath();
+    virtual std::string getCachePath();
     virtual bool isFileExist(const std::string& strFilePath);
     virtual bool isAbsolutePath(const std::string& strPath);
     virtual std::string getFullPathForDirectoryAndFilename(const std::string& strDirectory, const std::string& strFilename);

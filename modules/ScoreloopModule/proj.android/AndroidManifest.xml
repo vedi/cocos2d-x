@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vedidev.cocos2dx.scoreloopmodule"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <activity android:name="com.vedidev.cocos2dx.scoreloopmodule.LeaderboardActivity"
+			android:configChanges="keyboardHidden|keyboard|orientation"
+			android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:name="com.scoreloop.client.android.core.ui.ProxyActivity"
+         android:configChanges="keyboardHidden|orientation" />
+    </application>
+
+</manifest>

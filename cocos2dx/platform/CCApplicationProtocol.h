@@ -25,6 +25,8 @@ THE SOFTWARE.
 #ifndef __CC_APPLICATION_PROTOCOL_H__
 #define __CC_APPLICATION_PROTOCOL_H__
 
+#include <string>
+
 NS_CC_BEGIN
 
 enum TargetPlatform
@@ -63,6 +65,10 @@ public:
     */
     virtual bool applicationDidFinishLaunching() = 0;
 
+    virtual void applicationDidBecomeActive() {};
+
+    virtual void applicationWillResignActive() {};
+
     /**
     @brief  The function be called when the application enter background
     @param  the pointer of the application
@@ -86,11 +92,21 @@ public:
     @return Current language config
     */
     virtual ccLanguageType getCurrentLanguage() = 0;
+
+    /**
+     @brief Get current language iso 639-1 code
+     @return Current language iso 639-1 code
+     */
+    virtual const char * getCurrentLanguageCode() = 0;
     
     /**
      @brief Get target platform
      */
     virtual TargetPlatform getTargetPlatform() = 0;
+
+    virtual std::string getAppID() = 0;
+
+    virtual void openURL(char const* url) = 0;
 };
 
 // end of platform group

@@ -30,7 +30,10 @@
 #elif CC_ENABLE_BOX2D_INTEGRATION
 class b2Body;
 #else // CC_ENABLE_BOX2D_INTEGRATION
+<<<<<<< HEAD
 #error "You must define either CC_ENABLE_CHIPMUNK_INTEGRATION or CC_ENABLE_BOX2D_INTEGRATION to use CCPhysicsSprite.h"
+=======
+>>>>>>> master
 #endif
 
 NS_CC_EXT_BEGIN
@@ -63,6 +66,8 @@ protected:
 #endif // CC_ENABLE_CHIPMUNK_INTEGRATION
 public:
     CCPhysicsSprite();
+
+    virtual ~CCPhysicsSprite();
 
     static CCPhysicsSprite* create();
     /** Creates an sprite with a texture.
@@ -107,10 +112,13 @@ public:
     virtual void getPosition(float* x, float* y);
     virtual float getPositionX();
     virtual float getPositionY();
+
+#if CC_ENABLE_CHIPMUNK_INTEGRATION || CC_ENABLE_BOX2D_INTEGRATION
     virtual void setPosition(const CCPoint &position);
     virtual float getRotation();
     virtual void setRotation(float fRotation);
     virtual CCAffineTransform nodeToParentTransform();
+#endif // CC_ENABLE_CHIPMUNK_INTEGRATION || CC_ENABLE_BOX2D_INTEGRATION
 
 #if CC_ENABLE_CHIPMUNK_INTEGRATION
     /** Body accessor when using regular Chipmunk */
@@ -125,7 +133,7 @@ public:
     void setPTMRatio(float fPTMRatio);
 #endif // CC_ENABLE_BOX2D_INTEGRATION
 
-protected:
+public:
     void updatePosFromPhysics();
 };
 

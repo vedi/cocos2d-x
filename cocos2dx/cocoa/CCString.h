@@ -33,6 +33,8 @@ THE SOFTWARE.
 #include <functional>
 #include "CCObject.h"
 
+#include "cocoa/CCGeometry.h"
+
 NS_CC_BEGIN
 
 /**
@@ -83,6 +85,12 @@ public:
 
     /** convert to float value */
     float floatValue() const;
+    
+    /** convert to CCPoint value */
+    CCPoint pointValue() const;
+    
+    /** convert to CCSize value */
+    CCSize sizeValue() const;
 
     /** convert to double value */
     double doubleValue() const;

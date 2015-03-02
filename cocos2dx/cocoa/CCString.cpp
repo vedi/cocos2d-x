@@ -91,6 +91,36 @@ float CCString::floatValue() const
     return (float)atof(m_sString.c_str());
 }
 
+CCSize CCString::sizeValue() const{
+    CCSize size = CCSizeZero;
+    
+    if (length() != 0)
+    {
+        char * pch;
+        pch = strtok ((char*)m_sString.c_str(), "{,}" );
+        size.width = atof(pch);
+        pch = strtok (NULL, "{,}");
+        size.height = atof(pch);
+    }
+    
+    return size;
+}
+
+CCPoint CCString::pointValue() const{
+    CCPoint point = CCPointZero;
+    
+    if (length() != 0)
+    {
+        char * pch;
+        pch = strtok ((char*)m_sString.c_str(), "{,}" );
+        point.x = atof(pch);
+        pch = strtok (NULL, "{,}");
+        point.y = atof(pch);
+    }
+    
+    return point;
+}
+
 double CCString::doubleValue() const
 {
     if (length() == 0)

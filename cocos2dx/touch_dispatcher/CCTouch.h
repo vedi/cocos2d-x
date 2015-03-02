@@ -37,13 +37,15 @@ NS_CC_BEGIN
 
 class CC_DLL CCTouch : public CCObject
 {
+CC_SYNTHESIZE(bool, mProceeded, Proceeded)
 public:
     /**
      * @js ctor
      */
     CCTouch()
         : m_nId(0),
-        m_startPointCaptured(false)
+        m_startPointCaptured(false),
+        mProceeded(false)
     {}
 
     /** returns the current touch location in OpenGL coordinates */
@@ -91,6 +93,12 @@ private:
 
 class CC_DLL CCEvent : public CCObject
 {
+public:
+    CCEvent():_allTouches(NULL){}
+    void setAllTouches(CCSet *value) {_allTouches=value;}
+    CCSet *getAllTouches() const { return _allTouches; }
+private:
+    CCSet *_allTouches;
 };
 
 // end of input group
