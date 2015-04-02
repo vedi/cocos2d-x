@@ -1878,7 +1878,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51419383-cf3c-4e82-90d7-0fd54c4a7891";
+		        PROVISIONING_PROFILE = "51419383-cf3c-4e82-90d7-0fd54c4a7891";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../../plugin/plugins/flurry/proj.ios\"/** \"${PROJECT_DIR}/../../extensions/flurry/proj.ios\"/**";
 				VALID_ARCHS = "armv7 armv7s";
